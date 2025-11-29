@@ -22,7 +22,7 @@ export default function ProjectLayout({ content, next, prev, children }: LayoutP
       <ScrollTopAndComment />
       <article>
         <div className="divide-y divide-gray-200 dark:divide-gray-700">
-          {/* Header Section */}
+          {/* Header Section (Title & Desc only) */}
           <header className="space-y-6 pt-6 pb-10">
             <div className="space-y-4 text-center">
               <PageTitle>{title}</PageTitle>
@@ -37,25 +37,58 @@ export default function ProjectLayout({ content, next, prev, children }: LayoutP
           <div className="divide-y divide-gray-200 pb-8 dark:divide-gray-700">
             {/* Main Content Area */}
             <div className="pt-10 pb-8">
-              {/* Hero Image */}
-              {imgSrc && (
-                <div className="mb-12 flex w-full justify-center">
-                  <div className="relative w-full overflow-hidden rounded-xl border border-gray-200 shadow-xl dark:border-gray-800">
-                    <Image
-                      src={imgSrc}
-                      alt={title}
-                      width={1200}
-                      height={630}
-                      className="h-auto w-full object-cover"
-                      priority
-                    />
+              {/* Grid Layout */}
+              <div className="grid grid-cols-1 gap-10 xl:grid-cols-4 xl:gap-x-12">
+                {/* Main Content Column (Left) */}
+                <div className="xl:col-span-3">
+                  {/* Hero Image inside the content column */}
+                  {imgSrc && (
+                    <div className="mb-10 w-full">
+                      <div className="relative w-full overflow-hidden rounded-xl border border-gray-200 shadow-xl dark:border-gray-800">
+                        <Image
+                          src={imgSrc}
+                          alt={title}
+                          width={1200}
+                          height={630}
+                          className="h-auto w-full object-cover"
+                          priority
+                        />
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Prose Content */}
+                  <div className="prose prose-lg dark:prose-invert max-w-none">
+                    {children}
+
+                    {content.gallery && content.gallery.length > 0 && (
+                      <div className="mt-12 border-t border-gray-200 pt-8 dark:border-gray-700">
+                        <h2 className="mb-6 text-2xl font-bold text-gray-900 dark:text-gray-100">
+                          Галерея
+                        </h2>
+                        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                          {content.gallery.map((img, index) => (
+                            <div
+                              key={index}
+                              className="relative overflow-hidden rounded-lg border border-gray-200 shadow-lg transition-opacity hover:opacity-90 dark:border-gray-800"
+                            >
+                              <Image
+                                src={img}
+                                alt={`${title} gallery image ${index + 1}`}
+                                width={800}
+                                height={600}
+                                className="h-full w-full object-cover"
+                              />
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
-              )}
 
-              <div className="grid grid-cols-1 gap-10 xl:grid-cols-4 xl:gap-x-12">
-                {/* Sidebar / Metadata */}
-                <div className="xl:order-last xl:col-span-1">
+                {/* Sidebar / Metadata (Right) */}
+                <div className="xl:col-span-1">
                   <div className="sticky top-6 flex flex-col gap-6 rounded-xl border border-gray-100 bg-gray-50 p-6 shadow-sm dark:border-gray-700/50 dark:bg-gray-800/40">
                     {role && (
                       <div>
@@ -97,35 +130,6 @@ export default function ProjectLayout({ content, next, prev, children }: LayoutP
                       </div>
                     )}
                   </div>
-                </div>
-
-                {/* Prose Content */}
-                <div className="prose prose-lg dark:prose-invert max-w-none xl:col-span-3">
-                  {children}
-
-                  {content.gallery && content.gallery.length > 0 && (
-                    <div className="mt-12 border-t border-gray-200 pt-8 dark:border-gray-700">
-                      <h2 className="mb-6 text-2xl font-bold text-gray-900 dark:text-gray-100">
-                        Галерея
-                      </h2>
-                      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                        {content.gallery.map((img, index) => (
-                          <div
-                            key={index}
-                            className="relative overflow-hidden rounded-lg border border-gray-200 shadow-lg transition-opacity hover:opacity-90 dark:border-gray-800"
-                          >
-                            <Image
-                              src={img}
-                              alt={`${title} gallery image ${index + 1}`}
-                              width={800}
-                              height={600}
-                              className="h-full w-full object-cover"
-                            />
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
                 </div>
               </div>
             </div>
