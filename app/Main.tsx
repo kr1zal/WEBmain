@@ -5,18 +5,18 @@ import siteMetadata from '@/data/siteMetadata'
 export default function Home() {
   return (
     <>
-      <div className="flex flex-col space-y-12 px-4 py-12 sm:px-6 lg:px-8">
+      <div className="flex flex-col space-y-12 px-4 pt-6 pb-12 sm:px-6 lg:px-8">
         {/* Hero Section: Split Layout on Desktop */}
-        <div className="flex flex-col gap-8 md:flex-row md:items-center md:justify-between md:gap-12 lg:gap-16">
+        <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between md:gap-12 lg:gap-16">
           {/* Left Column: Image */}
           <div className="flex w-full justify-center md:w-1/2 md:justify-start">
-            <div className="relative aspect-[9/16] w-full max-w-xs overflow-hidden rounded-2xl border-4 border-gray-200 shadow-2xl sm:max-w-sm dark:border-gray-800">
+            <div className="relative aspect-[8/20] w-full max-w-xs overflow-hidden rounded-2xl border-4 border-gray-200 shadow-2xl sm:max-w-sm dark:border-gray-800">
               <Image
                 src="/static/images/avatar.png"
                 alt="Александр Виноградов"
-                width={450}
-                height={800}
-                className="h-full w-full object-cover"
+                width={400}
+                height={1000}
+                className="h-full w-full object-cover object-center"
                 priority
               />
             </div>
