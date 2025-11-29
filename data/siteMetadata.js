@@ -12,7 +12,7 @@ const siteMetadata = {
   socialBanner: `${process.env.BASE_PATH || ''}/static/images/twitter-card.png`,
   email: 'npspw@mail.ru',
   github: 'https://github.com/kr1zal',
-  x: 'https://t.me/alv1nogradov',
+  telegram: 'https://t.me/alv1nogradov',
   linkedin: 'https://www.linkedin.com',
   locale: 'en-US',
   analytics: {
