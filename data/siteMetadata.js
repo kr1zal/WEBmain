@@ -1,18 +1,18 @@
 /** @type {import("pliny/config").PlinyConfig } */
 const siteMetadata = {
-  title: 'My Personal Blog',
-  author: 'Aleksandr',
+  title: 'Aleksandr Vinogradov - IT Director & E-commerce Expert',
+  author: 'Aleksandr Vinogradov',
   headerTitle: 'MyWeb',
-  description: 'My personal space on the web',
+  description: 'Personal website of Aleksandr Vinogradov. IT Director, E-commerce Expert, Digital Transformation.',
   language: 'en-us',
   theme: 'system', // system, dark or light
   siteUrl: 'https://web-bmain.vercel.app',
   siteRepo: 'https://github.com/kr1zal/WEBmain',
   siteLogo: `${process.env.BASE_PATH || ''}/static/images/logo.png`,
   socialBanner: `${process.env.BASE_PATH || ''}/static/images/twitter-card.png`,
-  email: 'address@yoursite.com',
+  email: 'npspw@mail.ru',
   github: 'https://github.com/kr1zal',
-  x: 'https://twitter.com/x',
+  x: 'https://t.me/alv1nogradov',
   linkedin: 'https://www.linkedin.com',
   locale: 'en-US',
   analytics: {

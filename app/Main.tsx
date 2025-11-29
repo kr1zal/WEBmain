@@ -13,7 +13,7 @@ export default function Home() {
               alt="Aleksandr Vinogradov"
               width={256}
               height={256}
-              className="object-cover"
+              className="object-cover w-full h-full"
             />
           </div>
           <h1 className="text-4xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-5xl sm:leading-10 md:text-6xl md:leading-14 text-center">
