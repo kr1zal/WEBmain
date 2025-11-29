@@ -10,12 +10,12 @@ export default function Home() {
         <div className="flex flex-col gap-8 md:flex-row md:items-center md:justify-between md:gap-12 lg:gap-16">
           {/* Left Column: Image */}
           <div className="flex w-full justify-center md:w-1/2 md:justify-start">
-            <div className="relative aspect-video w-full max-w-md overflow-hidden rounded-2xl border-4 border-gray-200 shadow-2xl dark:border-gray-800">
+            <div className="relative aspect-[9/16] w-full max-w-xs overflow-hidden rounded-2xl border-4 border-gray-200 shadow-2xl sm:max-w-sm dark:border-gray-800">
               <Image
                 src="/static/images/avatar.png"
                 alt="Александр Виноградов"
-                width={800}
-                height={450}
+                width={450}
+                height={800}
                 className="h-full w-full object-cover"
                 priority
               />
