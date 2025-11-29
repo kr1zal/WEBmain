@@ -7,12 +7,12 @@ export default function Home() {
     <>
       <div className="flex flex-col items-center justify-center pt-6 pb-8 space-y-8 md:space-y-12">
         <div className="flex flex-col items-center space-y-4">
-          <div className="relative w-48 h-48 md:w-64 md:h-64 overflow-hidden rounded-full border-4 border-gray-200 dark:border-gray-800">
+          <div className="relative w-56 h-56 md:w-72 md:h-72 overflow-hidden rounded-2xl border-4 border-gray-200 dark:border-gray-800 shadow-xl">
              <Image
               src="/static/images/avatar.png"
               alt="Aleksandr Vinogradov"
-              width={256}
-              height={256}
+              width={300}
+              height={300}
               className="object-cover w-full h-full"
             />
           </div>

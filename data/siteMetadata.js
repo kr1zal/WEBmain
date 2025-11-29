@@ -2,7 +2,7 @@
 const siteMetadata = {
   title: 'Aleksandr Vinogradov - IT Director & E-commerce Expert',
   author: 'Aleksandr Vinogradov',
-  headerTitle: 'MyWeb',
+  headerTitle: 'Vinogradov',
   description: 'Personal website of Aleksandr Vinogradov. IT Director, E-commerce Expert, Digital Transformation.',
   language: 'en-us',
   theme: 'system', // system, dark or light
