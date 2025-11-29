@@ -156,6 +156,11 @@ export const Project = defineDocumentType(() => ({
     description: { type: 'string', required: true },
     imgSrc: { type: 'string' },
     href: { type: 'string' },
+    techStack: { type: 'list', of: { type: 'string' } },
+    period: { type: 'string' },
+    role: { type: 'string' },
+    repo: { type: 'string' },
+    gallery: { type: 'list', of: { type: 'string' } },
   },
   computedFields: {
     ...computedFields,

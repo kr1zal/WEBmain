@@ -15,47 +15,135 @@ interface LayoutProps {
 }
 
 export default function ProjectLayout({ content, next, prev, children }: LayoutProps) {
-  const { title, imgSrc } = content
+  const { title, description, imgSrc, role, period, techStack } = content
 
   return (
     <SectionContainer>
       <ScrollTopAndComment />
       <article>
         <div className="divide-y divide-gray-200 dark:divide-gray-700">
-          <header className="pt-6 pb-6">
-            <div className="space-y-1 text-center">
+          {/* Header Section */}
+          <header className="space-y-6 pt-6 pb-10">
+            <div className="space-y-4 text-center">
               <PageTitle>{title}</PageTitle>
+              {description && (
+                <p className="mx-auto max-w-2xl text-lg leading-7 text-gray-500 dark:text-gray-400">
+                  {description}
+                </p>
+              )}
             </div>
           </header>
-          
+
           <div className="divide-y divide-gray-200 pb-8 dark:divide-gray-700">
-            {imgSrc && (
-                <div className="w-full flex justify-center mb-8 pt-8">
-                        <div className="relative w-full max-w-4xl overflow-hidden rounded-lg shadow-lg">
-                            <Image
-                            src={imgSrc}
-                            alt={title}
-                            width={1200}
-                            height={630}
-                            className="object-cover w-full h-auto"
-                            />
-                        </div>
+            {/* Main Content Area */}
+            <div className="pt-10 pb-8">
+              {/* Hero Image */}
+              {imgSrc && (
+                <div className="mb-12 flex w-full justify-center">
+                  <div className="relative w-full overflow-hidden rounded-xl border border-gray-200 shadow-xl dark:border-gray-800">
+                    <Image
+                      src={imgSrc}
+                      alt={title}
+                      width={1200}
+                      height={630}
+                      className="h-auto w-full object-cover"
+                      priority
+                    />
+                  </div>
                 </div>
-            )}
-            <div className="prose dark:prose-invert max-w-none pt-10 pb-8">
-                {children}
+              )}
+
+              <div className="grid grid-cols-1 gap-10 xl:grid-cols-4 xl:gap-x-12">
+                {/* Sidebar / Metadata */}
+                <div className="xl:order-last xl:col-span-1">
+                  <div className="sticky top-6 flex flex-col gap-6 rounded-xl border border-gray-100 bg-gray-50 p-6 shadow-sm dark:border-gray-700/50 dark:bg-gray-800/40">
+                    {role && (
+                      <div>
+                        <h3 className="mb-1 text-xs font-bold tracking-wider text-gray-500 uppercase dark:text-gray-400">
+                          Роль
+                        </h3>
+                        <div className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                          {role}
+                        </div>
+                      </div>
+                    )}
+
+                    {period && (
+                      <div>
+                        <h3 className="mb-1 text-xs font-bold tracking-wider text-gray-500 uppercase dark:text-gray-400">
+                          Период
+                        </h3>
+                        <div className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                          {period}
+                        </div>
+                      </div>
+                    )}
+
+                    {techStack && techStack.length > 0 && (
+                      <div>
+                        <h3 className="mb-3 text-xs font-bold tracking-wider text-gray-500 uppercase dark:text-gray-400">
+                          Технологии
+                        </h3>
+                        <div className="flex flex-wrap gap-2">
+                          {techStack.map((tech) => (
+                            <span
+                              key={tech}
+                              className="text-primary-600 bg-primary-50 border-primary-100 dark:bg-primary-900/10 dark:text-primary-300 dark:border-primary-800/50 hover:bg-primary-100 dark:hover:bg-primary-900/30 rounded-md border px-2.5 py-1 text-xs font-medium transition-colors"
+                            >
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                {/* Prose Content */}
+                <div className="prose prose-lg dark:prose-invert max-w-none xl:col-span-3">
+                  {children}
+
+                  {content.gallery && content.gallery.length > 0 && (
+                    <div className="mt-12 border-t border-gray-200 pt-8 dark:border-gray-700">
+                      <h2 className="mb-6 text-2xl font-bold text-gray-900 dark:text-gray-100">
+                        Галерея
+                      </h2>
+                      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                        {content.gallery.map((img, index) => (
+                          <div
+                            key={index}
+                            className="relative overflow-hidden rounded-lg border border-gray-200 shadow-lg transition-opacity hover:opacity-90 dark:border-gray-800"
+                          >
+                            <Image
+                              src={img}
+                              alt={`${title} gallery image ${index + 1}`}
+                              width={800}
+                              height={600}
+                              className="h-full w-full object-cover"
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
             </div>
-            
+
+            {/* Footer Navigation */}
             <footer>
-              <div className="flex flex-col text-sm font-medium sm:flex-row sm:justify-between sm:text-base pt-4 xl:pt-8">
+              <div className="flex flex-col pt-8 text-sm font-medium sm:flex-row sm:justify-between sm:text-base">
                 {prev && prev.path && (
                   <div className="pt-4 sm:pt-0">
                     <Link
                       href={`/${prev.path}`}
-                      className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                      className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 group flex items-center"
                       aria-label={`Предыдущий проект: ${prev.title}`}
                     >
-                      &larr; {prev.title}
+                      <span className="mr-2 transition-transform group-hover:-translate-x-1">
+                        &larr;
+                      </span>{' '}
+                      {prev.title}
                     </Link>
                   </div>
                 )}
@@ -63,10 +151,13 @@ export default function ProjectLayout({ content, next, prev, children }: LayoutP
                   <div className="pt-4 sm:pt-0">
                     <Link
                       href={`/${next.path}`}
-                      className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                      className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 group flex items-center"
                       aria-label={`Следующий проект: ${next.title}`}
                     >
-                      {next.title} &rarr;
+                      {next.title}{' '}
+                      <span className="ml-2 transition-transform group-hover:translate-x-1">
+                        &rarr;
+                      </span>
                     </Link>
                   </div>
                 )}
