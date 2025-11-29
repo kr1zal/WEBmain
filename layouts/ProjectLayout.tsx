@@ -53,7 +53,7 @@ export default function ProjectLayout({ content, next, prev, children }: LayoutP
                     <Link
                       href={`/${prev.path}`}
                       className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-                      aria-label={`Previous project: ${prev.title}`}
+                      aria-label={`Предыдущий проект: ${prev.title}`}
                     >
                       &larr; {prev.title}
                     </Link>
@@ -64,7 +64,7 @@ export default function ProjectLayout({ content, next, prev, children }: LayoutP
                     <Link
                       href={`/${next.path}`}
                       className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-                      aria-label={`Next project: ${next.title}`}
+                      aria-label={`Следующий проект: ${next.title}`}
                     >
                       {next.title} &rarr;
                     </Link>
@@ -78,4 +78,3 @@ export default function ProjectLayout({ content, next, prev, children }: LayoutP
     </SectionContainer>
   )
 }
-

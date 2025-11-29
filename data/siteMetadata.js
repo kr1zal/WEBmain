@@ -1,10 +1,10 @@
 /** @type {import("pliny/config").PlinyConfig } */
 const siteMetadata = {
-  title: 'Aleksandr Vinogradov - IT Director & E-commerce Expert',
-  author: 'Aleksandr Vinogradov',
+  title: 'Александр Виноградов - IT Директор & Эксперт E-commerce',
+  author: 'Александр Виноградов',
   headerTitle: 'Vinogradov',
-  description: 'Personal website of Aleksandr Vinogradov. IT Director, E-commerce Expert, Digital Transformation.',
-  language: 'en-us',
+  description: 'Личный сайт Александра Виноградова. IT Директор, Эксперт в E-commerce, Цифровая трансформация.',
+  language: 'ru-RU',
   theme: 'system', // system, dark or light
   siteUrl: 'https://web-bmain.vercel.app',
   siteRepo: 'https://github.com/kr1zal/WEBmain',
@@ -14,7 +14,7 @@ const siteMetadata = {
   github: 'https://github.com/kr1zal',
   telegram: 'https://t.me/alv1nogradov',
   linkedin: 'https://www.linkedin.com',
-  locale: 'en-US',
+  locale: 'ru-RU',
   analytics: {
     umamiAnalytics: {
       umamiWebsiteId: process.env.NEXT_UMAMI_ID,
@@ -36,7 +36,7 @@ const siteMetadata = {
       theme: 'light',
       darkTheme: 'transparent_dark',
       themeURL: '',
-      lang: 'en',
+      lang: 'ru',
     },
   },
   search: {
