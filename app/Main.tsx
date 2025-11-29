@@ -5,14 +5,14 @@ import siteMetadata from '@/data/siteMetadata'
 export default function Home() {
   return (
     <>
-      <div className="flex flex-col items-center justify-center pt-6 pb-8 space-y-8 md:space-y-12">
-        <div className="flex flex-col items-center space-y-4">
-          <div className="relative w-56 h-56 md:w-72 md:h-72 overflow-hidden rounded-2xl border-4 border-gray-200 dark:border-gray-800 shadow-xl">
+      <div className="flex flex-col items-center justify-center pt-6 pb-8 space-y-8 md:space-y-12 px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col items-center space-y-6 md:space-y-8">
+          <div className="relative w-64 h-64 md:w-96 md:h-96 overflow-hidden rounded-2xl border-4 border-gray-200 dark:border-gray-800 shadow-2xl">
              <Image
               src="/static/images/avatar.png"
               alt="Aleksandr Vinogradov"
-              width={300}
-              height={300}
+              width={400}
+              height={400}
               className="object-cover w-full h-full"
             />
           </div>
@@ -31,13 +31,13 @@ export default function Home() {
         <div className="flex space-x-4">
           <Link
             href="/projects"
-            className="px-6 py-3 text-base font-medium leading-6 text-white bg-primary-500 hover:bg-primary-600 focus:ring-4 focus:ring-primary-300 rounded-lg transition duration-150 ease-in-out"
+            className="px-6 py-3 text-base font-medium leading-6 text-white bg-primary-500 hover:bg-primary-600 focus:ring-4 focus:ring-primary-300 rounded-lg transition duration-150 ease-in-out shadow-md"
           >
             View Projects
           </Link>
           <Link
             href="/about"
-            className="px-6 py-3 text-base font-medium leading-6 text-primary-500 bg-transparent border border-primary-500 hover:bg-primary-50 focus:ring-4 focus:ring-primary-300 rounded-lg transition duration-150 ease-in-out dark:hover:bg-gray-800"
+            className="px-6 py-3 text-base font-medium leading-6 text-primary-500 bg-transparent border border-primary-500 hover:bg-primary-50 focus:ring-4 focus:ring-primary-300 rounded-lg transition duration-150 ease-in-out dark:hover:bg-gray-800 shadow-sm"
           >
             About Me
           </Link>
@@ -48,20 +48,20 @@ export default function Home() {
             Core Competencies
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-             <div className="p-6 border border-gray-200 dark:border-gray-700 rounded-lg">
-                <h3 className="text-xl font-bold mb-2">Management</h3>
+             <div className="p-6 border border-gray-200 dark:border-gray-700 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200">
+                <h3 className="text-xl font-bold mb-2 text-primary-600 dark:text-primary-400">Management</h3>
                 <p className="text-gray-500 dark:text-gray-400 text-sm">
                   Teams up to 60 people. P&L Responsibility. Agile/Scrum. Crisis Management.
                 </p>
              </div>
-             <div className="p-6 border border-gray-200 dark:border-gray-700 rounded-lg">
-                <h3 className="text-xl font-bold mb-2">E-commerce</h3>
+             <div className="p-6 border border-gray-200 dark:border-gray-700 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200">
+                <h3 className="text-xl font-bold mb-2 text-primary-600 dark:text-primary-400">E-commerce</h3>
                 <p className="text-gray-500 dark:text-gray-400 text-sm">
                   Unit Economics. ROI up to 420%. Marketplaces (WB, Ozon, Yandex). PPC & SEO.
                 </p>
              </div>
-             <div className="p-6 border border-gray-200 dark:border-gray-700 rounded-lg">
-                <h3 className="text-xl font-bold mb-2">Tech & AI</h3>
+             <div className="p-6 border border-gray-200 dark:border-gray-700 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200">
+                <h3 className="text-xl font-bold mb-2 text-primary-600 dark:text-primary-400">Tech & AI</h3>
                 <p className="text-gray-500 dark:text-gray-400 text-sm">
                    n8n Automation. React Native (Expo). SQL/PostgreSQL. 1C Integration. AI Agents.
                 </p>
