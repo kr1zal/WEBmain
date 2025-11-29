@@ -15,7 +15,7 @@ const siteMetadata = {
   email: 'npspw@mail.ru',
   github: 'https://github.com/kr1zal',
   telegram: 'https://t.me/alv1nogradov',
-  linkedin: 'https://www.linkedin.com',
+  linkedin: 'https://www.linkedin.com/in/александр-виноградов-02a2441a0',
   locale: 'ru-RU',
   analytics: {
     umamiAnalytics: {
