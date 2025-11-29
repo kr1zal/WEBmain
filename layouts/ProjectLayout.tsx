@@ -21,9 +21,9 @@ export default function ProjectLayout({ content, next, prev, children }: LayoutP
     <SectionContainer>
       <ScrollTopAndComment />
       <article>
-        <div className="divide-y divide-gray-200 dark:divide-gray-700">
+        <div className="xl:divide-y xl:divide-gray-200 xl:dark:divide-gray-700">
           {/* Header Section (Title & Desc only) */}
-          <header className="space-y-6 pt-6 pb-10">
+          <header className="space-y-6 pt-6 pb-6">
             <div className="space-y-4 text-center">
               <PageTitle>{title}</PageTitle>
               {description && (
@@ -34,9 +34,9 @@ export default function ProjectLayout({ content, next, prev, children }: LayoutP
             </div>
           </header>
 
-          <div className="divide-y divide-gray-200 pb-8 dark:divide-gray-700">
+          <div className="divide-y divide-gray-200 pb-8 xl:divide-y-0 dark:divide-gray-700">
             {/* Main Content Area */}
-            <div className="pt-10 pb-8">
+            <div className="pt-6 pb-8">
               {/* Grid Layout */}
               <div className="grid grid-cols-1 gap-10 xl:grid-cols-4 xl:gap-x-12">
                 {/* Main Content Column (Left) */}
