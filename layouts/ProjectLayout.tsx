@@ -21,20 +21,15 @@ export default function ProjectLayout({ content, next, prev, children }: LayoutP
     <SectionContainer>
       <ScrollTopAndComment />
       <article>
-        <div className="xl:divide-y xl:divide-gray-200 xl:dark:divide-gray-700">
-          {/* Header Section (Title & Desc only) */}
+        <div>
+          {/* Header Section (Title only) */}
           <header className="space-y-6 pt-6 pb-6">
             <div className="space-y-4 text-center">
               <PageTitle>{title}</PageTitle>
-              {description && (
-                <p className="mx-auto max-w-2xl text-lg leading-7 text-gray-500 dark:text-gray-400">
-                  {description}
-                </p>
-              )}
             </div>
           </header>
 
-          <div className="divide-y divide-gray-200 pb-8 xl:divide-y-0 dark:divide-gray-700">
+          <div className="pb-8">
             {/* Main Content Area */}
             <div className="pt-6 pb-8">
               {/* Grid Layout */}
