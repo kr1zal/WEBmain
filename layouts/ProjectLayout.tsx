@@ -23,8 +23,8 @@ export default function ProjectLayout({ content, next, prev, children }: LayoutP
       <article>
         <div>
           {/* Header Section (Title only) */}
-          <header className="space-y-6 pt-6 pb-6">
-            <div className="space-y-4 text-center">
+          <header className="pt-6 pb-4">
+            <div className="text-left">
               <PageTitle>{title}</PageTitle>
             </div>
           </header>
