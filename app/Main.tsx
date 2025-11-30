@@ -56,23 +56,23 @@ export default function Home() {
               <div
                 className={`relative aspect-[11/14] w-full max-w-xs overflow-hidden rounded-2xl border-4 border-gray-200 shadow-2xl transition-all duration-300 sm:max-w-sm dark:border-gray-800 ${!isVideoPlaying ? 'group-hover:ring-primary-500/50 group-hover:scale-105 group-hover:ring-4' : ''}`}
               >
-                {!isVideoPlaying ? (
-                  <Image
-                    src="/static/images/avatar.png"
-                    alt="Александр Виноградов"
-                    width={550}
-                    height={700}
-                    className="h-full w-full object-cover object-center"
-                    priority
-                  />
-                ) : (
+                <Image
+                  src="/static/images/avatar.png"
+                  alt="Александр Виноградов"
+                  width={550}
+                  height={700}
+                  className={`h-full w-full object-cover object-center transition-opacity duration-300 ${isVideoPlaying ? 'opacity-0' : 'opacity-100'}`}
+                  priority
+                />
+                {isVideoPlaying && (
                   <video
                     src="/static/images/avatar.mp4"
                     autoPlay
                     muted
                     loop
                     playsInline
-                    className="h-full w-full object-cover object-center"
+                    preload="auto"
+                    className="absolute inset-0 h-full w-full object-cover object-center"
                   />
                 )}
               </div>
