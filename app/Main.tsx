@@ -4,6 +4,7 @@ import Link from '@/components/Link'
 import Image from '@/components/Image'
 import siteMetadata from '@/data/siteMetadata'
 import { motion } from 'framer-motion'
+import { useState } from 'react'
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -20,6 +21,8 @@ const staggerContainer = {
 }
 
 export default function Home() {
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false)
+
   return (
     <>
       <motion.div
@@ -35,16 +38,45 @@ export default function Home() {
             variants={fadeInUp}
             className="flex w-full justify-center md:w-1/2 md:justify-start"
           >
-            <div className="relative aspect-[11/14] w-full max-w-xs overflow-hidden rounded-2xl border-4 border-gray-200 shadow-2xl sm:max-w-sm dark:border-gray-800">
-              <Image
-                src="/static/images/avatar.png"
-                alt="Александр Виноградов"
-                width={550}
-                height={700}
-                className="h-full w-full object-cover object-center"
-                priority
-              />
-            </div>
+            <button
+              type="button"
+              className="group relative flex cursor-pointer flex-col items-center border-none bg-transparent p-0 outline-none"
+              onClick={() => setIsVideoPlaying(true)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  setIsVideoPlaying(true)
+                }
+              }}
+            >
+              {!isVideoPlaying && (
+                <span className="text-primary-500 absolute -top-8 z-10 animate-bounce text-lg font-bold tracking-wider uppercase">
+                  push me
+                </span>
+              )}
+              <div
+                className={`relative aspect-[11/14] w-full max-w-xs overflow-hidden rounded-2xl border-4 border-gray-200 shadow-2xl transition-all duration-300 sm:max-w-sm dark:border-gray-800 ${!isVideoPlaying ? 'group-hover:ring-primary-500/50 group-hover:scale-105 group-hover:ring-4' : ''}`}
+              >
+                {!isVideoPlaying ? (
+                  <Image
+                    src="/static/images/avatar.png"
+                    alt="Александр Виноградов"
+                    width={550}
+                    height={700}
+                    className="h-full w-full object-cover object-center"
+                    priority
+                  />
+                ) : (
+                  <video
+                    src="/static/images/avatar.mp4"
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    className="h-full w-full object-cover object-center"
+                  />
+                )}
+              </div>
+            </button>
           </motion.div>
 
           {/* Right Column: Text & Actions */}
