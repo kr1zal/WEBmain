@@ -26,7 +26,7 @@ export default function AuthorLayout({ children, content }: Props) {
             {avatar && (
               <button
                 type="button"
-                className="relative flex cursor-pointer flex-col items-center border-none bg-transparent p-0 outline-none"
+                className="group relative flex cursor-pointer flex-col items-center border-none bg-transparent p-0 outline-none"
                 onClick={() => setIsVideoPlaying(true)}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' || e.key === ' ') {
@@ -40,7 +40,7 @@ export default function AuthorLayout({ children, content }: Props) {
                   </span>
                 )}
                 <div
-                  className={`relative h-48 w-48 overflow-hidden rounded-full transition-all duration-300 ${!isVideoPlaying ? 'hover:ring-primary-500/50 hover:scale-105 hover:ring-4' : ''}`}
+                  className={`relative h-48 w-48 overflow-hidden rounded-full transition-all duration-300 ${!isVideoPlaying ? 'group-hover:ring-primary-500/50 group-hover:scale-105 group-hover:ring-4' : ''}`}
                 >
                   {!isVideoPlaying ? (
                     <Image
