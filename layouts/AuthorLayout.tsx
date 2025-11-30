@@ -1,4 +1,5 @@
-import { ReactNode } from 'react'
+'use client'
+import { ReactNode, useState } from 'react'
 import type { Authors } from 'contentlayer/generated'
 import SocialIcon from '@/components/social-icons'
 import Image from '@/components/Image'
@@ -10,6 +11,7 @@ interface Props {
 
 export default function AuthorLayout({ children, content }: Props) {
   const { name, avatar, occupation, company, email, twitter, bluesky, linkedin, github } = content
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false)
 
   return (
     <>
@@ -19,18 +21,47 @@ export default function AuthorLayout({ children, content }: Props) {
             Обо мне
           </h1>
         </div>
-        <div className="items-start space-y-2 xl:grid xl:grid-cols-3 xl:gap-x-8 xl:space-y-0">
+        <div className="items-start space-y-2 xl:grid xl:grid-cols-3 xl:space-y-0 xl:gap-x-8">
           <div className="flex flex-col items-center space-x-2 pt-8">
             {avatar && (
-              <div className="relative w-48 h-48 rounded-full overflow-hidden">
-                <Image
-                  src={avatar}
-                  alt="avatar"
-                  width={192}
-                  height={192}
-                  className="object-cover w-full h-full"
-                />
-              </div>
+              <button
+                type="button"
+                className="relative flex cursor-pointer flex-col items-center border-none bg-transparent p-0 outline-none"
+                onClick={() => setIsVideoPlaying(true)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    setIsVideoPlaying(true)
+                  }
+                }}
+              >
+                {!isVideoPlaying && (
+                  <span className="text-primary-500 absolute -top-8 animate-bounce text-sm font-bold tracking-wider uppercase">
+                    push me
+                  </span>
+                )}
+                <div
+                  className={`relative h-48 w-48 overflow-hidden rounded-full transition-all duration-300 ${!isVideoPlaying ? 'hover:ring-primary-500/50 hover:scale-105 hover:ring-4' : ''}`}
+                >
+                  {!isVideoPlaying ? (
+                    <Image
+                      src={avatar}
+                      alt="avatar"
+                      width={192}
+                      height={192}
+                      className="h-full w-full object-cover"
+                    />
+                  ) : (
+                    <video
+                      src="/static/images/avatar.mp4"
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      className="h-full w-full object-cover"
+                    />
+                  )}
+                </div>
+              </button>
             )}
             <h3 className="pt-4 pb-2 text-2xl leading-8 font-bold tracking-tight">{name}</h3>
             <div className="text-gray-500 dark:text-gray-400">{occupation}</div>
