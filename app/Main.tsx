@@ -61,7 +61,7 @@ export default function Home() {
                   alt="Александр Виноградов"
                   width={550}
                   height={700}
-                  className={`h-full w-full object-cover object-center transition-opacity duration-300 ${isVideoPlaying ? 'opacity-0' : 'opacity-100'}`}
+                  className="h-full w-full object-cover object-center"
                   priority
                 />
                 {isVideoPlaying && (
@@ -71,8 +71,7 @@ export default function Home() {
                     muted
                     loop
                     playsInline
-                    preload="auto"
-                    className="absolute inset-0 h-full w-full object-cover object-center"
+                    className="absolute inset-0 z-10 h-full w-full object-cover object-center"
                   />
                 )}
               </div>
