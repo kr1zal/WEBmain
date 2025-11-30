@@ -42,22 +42,21 @@ export default function AuthorLayout({ children, content }: Props) {
                 <div
                   className={`relative h-48 w-48 overflow-hidden rounded-full transition-all duration-300 ${!isVideoPlaying ? 'group-hover:ring-primary-500/50 group-hover:scale-105 group-hover:ring-4' : ''}`}
                 >
-                  {!isVideoPlaying ? (
-                    <Image
-                      src={avatar}
-                      alt="avatar"
-                      width={192}
-                      height={192}
-                      className="h-full w-full object-cover"
-                    />
-                  ) : (
+                  <Image
+                    src={avatar}
+                    alt="avatar"
+                    width={192}
+                    height={192}
+                    className="h-full w-full object-cover"
+                  />
+                  {isVideoPlaying && (
                     <video
                       src="/static/images/avatar.mp4"
                       autoPlay
                       muted
                       loop
                       playsInline
-                      className="h-full w-full object-cover"
+                      className="absolute inset-0 h-full w-full object-cover"
                     />
                   )}
                 </div>
