@@ -48,11 +48,6 @@ export default function Home() {
                 }
               }}
             >
-              {!isVideoPlaying && (
-                <span className="text-primary-500 absolute -top-8 z-10 animate-bounce text-lg font-bold tracking-wider uppercase">
-                  push me
-                </span>
-              )}
               <div
                 className={`relative aspect-[11/14] w-full max-w-xs overflow-hidden rounded-2xl border-4 border-gray-200 shadow-2xl transition-all duration-300 sm:max-w-sm dark:border-gray-800 ${!isVideoPlaying ? 'group-hover:ring-primary-500/50 group-hover:scale-105 group-hover:ring-4' : ''}`}
               >

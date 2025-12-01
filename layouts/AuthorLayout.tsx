@@ -34,11 +34,6 @@ export default function AuthorLayout({ children, content }: Props) {
                   }
                 }}
               >
-                {!isVideoPlaying && (
-                  <span className="text-primary-500 absolute -top-8 animate-bounce text-sm font-bold tracking-wider uppercase">
-                    push me
-                  </span>
-                )}
                 <div
                   className={`relative h-48 w-48 overflow-hidden rounded-full transition-all duration-300 ${!isVideoPlaying ? 'group-hover:ring-primary-500/50 group-hover:scale-105 group-hover:ring-4' : ''}`}
                 >
