@@ -49,9 +49,9 @@ export default function AuthorLayout({ children, content }: Props) {
                       src="/static/images/avatar.mp4"
                       autoPlay
                       muted
-                      loop
                       playsInline
                       className="absolute inset-0 h-full w-full object-cover"
+                      onEnded={() => setIsVideoPlaying(false)}
                     />
                   )}
                 </div>
