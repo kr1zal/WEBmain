@@ -84,7 +84,7 @@ export default function ProjectLayout({ content, next, prev, children }: LayoutP
 
                 {/* Sidebar / Metadata (Right) */}
                 <div className="xl:col-span-1">
-                  <div className="sticky top-6 flex flex-col gap-6 rounded-xl border border-gray-100 bg-gray-50 p-6 shadow-sm dark:border-gray-700/50 dark:bg-gray-800/40">
+                  <div className="sticky top-24 flex flex-col gap-6 rounded-xl border border-gray-100 bg-gray-50 p-6 shadow-sm dark:border-gray-700/50 dark:bg-gray-800/40">
                     {role && (
                       <div>
                         <h3 className="mb-1 text-xs font-bold tracking-wider text-gray-500 uppercase dark:text-gray-400">
