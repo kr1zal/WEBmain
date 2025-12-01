@@ -7,7 +7,7 @@ const siteMetadata = {
     'Личный сайт Александра Виноградова. IT Директор, Эксперт в E-commerce, Цифровая трансформация.',
   language: 'ru-RU',
   theme: 'system', // system, dark or light
-  siteUrl: 'https://web-bmain.vercel.app',
+  siteUrl: 'https://avinogradov.pro',
   siteRepo: 'https://github.com/kr1zal/WEBmain',
   siteLogo: `${process.env.BASE_PATH || ''}/static/images/logo.png`,
   socialBanner: `${process.env.BASE_PATH || ''}/static/images/twitter-card.png`,
