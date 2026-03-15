@@ -7,22 +7,23 @@
 /* Core theme configuration */
 @theme {
   /* Font families */
-  --font-sans: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+  --font-sans:
+    var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
     'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --font-display: var(--font-dm-serif), Georgia, serif;
 
-  /* Colors */
-  /* Blue/Sky Theme (Hue ~250) */
-  --color-primary-50: oklch(0.97 0.013 250);
-  --color-primary-100: oklch(0.95 0.03 250);
-  --color-primary-200: oklch(0.9 0.06 250);
-  --color-primary-300: oklch(0.8 0.1 250);
-  --color-primary-400: oklch(0.7 0.15 250);
-  --color-primary-500: oklch(0.6 0.2 250);
-  --color-primary-600: oklch(0.5 0.2 250);
-  --color-primary-700: oklch(0.4 0.15 250);
-  --color-primary-800: oklch(0.3 0.1 250);
-  --color-primary-900: oklch(0.2 0.05 250);
-  --color-primary-950: oklch(0.1 0.03 250);
+  /* Colors — Neutral enterprise palette */
+  --color-primary-50: oklch(0.975 0.006 260);
+  --color-primary-100: oklch(0.955 0.012 260);
+  --color-primary-200: oklch(0.91 0.025 260);
+  --color-primary-300: oklch(0.83 0.045 260);
+  --color-primary-400: oklch(0.72 0.07 260);
+  --color-primary-500: oklch(0.55 0.08 260);
+  --color-primary-600: oklch(0.45 0.08 260);
+  --color-primary-700: oklch(0.37 0.065 260);
+  --color-primary-800: oklch(0.29 0.05 260);
+  --color-primary-900: oklch(0.22 0.035 260);
+  --color-primary-950: oklch(0.15 0.02 260);
 
   --color-gray-50: oklch(0.985 0.002 247.839);
   --color-gray-100: oklch(0.967 0.003 264.542);
@@ -48,15 +49,20 @@
   --z-80: 80;
 }
 
-/*
-  The default border color has changed to `currentColor` in Tailwind CSS v4,
-  so we've added these compatibility styles to make sure everything still
-  looks the same as it did with Tailwind CSS v3.
+/* Digits rendered in DM Serif Display across the entire site */
+@font-face {
+  font-family: 'Space Grotesk Digits';
+  src: local('DM Serif Display'), local('DMSerifDisplay-Regular');
+  unicode-range: U+0030-0039; /* 0-9 */
+  font-weight: 100 900;
+  font-display: swap;
+}
 
-  If we ever want to remove these styles, we need to add an explicit border
-  color utility to any element that depends on these defaults.
-*/
 @layer base {
+  body {
+    font-family: 'Space Grotesk Digits', var(--font-sans);
+  }
+
   *,
   ::after,
   ::before,
@@ -76,25 +82,33 @@
     border-radius: var(--radius-sm);
     outline-color: var(--color-primary-500);
   }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+  }
 }
 
 @layer utilities {
   .prose {
     & a {
-      color: var(--color-primary-500);
+      color: var(--color-primary-600);
       &:hover {
-        color: var(--color-primary-600);
+        color: var(--color-primary-700);
       }
       & code {
-        color: var(--color-primary-400);
+        color: var(--color-primary-500);
       }
     }
     & :where(h1, h2) {
       font-weight: 700;
       letter-spacing: var(--tracking-tight);
+      font-family: var(--font-display);
     }
     & h3 {
       font-weight: 600;
+      font-family: var(--font-display);
     }
     & :where(code):not(pre code) {
       color: var(--color-indigo-500);
@@ -103,9 +117,9 @@
 
   .prose-invert {
     & a {
-      color: var(--color-primary-500);
+      color: var(--color-primary-400);
       &:hover {
-        color: var(--color-primary-400);
+        color: var(--color-primary-300);
       }
       & code {
         color: var(--color-primary-400);
@@ -142,11 +156,10 @@
 }
 
 .no-scrollbar {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
-/* https://stackoverflow.com/questions/61083813/how-to-avoid-internal-autofill-selected-style-to-be-applied */
 input:-webkit-autofill,
 input:-webkit-autofill:focus {
   transition:

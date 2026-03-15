@@ -3,6 +3,7 @@ import { ReactNode, useState } from 'react'
 import type { Authors } from 'contentlayer/generated'
 import SocialIcon from '@/components/social-icons'
 import Image from '@/components/Image'
+import { Reveal } from '@/components/Motion'
 
 interface Props {
   children: ReactNode
@@ -14,15 +15,24 @@ export default function AuthorLayout({ children, content }: Props) {
   const [isVideoPlaying, setIsVideoPlaying] = useState(false)
 
   return (
-    <>
-      <div className="divide-y divide-gray-200 dark:divide-gray-700">
-        <div className="space-y-2 pt-6 pb-8 md:space-y-5">
-          <h1 className="text-3xl leading-9 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14 dark:text-gray-100">
+    <section className="pt-24 pb-16 sm:pt-28">
+      {/* Editorial section header */}
+      <Reveal>
+        <div className="flex items-baseline justify-between border-b-[3px] border-[#1b2d4e] pb-3 dark:border-[#8fa7cc]">
+          <h1 className="font-display text-3xl font-bold tracking-tight text-[#1b2d4e] sm:text-4xl md:text-5xl dark:text-gray-100">
             Обо мне
           </h1>
+          <span className="hidden text-sm font-medium tracking-widest text-[#1b2d4e]/50 uppercase sm:block dark:text-[#8fa7cc]/60">
+            Биография
+          </span>
         </div>
-        <div className="items-start space-y-2 xl:grid xl:grid-cols-3 xl:space-y-0 xl:gap-x-8">
-          <div className="flex flex-col items-center space-x-2 pt-8">
+      </Reveal>
+
+      {/* Two-column layout */}
+      <div className="mt-10 grid grid-cols-1 gap-10 md:grid-cols-[280px_1fr] lg:gap-16">
+        {/* Left column — photo + info */}
+        <Reveal direction="left">
+          <div className="flex flex-col items-center md:items-start">
             {avatar && (
               <button
                 type="button"
@@ -33,15 +43,20 @@ export default function AuthorLayout({ children, content }: Props) {
                     setIsVideoPlaying(true)
                   }
                 }}
+                aria-label="Воспроизвести анимированный аватар"
               >
                 <div
-                  className={`relative h-48 w-48 overflow-hidden rounded-full transition-all duration-300 ${!isVideoPlaying ? 'group-hover:ring-primary-500/50 group-hover:scale-105 group-hover:ring-4' : ''}`}
+                  className={`relative aspect-[3/4] w-full max-w-[280px] overflow-hidden transition-all duration-500 ${
+                    !isVideoPlaying
+                      ? 'group-hover:-translate-y-1 group-hover:shadow-xl group-hover:shadow-[#1b2d4e]/10'
+                      : ''
+                  }`}
                 >
                   <Image
                     src={avatar}
                     alt="avatar"
-                    width={192}
-                    height={192}
+                    width={280}
+                    height={373}
                     className="h-full w-full object-cover"
                   />
                   {isVideoPlaying && (
@@ -50,28 +65,41 @@ export default function AuthorLayout({ children, content }: Props) {
                       autoPlay
                       muted
                       playsInline
+                      preload="none"
                       className="absolute inset-0 h-full w-full object-cover"
                       onEnded={() => setIsVideoPlaying(false)}
                     />
                   )}
+                  {/* Gradient fade at bottom */}
+                  <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-[#f5f2ed] to-transparent dark:from-[#111110]" />
                 </div>
               </button>
             )}
-            <h3 className="pt-4 pb-2 text-2xl leading-8 font-bold tracking-tight">{name}</h3>
-            <div className="text-gray-500 dark:text-gray-400">{occupation}</div>
-            <div className="text-gray-500 dark:text-gray-400">{company}</div>
-            <div className="flex space-x-3 pt-6">
-              <SocialIcon kind="mail" href={`mailto:${email}`} />
-              <SocialIcon kind="github" href={github} />
-              <SocialIcon kind="linkedin" href={linkedin} />
-              <SocialIcon kind="telegram" href={twitter} />
+
+            <h3 className="font-display mt-5 text-xl font-bold tracking-tight text-[#1b2d4e] dark:text-gray-100">
+              {name}
+            </h3>
+            <p className="mt-1 text-sm leading-relaxed text-[#1b2d4e]/60 dark:text-[#8fa7cc]/80">
+              {occupation}
+            </p>
+            <p className="text-sm text-[#1b2d4e]/60 dark:text-[#8fa7cc]/80">{company}</p>
+
+            <div className="mt-5 flex space-x-3">
+              <SocialIcon kind="mail" href={`mailto:${email}`} size={5} />
+              <SocialIcon kind="github" href={github} size={5} />
+              <SocialIcon kind="linkedin" href={linkedin} size={5} />
+              <SocialIcon kind="telegram" href={twitter} size={5} />
             </div>
           </div>
-          <div className="prose dark:prose-invert max-w-none pt-8 pb-8 xl:col-span-2">
+        </Reveal>
+
+        {/* Right column — MDX content */}
+        <Reveal delay={0.2}>
+          <div className="prose prose-neutral dark:prose-invert prose-headings:font-display prose-headings:tracking-tight prose-headings:text-[#1b2d4e] dark:prose-headings:text-gray-100 prose-a:text-[#1b2d4e] prose-a:underline-offset-2 dark:prose-a:text-[#8fa7cc] max-w-none">
             {children}
           </div>
-        </div>
+        </Reveal>
       </div>
-    </>
+    </section>
   )
 }
