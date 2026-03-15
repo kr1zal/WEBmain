@@ -9,17 +9,15 @@ const MobileNav = () => {
   const [navShow, setNavShow] = useState(false)
 
   const onToggleNav = () => {
-    setNavShow((status) => {
-      document.body.style.overflow = status ? '' : 'hidden'
-      return !status
-    })
+    setNavShow((status) => !status)
   }
 
   useEffect(() => {
+    document.body.style.overflow = navShow ? 'hidden' : ''
     return () => {
       document.body.style.overflow = ''
     }
-  }, [])
+  }, [navShow])
 
   return (
     <>

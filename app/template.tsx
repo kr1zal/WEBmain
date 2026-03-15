@@ -1,11 +1,17 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
 
 export default function Template({ children }: { children: React.ReactNode }) {
   const prefersReducedMotion = useReducedMotion()
+  const [isMounted, setIsMounted] = useState(false)
 
-  if (prefersReducedMotion) {
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
+
+  if (prefersReducedMotion || !isMounted) {
     return <>{children}</>
   }
 

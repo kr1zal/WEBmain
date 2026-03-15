@@ -25,7 +25,7 @@ export default function Projects() {
       <div className="pt-6 pb-8 sm:pt-8 sm:pb-12">
         <div className="grid grid-cols-2 gap-3 sm:gap-6">
           {allProjects.map((project, index) => (
-            <Reveal key={project.title} delay={index * 0.08}>
+            <Reveal key={project.slug} delay={index * 0.08}>
               <Card
                 title={project.title}
                 description={project.description}

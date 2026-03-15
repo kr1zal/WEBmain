@@ -40,6 +40,7 @@ export default function AuthorLayout({ children, content }: Props) {
                 onClick={() => setIsVideoPlaying(true)}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault()
                     setIsVideoPlaying(true)
                   }
                 }}
@@ -85,10 +86,10 @@ export default function AuthorLayout({ children, content }: Props) {
             <p className="text-sm text-[#1b2d4e]/60 dark:text-[#8fa7cc]/80">{company}</p>
 
             <div className="mt-5 flex space-x-3">
-              <SocialIcon kind="mail" href={`mailto:${email}`} size={5} />
-              <SocialIcon kind="github" href={github} size={5} />
-              <SocialIcon kind="linkedin" href={linkedin} size={5} />
-              <SocialIcon kind="telegram" href={twitter} size={5} />
+              {email && <SocialIcon kind="mail" href={`mailto:${email}`} size={5} />}
+              {github && <SocialIcon kind="github" href={github} size={5} />}
+              {linkedin && <SocialIcon kind="linkedin" href={linkedin} size={5} />}
+              {twitter && <SocialIcon kind="telegram" href={twitter} size={5} />}
             </div>
           </div>
         </Reveal>

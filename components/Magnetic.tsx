@@ -35,7 +35,7 @@ export default function Magnetic({
       const x = e.clientX - rect.left - rect.width / 2
       const y = e.clientY - rect.top - rect.height / 2
       ref.current.style.transform = `translate(${x * strength}px, ${y * strength}px)`
-      ref.current.style.transition = 'transform 0.1s ease-out'
+      ref.current.style.transition = 'none'
     },
     [strength, prefersReduced]
   )
