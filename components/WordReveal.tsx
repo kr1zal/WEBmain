@@ -11,12 +11,17 @@ interface WordRevealProps {
 
 export default function WordReveal({ text, className = '', wordDelay = 70 }: WordRevealProps) {
   const ref = useRef<HTMLElement>(null)
+  const [isMounted, setIsMounted] = useState(false)
   const [isVisible, setIsVisible] = useState(false)
   const prefersReducedMotion = useReducedMotion()
   const words = text.split(/\s+/)
 
   useEffect(() => {
-    if (!ref.current) return
+    setIsMounted(true)
+  }, [])
+
+  useEffect(() => {
+    if (!isMounted || !ref.current) return
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -28,7 +33,7 @@ export default function WordReveal({ text, className = '', wordDelay = 70 }: Wor
     )
     observer.observe(ref.current)
     return () => observer.disconnect()
-  }, [])
+  }, [isMounted])
 
   if (prefersReducedMotion) {
     return <blockquote className={className}>{text}</blockquote>
@@ -38,7 +43,7 @@ export default function WordReveal({ text, className = '', wordDelay = 70 }: Wor
     <blockquote ref={ref} className={className}>
       {words.map((word, i) => (
         <span
-          key={i}
+          key={`${i}-${word}`}
           className="inline-block transition-all duration-500"
           style={{
             opacity: isVisible ? 1 : 0,

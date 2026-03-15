@@ -244,7 +244,10 @@ export default function Home() {
                 className="group relative cursor-pointer border-none bg-transparent p-0 outline-none"
                 onClick={() => setIsVideoPlaying(true)}
                 onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') setIsVideoPlaying(true)
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault()
+                    setIsVideoPlaying(true)
+                  }
                 }}
                 aria-label="Воспроизвести анимированный аватар"
               >
@@ -265,6 +268,7 @@ export default function Home() {
                       muted
                       playsInline
                       preload="none"
+                      aria-label="Анимированный аватар Александра Виноградова"
                       className="absolute inset-0 z-10 h-full w-full object-cover object-center"
                       onEnded={() => setIsVideoPlaying(false)}
                     />
@@ -321,9 +325,9 @@ export default function Home() {
                     {exp.desc}
                   </p>
                   <div className="mt-4 flex flex-wrap gap-2">
-                    {exp.chips.map((chip) => (
+                    {exp.chips.map((chip, ci) => (
                       <span
-                        key={chip}
+                        key={`${exp.period}-${ci}`}
                         className="rounded-sm bg-[#e8dfd3] px-3 py-1 text-xs font-medium text-[#1b2d4e] dark:bg-[#2e2a24] dark:text-[#8fa7cc]"
                       >
                         {chip}
@@ -366,9 +370,9 @@ export default function Home() {
                   <span className="absolute bottom-0 left-0 h-[1.5px] w-0 bg-[#1b2d4e] transition-all duration-300 group-hover/title:w-full dark:bg-[#8fa7cc]" />
                 </h3>
                 <ul className="mt-5 flex flex-col gap-0">
-                  {col.items.map((item) => (
+                  {col.items.map((item, ii) => (
                     <li
-                      key={item}
+                      key={`${col.title}-${ii}`}
                       className="group/item flex items-start gap-2.5 py-2 transition-all duration-200 hover:pl-1"
                     >
                       <span className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-gray-300 transition-colors duration-200 group-hover/item:bg-[#1b2d4e] dark:bg-gray-700 dark:group-hover/item:bg-[#8fa7cc]" />
@@ -416,9 +420,9 @@ export default function Home() {
                 {p.desc}
               </p>
               <div className="mt-5 flex flex-wrap gap-2">
-                {p.tags.map((tag) => (
+                {p.tags.map((tag, ti) => (
                   <span
-                    key={tag}
+                    key={`${p.title}-${ti}`}
                     className="border border-gray-300 px-3 py-1 text-[11px] font-medium tracking-wider text-gray-500 uppercase transition-all duration-300 group-hover:border-[#1b2d4e]/50 group-hover:text-[#1b2d4e] dark:border-gray-700 dark:text-gray-400 dark:group-hover:border-[#8fa7cc]/50 dark:group-hover:text-[#8fa7cc]"
                   >
                     {tag}
@@ -457,9 +461,9 @@ export default function Home() {
                   {p.desc}
                 </p>
                 <div className="mt-auto flex flex-wrap gap-2 pt-6">
-                  {p.tags.map((tag) => (
+                  {p.tags.map((tag, ti) => (
                     <span
-                      key={tag}
+                      key={`${p.num}-${ti}`}
                       className="border border-gray-300 px-3 py-1 text-[11px] font-medium tracking-wider text-gray-500 uppercase transition-all duration-300 group-hover:border-[#1b2d4e]/50 group-hover:text-[#1b2d4e] dark:border-gray-700 dark:text-gray-400 dark:group-hover:border-[#8fa7cc]/50 dark:group-hover:text-[#8fa7cc]"
                     >
                       {tag}
