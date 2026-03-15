@@ -1,35 +1,60 @@
+'use client'
+
 import Image from './Image'
 import Link from './Link'
+import { motion, useReducedMotion } from 'framer-motion'
 
-const Card = ({ title, description, imgSrc, href }) => (
-  <div className="md max-w-[544px] p-4 md:w-1/2">
-    <div
+interface CardProps {
+  title: string
+  description: string
+  imgSrc?: string
+  href?: string
+}
+
+const Card = ({ title, description, imgSrc, href }: CardProps) => {
+  const prefersReducedMotion = useReducedMotion()
+
+  return (
+    <motion.div
+      whileHover={
+        prefersReducedMotion
+          ? {}
+          : {
+              y: -4,
+              boxShadow: '0 10px 40px -10px rgba(0,0,0,0.1)',
+              transition: { type: 'spring', stiffness: 400, damping: 25 },
+            }
+      }
       className={`${
         imgSrc && 'h-full'
-      } overflow-hidden rounded-md border-2 border-gray-200/60 dark:border-gray-700/60`}
+      } group overflow-hidden rounded-xl border border-gray-200 bg-white will-change-transform dark:border-gray-800 dark:bg-gray-900/60`}
     >
       {imgSrc &&
         (href ? (
           <Link href={href} aria-label={`Ссылка на ${title}`}>
+            <div className="overflow-hidden">
+              <Image
+                alt={title}
+                src={imgSrc}
+                className="aspect-[16/10] w-full object-cover"
+                width={544}
+                height={340}
+              />
+            </div>
+          </Link>
+        ) : (
+          <div className="overflow-hidden">
             <Image
               alt={title}
               src={imgSrc}
-              className="object-cover object-center md:h-36 lg:h-48"
+              className="aspect-[16/10] w-full object-cover"
               width={544}
-              height={306}
+              height={340}
             />
-          </Link>
-        ) : (
-          <Image
-            alt={title}
-            src={imgSrc}
-            className="object-cover object-center md:h-36 lg:h-48"
-            width={544}
-            height={306}
-          />
+          </div>
         ))}
-      <div className="p-6">
-        <h2 className="mb-3 text-2xl leading-8 font-bold tracking-tight">
+      <div className="p-3 sm:p-5">
+        <h2 className="font-display mb-1.5 text-sm leading-snug font-semibold tracking-tight text-gray-900 sm:mb-2 sm:text-lg sm:leading-7 dark:text-gray-100">
           {href ? (
             <Link href={href} aria-label={`Ссылка на ${title}`}>
               {title}
@@ -38,19 +63,34 @@ const Card = ({ title, description, imgSrc, href }) => (
             title
           )}
         </h2>
-        <p className="prose mb-3 max-w-none text-gray-500 dark:text-gray-400">{description}</p>
+        <p className="mb-2 line-clamp-2 text-xs leading-relaxed text-gray-500 sm:mb-3 sm:text-sm dark:text-gray-400">
+          {description}
+        </p>
         {href && (
           <Link
             href={href}
-            className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 text-base leading-6 font-medium"
+            className="text-primary-600 dark:text-primary-400 inline-flex items-center gap-1 text-xs font-medium sm:text-sm"
             aria-label={`Ссылка на ${title}`}
           >
-            Подробнее &rarr;
+            Подробнее
+            <svg
+              className="h-3 w-3 sm:h-3.5 sm:w-3.5"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={2}
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
+              />
+            </svg>
           </Link>
         )}
       </div>
-    </div>
-  </div>
-)
+    </motion.div>
+  )
+}
 
 export default Card

@@ -29,7 +29,7 @@ export async function generateMetadata(props: {
       title: project.title,
       description: project.description,
       siteName: siteMetadata.title,
-      locale: 'en_US',
+      locale: 'ru_RU',
       type: 'article',
       url: './',
       images: project.imgSrc ? [project.imgSrc] : [siteMetadata.socialBanner],
@@ -50,7 +50,7 @@ export const generateStaticParams = async () => {
 export default async function Page(props: { params: Promise<{ slug: string[] }> }) {
   const params = await props.params
   const slug = decodeURI(params.slug.join('/'))
-  
+
   const project = allProjects.find((p) => p.slug === slug) as Project
   if (!project) {
     return notFound()
@@ -71,4 +71,3 @@ export default async function Page(props: { params: Promise<{ slug: string[] }> 
     </>
   )
 }
-

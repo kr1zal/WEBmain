@@ -1,6 +1,13 @@
-import Link from './Link'
+import { Metadata } from 'next'
 import siteMetadata from '@/data/siteMetadata'
-import Magnetic from './Magnetic'
+import Magnetic from '@/components/Magnetic'
+import { Reveal } from '@/components/Motion'
+
+export const metadata: Metadata = {
+  title: 'Контакт',
+  description:
+    'Связаться с Александром Виноградовым — IT Director, Chief AI Officer, E-commerce Expert',
+}
 
 const MailIcon = () => (
   <svg
@@ -58,34 +65,49 @@ const contacts = [
   { icon: <LinkedInIcon />, label: 'LinkedIn', href: siteMetadata.linkedin },
 ]
 
-export default function Footer() {
+export default function ContactPage() {
   return (
-    <footer className="mt-10 border-t border-gray-200 dark:border-gray-800">
-      <div className="flex items-center justify-between border-t border-gray-200 py-4 dark:border-gray-800">
-        <div className="flex items-center gap-3">
-          <span className="text-xs tracking-widest text-gray-400 uppercase dark:text-gray-500">
-            © {new Date().getFullYear()} {siteMetadata.author}
+    <div className="pt-24 sm:pt-28">
+      <Reveal>
+        <div className="mb-12 flex items-baseline justify-between border-b-[3px] border-gray-900 pb-3 dark:border-gray-100">
+          <h1 className="font-display text-3xl tracking-tight text-gray-900 sm:text-4xl dark:text-gray-100">
+            Контакт
+          </h1>
+          <span className="text-xs font-medium tracking-widest text-gray-400 uppercase dark:text-gray-500">
+            На связи
           </span>
-          <span className="text-gray-300 dark:text-gray-700">·</span>
-          <div className="flex items-center gap-4">
-            {contacts.map((c) => (
+        </div>
+      </Reveal>
+      <Reveal delay={0.1}>
+        <p className="mb-10 max-w-lg text-sm leading-relaxed text-gray-500 sm:text-base sm:leading-7 dark:text-gray-400">
+          Пишите — обсудим, как технологии и AI могут усилить ваш бизнес.
+        </p>
+      </Reveal>
+      <div className="max-w-xl">
+        {contacts.map((c, index) => (
+          <Reveal key={c.label} delay={0.15 + index * 0.06}>
+            <Magnetic strength={0.1}>
               <a
-                key={c.label}
                 href={c.href}
                 target={c.href.startsWith('http') ? '_blank' : undefined}
                 rel={c.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                aria-label={c.label}
-                className="text-gray-400 transition-colors duration-200 hover:text-[#1b2d4e] dark:text-gray-600 dark:hover:text-[#8fa7cc]"
+                className="group flex items-center gap-4 border-b border-gray-200 py-4 transition-all duration-250 ease-out first:border-t hover:pl-2 dark:border-gray-800"
               >
-                {c.icon}
+                <span className="text-gray-400 transition-colors duration-250 group-hover:text-[#1b2d4e] dark:text-gray-600 dark:group-hover:text-[#8fa7cc]">
+                  {c.icon}
+                </span>
+                <span className="relative text-sm font-medium text-gray-900 transition-colors duration-250 group-hover:text-[#1b2d4e] dark:text-gray-100 dark:group-hover:text-[#8fa7cc]">
+                  {c.label}
+                  <span className="absolute bottom-0 left-0 h-[1.5px] w-0 bg-[#1b2d4e] transition-all duration-300 group-hover:w-full dark:bg-[#8fa7cc]" />
+                </span>
+                <span className="ml-auto text-sm text-gray-400 transition-all duration-250 ease-out group-hover:translate-x-1 group-hover:text-[#1b2d4e] dark:text-gray-600 dark:group-hover:text-[#8fa7cc]">
+                  →
+                </span>
               </a>
-            ))}
-          </div>
-        </div>
-        <Link href="/" className="font-display text-sm text-gray-400 dark:text-gray-500">
-          AV.
-        </Link>
+            </Magnetic>
+          </Reveal>
+        ))}
       </div>
-    </footer>
+    </div>
   )
 }
