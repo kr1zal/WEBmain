@@ -70,8 +70,8 @@ const positions = [
   {
     period: '2014 — н.в.',
     duration: '11+ лет',
-    role: 'Digital-консультант',
-    company: 'Фриланс',
+    role: 'Digital-стратег',
+    company: 'Частная практика',
     oneLiner: '50+ проектов: FMCG, стартапы, gaming, crypto, e-commerce. Бюджеты до 120M ₽.',
     metricNum: '300%+',
     metricLabel: 'Средний ROI',
