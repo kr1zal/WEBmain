@@ -4,7 +4,13 @@ import Link from '@/components/Link'
 import Image from '@/components/Image'
 import { motion, useReducedMotion } from 'framer-motion'
 import { useState, useEffect, useCallback, useRef } from 'react'
-import { Reveal, StaggerContainer, StaggerItem, AnimatedCounter } from '@/components/Motion'
+import {
+  Reveal,
+  StaggerContainer,
+  StaggerItem,
+  AnimatedCounter,
+  ScrollActiveCard,
+} from '@/components/Motion'
 import TypingEffect from '@/components/TypingEffect'
 
 // --- Experience data ---
@@ -252,7 +258,7 @@ export default function Home() {
         </motion.div>
 
         {/* Text content — overlaid */}
-        <div className="relative z-10 mx-auto flex min-h-screen w-full max-w-[1380px] flex-col justify-start px-6 pt-[120px] sm:px-12 sm:pt-[140px]">
+        <div className="relative z-10 mx-auto flex min-h-screen w-full max-w-[1380px] flex-col justify-start px-6 pt-[72px] sm:px-12 sm:pt-[140px]">
           {/* Mobile photo */}
           <motion.div {...photoReveal} className="mb-8 md:hidden">
             <div className="relative aspect-[3/4] w-full overflow-hidden">
@@ -436,9 +442,9 @@ export default function Home() {
         {/* Featured projects */}
         {featuredProjects.map((p, i) => (
           <Reveal key={p.title} delay={i * 0.1}>
-            <div className="group relative mb-4 overflow-hidden border border-gray-200 bg-white/80 p-8 transition-all duration-500 ease-out hover:-translate-y-1 hover:border-[#1b2d4e] hover:shadow-[0_20px_60px_rgba(0,0,0,0.06)] sm:p-10 dark:border-gray-800 dark:bg-[#1a1916] dark:hover:border-[#8fa7cc] dark:hover:shadow-[0_20px_60px_rgba(0,0,0,0.3)]">
+            <ScrollActiveCard className="group relative mb-4 overflow-hidden border border-gray-200 bg-white/80 p-8 transition-all duration-500 ease-out hover:-translate-y-1 hover:border-[#1b2d4e] hover:shadow-[0_20px_60px_rgba(0,0,0,0.06)] sm:p-10 dark:border-gray-800 dark:bg-[#1a1916] dark:hover:border-[#8fa7cc] dark:hover:shadow-[0_20px_60px_rgba(0,0,0,0.3)] [&.in-view]:border-[#1b2d4e] [&.in-view]:shadow-[0_20px_60px_rgba(0,0,0,0.06)] md:[&.in-view]:border-gray-200 md:[&.in-view]:shadow-none dark:[&.in-view]:border-[#8fa7cc] dark:[&.in-view]:shadow-[0_20px_60px_rgba(0,0,0,0.3)] dark:md:[&.in-view]:border-gray-800 dark:md:[&.in-view]:shadow-none">
               {/* Left accent line */}
-              <div className="absolute top-0 left-0 h-0 w-1 bg-[#1b2d4e] transition-all duration-500 ease-out group-hover:h-full dark:bg-[#8fa7cc]" />
+              <div className="absolute top-0 left-0 h-0 w-1 bg-[#1b2d4e] transition-all duration-500 ease-out group-hover:h-full group-[.in-view]:h-full md:group-[.in-view]:h-0 dark:bg-[#8fa7cc]" />
               <span className="inline-block border border-[#1b2d4e] px-2.5 py-0.5 text-[11px] font-semibold tracking-widest text-[#1b2d4e] uppercase transition-colors duration-300 group-hover:border-[#1b2d4e]/40 dark:border-[#8fa7cc] dark:text-[#8fa7cc]">
                 {p.badge}
               </span>
@@ -455,7 +461,7 @@ export default function Home() {
                 {p.tags.map((tag, ti) => (
                   <span
                     key={`${p.title}-${ti}`}
-                    className="border border-gray-300 px-3 py-1 text-[11px] font-medium tracking-wider text-gray-500 uppercase transition-all duration-300 group-hover:border-[#1b2d4e]/50 group-hover:text-[#1b2d4e] dark:border-gray-700 dark:text-gray-400 dark:group-hover:border-[#8fa7cc]/50 dark:group-hover:text-[#8fa7cc]"
+                    className="border border-gray-300 px-3 py-1 text-[11px] font-medium tracking-wider text-gray-500 uppercase transition-all duration-300 group-hover:border-[#1b2d4e]/50 group-hover:text-[#1b2d4e] group-[.in-view]:border-[#1b2d4e]/50 group-[.in-view]:text-[#1b2d4e] md:group-[.in-view]:border-gray-300 md:group-[.in-view]:text-gray-500 dark:border-gray-700 dark:text-gray-400 dark:group-hover:border-[#8fa7cc]/50 dark:group-hover:text-[#8fa7cc] dark:group-[.in-view]:border-[#8fa7cc]/50 dark:group-[.in-view]:text-[#8fa7cc] dark:md:group-[.in-view]:border-gray-700 dark:md:group-[.in-view]:text-gray-400"
                   >
                     {tag}
                   </span>
@@ -469,7 +475,7 @@ export default function Home() {
               >
                 {p.linkText} <span>→</span>
               </a>
-            </div>
+            </ScrollActiveCard>
           </Reveal>
         ))}
 
@@ -477,10 +483,10 @@ export default function Home() {
         <StaggerContainer className="grid grid-cols-1 gap-4 sm:grid-cols-2" stagger={0.08}>
           {gridProjects.map((p) => (
             <StaggerItem key={p.num}>
-              <div className="group relative flex h-full flex-col overflow-hidden border border-gray-200 bg-white/80 p-8 transition-all duration-500 ease-out hover:-translate-y-1 hover:border-[#1b2d4e] hover:shadow-[0_20px_60px_rgba(0,0,0,0.06)] sm:p-10 dark:border-gray-800 dark:bg-[#1a1916] dark:hover:border-[#8fa7cc] dark:hover:shadow-[0_20px_60px_rgba(0,0,0,0.3)]">
+              <ScrollActiveCard className="group relative flex h-full flex-col overflow-hidden border border-gray-200 bg-white/80 p-8 transition-all duration-500 ease-out hover:-translate-y-1 hover:border-[#1b2d4e] hover:shadow-[0_20px_60px_rgba(0,0,0,0.06)] sm:p-10 dark:border-gray-800 dark:bg-[#1a1916] dark:hover:border-[#8fa7cc] dark:hover:shadow-[0_20px_60px_rgba(0,0,0,0.3)] [&.in-view]:border-[#1b2d4e] [&.in-view]:shadow-[0_20px_60px_rgba(0,0,0,0.06)] md:[&.in-view]:border-gray-200 md:[&.in-view]:shadow-none dark:[&.in-view]:border-[#8fa7cc] dark:[&.in-view]:shadow-[0_20px_60px_rgba(0,0,0,0.3)] dark:md:[&.in-view]:border-gray-800 dark:md:[&.in-view]:shadow-none">
                 {/* Left accent line */}
-                <div className="absolute top-0 left-0 h-0 w-1 bg-[#1b2d4e] transition-all duration-500 ease-out group-hover:h-full dark:bg-[#8fa7cc]" />
-                <div className="font-display mb-6 text-5xl leading-none font-light text-gray-300 transition-colors duration-400 group-hover:text-[#1b2d4e] dark:text-gray-700 dark:group-hover:text-[#8fa7cc]">
+                <div className="absolute top-0 left-0 h-0 w-1 bg-[#1b2d4e] transition-all duration-500 ease-out group-hover:h-full group-[.in-view]:h-full md:group-[.in-view]:h-0 dark:bg-[#8fa7cc]" />
+                <div className="font-display mb-6 text-5xl leading-none font-light text-gray-300 transition-colors duration-400 group-hover:text-[#1b2d4e] group-[.in-view]:text-[#1b2d4e] md:group-[.in-view]:text-gray-300 dark:text-gray-700 dark:group-hover:text-[#8fa7cc] dark:group-[.in-view]:text-[#8fa7cc] dark:md:group-[.in-view]:text-gray-700">
                   {p.num}
                 </div>
                 <h3 className="font-display text-xl text-gray-900 sm:text-2xl dark:text-gray-100">
@@ -496,13 +502,13 @@ export default function Home() {
                   {p.tags.map((tag, ti) => (
                     <span
                       key={`${p.num}-${ti}`}
-                      className="border border-gray-300 px-3 py-1 text-[11px] font-medium tracking-wider text-gray-500 uppercase transition-all duration-300 group-hover:border-[#1b2d4e]/50 group-hover:text-[#1b2d4e] dark:border-gray-700 dark:text-gray-400 dark:group-hover:border-[#8fa7cc]/50 dark:group-hover:text-[#8fa7cc]"
+                      className="border border-gray-300 px-3 py-1 text-[11px] font-medium tracking-wider text-gray-500 uppercase transition-all duration-300 group-hover:border-[#1b2d4e]/50 group-hover:text-[#1b2d4e] group-[.in-view]:border-[#1b2d4e]/50 group-[.in-view]:text-[#1b2d4e] md:group-[.in-view]:border-gray-300 md:group-[.in-view]:text-gray-500 dark:border-gray-700 dark:text-gray-400 dark:group-hover:border-[#8fa7cc]/50 dark:group-hover:text-[#8fa7cc] dark:group-[.in-view]:border-[#8fa7cc]/50 dark:group-[.in-view]:text-[#8fa7cc] dark:md:group-[.in-view]:border-gray-700 dark:md:group-[.in-view]:text-gray-400"
                     >
                       {tag}
                     </span>
                   ))}
                 </div>
-              </div>
+              </ScrollActiveCard>
             </StaggerItem>
           ))}
         </StaggerContainer>

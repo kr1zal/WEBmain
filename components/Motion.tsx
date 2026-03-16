@@ -30,10 +30,10 @@ export function Reveal({
   const prefersReducedMotion = useReducedMotion()
 
   const directionOffset = {
-    up: { y: 40 },
-    down: { y: -40 },
-    left: { x: 40 },
-    right: { x: -40 },
+    up: { y: 50 },
+    down: { y: -50 },
+    left: { x: 50 },
+    right: { x: -50 },
   }
 
   if (prefersReducedMotion) {
@@ -44,7 +44,7 @@ export function Reveal({
     <motion.div
       initial={{ opacity: 0, ...directionOffset[direction] }}
       whileInView={{ opacity: 1, x: 0, y: 0 }}
-      viewport={{ once: true, margin: '-50px' }}
+      viewport={{ once: true, amount: 0.15 }}
       transition={{ duration, delay, ease: [0.25, 0.1, 0.25, 1] }}
       className={className}
     >
@@ -76,7 +76,7 @@ export function StaggerContainer({
     <motion.div
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: '-50px' }}
+      viewport={{ once: true, amount: 0.1 }}
       variants={{
         hidden: {},
         visible: {
@@ -102,11 +102,11 @@ export function StaggerItem({
   return (
     <motion.div
       variants={{
-        hidden: { opacity: 0, y: 30 },
+        hidden: { opacity: 0, y: 50 },
         visible: {
           opacity: 1,
           y: 0,
-          transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1] },
+          transition: { duration: 0.6, ease: [0.25, 0.1, 0.25, 1] },
         },
       }}
       className={className}
@@ -166,6 +166,48 @@ export function AnimatedCounter({
   )
 }
 
+// --- Scroll-active card (mobile hover substitute) ---
+// On mobile: card is dimmed by default, lights up when near center of viewport,
+// dims again when scrolled away. On desktop (md+): no effect, hover works instead.
+
+interface ScrollActiveCardProps {
+  children: ReactNode
+  className?: string
+}
+
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(false)
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 767px)')
+    setIsMobile(mq.matches)
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches)
+    mq.addEventListener('change', handler)
+    return () => mq.removeEventListener('change', handler)
+  }, [])
+  return isMobile
+}
+
+export function ScrollActiveCard({ children, className = '' }: ScrollActiveCardProps) {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { amount: 0.5 })
+  const isMobile = useIsMobile()
+
+  const mobileStyle: React.CSSProperties = isMobile
+    ? {
+        opacity: isInView ? 1 : 0.4,
+        transform: isInView ? 'scale(1)' : 'scale(0.97)',
+        transition:
+          'opacity 0.5s ease, transform 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease',
+      }
+    : {}
+
+  return (
+    <div ref={ref} className={`${className} ${isInView ? 'in-view' : ''}`} style={mobileStyle}>
+      {children}
+    </div>
+  )
+}
+
 // --- Image reveal ---
 
 interface ImageRevealProps {
@@ -185,7 +227,7 @@ export function ImageReveal({ children, className = '', delay = 0 }: ImageReveal
     <motion.div
       initial={{ opacity: 0, scale: 0.97, filter: 'blur(4px)' }}
       whileInView={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
-      viewport={{ once: true, margin: '-60px' }}
+      viewport={{ once: true, amount: 0.15 }}
       transition={{ duration: 0.7, delay, ease: [0.25, 0.1, 0.25, 1] }}
       className={className}
     >
