@@ -493,36 +493,108 @@ export default function Home() {
           <div className="absolute top-2 bottom-2 left-[5px] w-[1.5px] bg-gray-300 dark:bg-gray-700" />
 
           {/* Hero node */}
-          <Reveal>
-            <div className="relative mb-2">
-              <div className="absolute top-4 -left-7 z-[2] h-3 w-3 rounded-full bg-[#1b2d4e] shadow-[0_0_0_3px_rgba(27,45,78,0.12)] dark:bg-[#8fa7cc] dark:shadow-[0_0_0_3px_rgba(143,167,204,0.15)]" />
+          <div className="relative mb-2">
+            <div className="absolute top-4 -left-7 z-[2] h-3 w-3 rounded-full bg-[#1b2d4e] shadow-[0_0_0_3px_rgba(27,45,78,0.12)] dark:bg-[#8fa7cc] dark:shadow-[0_0_0_3px_rgba(143,167,204,0.15)]" />
+            <button
+              type="button"
+              className="w-full cursor-pointer overflow-hidden rounded border-l-[3px] border-[#1b2d4e] bg-white/80 text-left shadow-sm transition-shadow duration-300 dark:border-[#8fa7cc] dark:bg-[#1a1916]"
+              onClick={() => setOpenPosition(openPosition === 'hero' ? null : 'hero')}
+            >
+              <div className="flex items-center gap-3 px-4 py-4">
+                <div className="min-w-0 flex-1">
+                  <div className="text-[10px] font-semibold tracking-[0.12em] text-gray-400 uppercase dark:text-gray-500">
+                    {heroPosition.period} · {heroPosition.duration}
+                  </div>
+                  <div className="font-display mt-1 text-xl leading-tight text-gray-900 dark:text-gray-100">
+                    {heroPosition.role}
+                  </div>
+                  <div className="mt-0.5 text-xs font-medium text-[#1b2d4e] dark:text-[#8fa7cc]">
+                    {heroPosition.company}
+                  </div>
+                </div>
+                <div className="shrink-0 text-right">
+                  <div className="font-display text-[26px] text-[#1b2d4e] dark:text-[#8fa7cc]">
+                    x87
+                  </div>
+                  <div className="text-[9px] font-semibold tracking-wider text-gray-400 uppercase dark:text-gray-500">
+                    Выручка
+                  </div>
+                </div>
+                <motion.svg
+                  animate={{ rotate: openPosition === 'hero' ? 180 : 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="h-5 w-5 shrink-0 text-gray-300 dark:text-gray-600"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <polyline points="6 9 12 15 18 9" />
+                </motion.svg>
+              </div>
+              <motion.div
+                initial={false}
+                animate={{
+                  height: openPosition === 'hero' ? 'auto' : 0,
+                  opacity: openPosition === 'hero' ? 1 : 0,
+                }}
+                transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
+                className="overflow-hidden"
+              >
+                <div className="border-t border-gray-200 px-4 pt-3 pb-4 dark:border-gray-800">
+                  <p className="text-[13px] leading-relaxed text-gray-500 dark:text-gray-400">
+                    {heroPosition.desc}
+                  </p>
+                  <div className="mt-3 flex flex-wrap gap-x-4 gap-y-2 border-t border-gray-200 pt-3 dark:border-gray-800">
+                    {heroPosition.stats.map((stat) => (
+                      <div key={stat.label} className="flex flex-col">
+                        <span className="font-display text-xl text-[#1b2d4e] dark:text-[#8fa7cc]">
+                          {stat.num}
+                        </span>
+                        <span className="text-[9px] font-semibold tracking-wider text-gray-400 uppercase dark:text-gray-500">
+                          {stat.label}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+            </button>
+          </div>
+
+          {/* Secondary nodes */}
+          {positions.map((pos, i) => (
+            <div key={pos.period} className="relative mb-2">
+              <div
+                className={`absolute top-[18px] -left-7 z-[2] h-2 w-2 rounded-full border-2 border-[#f5f2ed] transition-colors duration-300 dark:border-[#111110] ${openPosition === i ? 'bg-[#1b2d4e] dark:bg-[#8fa7cc]' : 'bg-gray-300 dark:bg-gray-600'}`}
+              />
               <button
                 type="button"
-                className="w-full cursor-pointer overflow-hidden rounded border-l-[3px] border-[#1b2d4e] bg-white/80 text-left shadow-sm transition-shadow duration-300 dark:border-[#8fa7cc] dark:bg-[#1a1916]"
-                onClick={() => setOpenPosition(openPosition === 'hero' ? null : 'hero')}
+                className="w-full cursor-pointer overflow-hidden rounded bg-white/80 text-left shadow-sm transition-shadow duration-300 dark:bg-[#1a1916]"
+                onClick={() => setOpenPosition(openPosition === i ? null : i)}
               >
-                <div className="flex items-center gap-3 px-4 py-4">
+                <div className="flex items-center gap-3 px-4 py-3.5">
                   <div className="min-w-0 flex-1">
                     <div className="text-[10px] font-semibold tracking-[0.12em] text-gray-400 uppercase dark:text-gray-500">
-                      {heroPosition.period} · {heroPosition.duration}
+                      {pos.period} · {pos.duration}
                     </div>
-                    <div className="font-display mt-1 text-xl leading-tight text-gray-900 dark:text-gray-100">
-                      {heroPosition.role}
+                    <div className="font-display mt-0.5 text-[17px] leading-tight text-gray-900 dark:text-gray-100">
+                      {pos.role}
                     </div>
                     <div className="mt-0.5 text-xs font-medium text-[#1b2d4e] dark:text-[#8fa7cc]">
-                      {heroPosition.company}
+                      {pos.company}
                     </div>
                   </div>
                   <div className="shrink-0 text-right">
-                    <div className="font-display text-[26px] text-[#1b2d4e] dark:text-[#8fa7cc]">
-                      x87
+                    <div className="font-display text-[22px] text-[#1b2d4e] dark:text-[#8fa7cc]">
+                      {pos.metricNum}
                     </div>
                     <div className="text-[9px] font-semibold tracking-wider text-gray-400 uppercase dark:text-gray-500">
-                      Выручка
+                      {pos.metricLabel}
                     </div>
                   </div>
                   <motion.svg
-                    animate={{ rotate: openPosition === 'hero' ? 180 : 0 }}
+                    animate={{ rotate: openPosition === i ? 180 : 0 }}
                     transition={{ duration: 0.3 }}
                     className="h-5 w-5 shrink-0 text-gray-300 dark:text-gray-600"
                     viewBox="0 0 24 24"
@@ -536,110 +608,34 @@ export default function Home() {
                 <motion.div
                   initial={false}
                   animate={{
-                    height: openPosition === 'hero' ? 'auto' : 0,
-                    opacity: openPosition === 'hero' ? 1 : 0,
+                    height: openPosition === i ? 'auto' : 0,
+                    opacity: openPosition === i ? 1 : 0,
                   }}
                   transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
                   className="overflow-hidden"
                 >
                   <div className="border-t border-gray-200 px-4 pt-3 pb-4 dark:border-gray-800">
                     <p className="text-[13px] leading-relaxed text-gray-500 dark:text-gray-400">
-                      {heroPosition.desc}
+                      {pos.oneLiner}
                     </p>
-                    <div className="mt-3 flex flex-wrap gap-x-4 gap-y-2 border-t border-gray-200 pt-3 dark:border-gray-800">
-                      {heroPosition.stats.map((stat) => (
-                        <div key={stat.label} className="flex flex-col">
-                          <span className="font-display text-xl text-[#1b2d4e] dark:text-[#8fa7cc]">
-                            {stat.num}
-                          </span>
-                          <span className="text-[9px] font-semibold tracking-wider text-gray-400 uppercase dark:text-gray-500">
-                            {stat.label}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
+                    {pos.extraMetrics.length > 0 && (
+                      <div className="mt-3 flex flex-wrap gap-x-4 gap-y-2 border-t border-gray-200 pt-3 dark:border-gray-800">
+                        {pos.extraMetrics.map((m) => (
+                          <div key={m.label} className="flex flex-col">
+                            <span className="font-display text-xl text-[#1b2d4e] dark:text-[#8fa7cc]">
+                              {m.num}
+                            </span>
+                            <span className="text-[9px] font-semibold tracking-wider text-gray-400 uppercase dark:text-gray-500">
+                              {m.label}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 </motion.div>
               </button>
             </div>
-          </Reveal>
-
-          {/* Secondary nodes */}
-          {positions.map((pos, i) => (
-            <Reveal key={pos.period} delay={i * 0.08}>
-              <div className="relative mb-2">
-                <div
-                  className={`absolute top-[18px] -left-7 z-[2] h-2 w-2 rounded-full border-2 border-[#f5f2ed] transition-colors duration-300 dark:border-[#111110] ${openPosition === i ? 'bg-[#1b2d4e] dark:bg-[#8fa7cc]' : 'bg-gray-300 dark:bg-gray-600'}`}
-                />
-                <button
-                  type="button"
-                  className="w-full cursor-pointer overflow-hidden rounded bg-white/80 text-left shadow-sm transition-shadow duration-300 dark:bg-[#1a1916]"
-                  onClick={() => setOpenPosition(openPosition === i ? null : i)}
-                >
-                  <div className="flex items-center gap-3 px-4 py-3.5">
-                    <div className="min-w-0 flex-1">
-                      <div className="text-[10px] font-semibold tracking-[0.12em] text-gray-400 uppercase dark:text-gray-500">
-                        {pos.period} · {pos.duration}
-                      </div>
-                      <div className="font-display mt-0.5 text-[17px] leading-tight text-gray-900 dark:text-gray-100">
-                        {pos.role}
-                      </div>
-                      <div className="mt-0.5 text-xs font-medium text-[#1b2d4e] dark:text-[#8fa7cc]">
-                        {pos.company}
-                      </div>
-                    </div>
-                    <div className="shrink-0 text-right">
-                      <div className="font-display text-[22px] text-[#1b2d4e] dark:text-[#8fa7cc]">
-                        {pos.metricNum}
-                      </div>
-                      <div className="text-[9px] font-semibold tracking-wider text-gray-400 uppercase dark:text-gray-500">
-                        {pos.metricLabel}
-                      </div>
-                    </div>
-                    <motion.svg
-                      animate={{ rotate: openPosition === i ? 180 : 0 }}
-                      transition={{ duration: 0.3 }}
-                      className="h-5 w-5 shrink-0 text-gray-300 dark:text-gray-600"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth={2}
-                    >
-                      <polyline points="6 9 12 15 18 9" />
-                    </motion.svg>
-                  </div>
-                  <motion.div
-                    initial={false}
-                    animate={{
-                      height: openPosition === i ? 'auto' : 0,
-                      opacity: openPosition === i ? 1 : 0,
-                    }}
-                    transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
-                    className="overflow-hidden"
-                  >
-                    <div className="border-t border-gray-200 px-4 pt-3 pb-4 dark:border-gray-800">
-                      <p className="text-[13px] leading-relaxed text-gray-500 dark:text-gray-400">
-                        {pos.oneLiner}
-                      </p>
-                      {pos.extraMetrics.length > 0 && (
-                        <div className="mt-3 flex flex-wrap gap-x-4 gap-y-2 border-t border-gray-200 pt-3 dark:border-gray-800">
-                          {pos.extraMetrics.map((m) => (
-                            <div key={m.label} className="flex flex-col">
-                              <span className="font-display text-xl text-[#1b2d4e] dark:text-[#8fa7cc]">
-                                {m.num}
-                              </span>
-                              <span className="text-[9px] font-semibold tracking-wider text-gray-400 uppercase dark:text-gray-500">
-                                {m.label}
-                              </span>
-                            </div>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  </motion.div>
-                </button>
-              </div>
-            </Reveal>
           ))}
         </div>
 
