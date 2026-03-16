@@ -174,122 +174,151 @@ const typingRoles = [
 
 export default function Home() {
   const [isVideoPlaying, setIsVideoPlaying] = useState(false)
+  const [hasAutoPlayed, setHasAutoPlayed] = useState(false)
   const prefersReducedMotion = useReducedMotion()
+
+  // Auto-start video after 2.5s on first visit
+  useEffect(() => {
+    if (prefersReducedMotion || hasAutoPlayed) return
+    const timer = setTimeout(() => {
+      setIsVideoPlaying(true)
+      setHasAutoPlayed(true)
+    }, 2500)
+    return () => clearTimeout(timer)
+  }, [prefersReducedMotion, hasAutoPlayed])
+
+  // Hero mount animation variants
+  const heroFade = (delay: number) =>
+    prefersReducedMotion
+      ? {}
+      : {
+          initial: { opacity: 0, y: 24 },
+          animate: { opacity: 1, y: 0 },
+          transition: { duration: 0.7, delay, ease: [0.25, 0.1, 0.25, 1] },
+        }
+
+  const photoReveal = prefersReducedMotion
+    ? {}
+    : {
+        initial: { opacity: 0, scale: 0.95, filter: 'blur(6px)' },
+        animate: { opacity: 1, scale: 1, filter: 'blur(0px)' },
+        transition: { duration: 0.9, delay: 0, ease: [0.25, 0.1, 0.25, 1] },
+      }
 
   return (
     <>
       {/* ═══ HERO ═══ */}
       <section className="pt-24 pb-16 sm:pt-28 sm:pb-20">
-        <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-[1fr_340px] md:gap-16">
+        <div className="grid grid-cols-1 items-start gap-10 md:grid-cols-2 md:gap-12 lg:gap-16">
           {/* Text */}
           <div>
-            <Reveal>
-              <h1 className="font-display text-5xl leading-[1.05] tracking-tight text-gray-900 sm:text-6xl lg:text-7xl dark:text-gray-100">
-                Александр
-                <br />
-                Виноградов
-              </h1>
-            </Reveal>
+            <motion.h1
+              {...heroFade(0.15)}
+              className="font-display text-5xl leading-[1.05] tracking-tight text-gray-900 sm:text-6xl lg:text-7xl dark:text-gray-100"
+            >
+              Александр
+              <br />
+              Виноградов
+            </motion.h1>
 
-            <Reveal delay={0.1}>
-              <div className="mt-5 h-7 text-lg font-medium text-[#1b2d4e] dark:text-[#8fa7cc]">
-                <TypingEffect words={typingRoles} />
-              </div>
-            </Reveal>
+            <motion.div
+              {...heroFade(0.35)}
+              className="mt-5 h-7 text-lg font-medium text-[#1b2d4e] dark:text-[#8fa7cc]"
+            >
+              <TypingEffect words={typingRoles} />
+            </motion.div>
 
-            <Reveal delay={0.2}>
-              <p className="mt-6 max-w-xl text-base leading-7 text-gray-600 dark:text-gray-300">
-                IT-директор и руководитель e-commerce с{' '}
-                <strong className="font-semibold text-gray-900 dark:text-gray-100">
-                  11+ летним опытом
-                </strong>
-                . Строю IT-инфраструктуру, автоматизирую бизнес-процессы и масштабирую
-                онлайн-продажи в fashion-ритейле.
+            <motion.p
+              {...heroFade(0.45)}
+              className="mt-6 max-w-xl text-base leading-7 text-gray-600 dark:text-gray-300"
+            >
+              IT-директор и руководитель e-commerce с{' '}
+              <strong className="font-semibold text-gray-900 dark:text-gray-100">
+                11+ летним опытом
+              </strong>
+              . Строю IT-инфраструктуру, автоматизирую бизнес-процессы и масштабирую онлайн-продажи
+              в fashion-ритейле.
+            </motion.p>
+
+            <motion.p
+              {...heroFade(0.5)}
+              className="mt-3 max-w-xl text-base leading-7 text-gray-600 dark:text-gray-300"
+            >
+              Фокус:{' '}
+              <strong className="font-semibold text-gray-900 dark:text-gray-100">
+                CTO, IT Director, Head of E-commerce, Chief AI Officer
+              </strong>{' '}
+              — позиции, где технологии и AI напрямую двигают бизнес-результат.
+            </motion.p>
+
+            <motion.div {...heroFade(0.6)} className="mt-8 flex gap-3">
+              <Link
+                href="/projects"
+                className="rounded-lg bg-gray-900 px-6 py-2.5 text-sm font-medium text-white transition-all duration-200 hover:-translate-y-px hover:shadow-md dark:bg-gray-100 dark:text-gray-900"
+              >
+                Смотреть проекты
+              </Link>
+              <Link
+                href="/about"
+                className="rounded-lg border border-gray-300 px-6 py-2.5 text-sm font-medium text-gray-700 transition-all duration-200 hover:-translate-y-px hover:border-gray-400 dark:border-gray-700 dark:text-gray-300 dark:hover:border-gray-600"
+              >
+                Обо мне
+              </Link>
+            </motion.div>
+
+            <motion.div
+              {...heroFade(0.75)}
+              className="mt-10 max-w-md border-l-4 border-[#1b2d4e] pl-5 dark:border-[#8fa7cc]"
+            >
+              <p className="font-display text-lg leading-snug font-normal text-gray-900 italic dark:text-gray-100">
+                Цифровая трансформация — это не про технологии. Это про то, как бизнес думает,
+                принимает решения и создает ценность для клиента.
               </p>
-            </Reveal>
-
-            <Reveal delay={0.25}>
-              <p className="mt-3 max-w-xl text-base leading-7 text-gray-600 dark:text-gray-300">
-                Фокус:{' '}
-                <strong className="font-semibold text-gray-900 dark:text-gray-100">
-                  CTO, IT Director, Head of E-commerce, Chief AI Officer
-                </strong>{' '}
-                — позиции, где технологии и AI напрямую двигают бизнес-результат.
-              </p>
-            </Reveal>
-
-            <Reveal delay={0.3}>
-              <div className="mt-8 flex gap-3">
-                <Link
-                  href="/projects"
-                  className="rounded-lg bg-gray-900 px-6 py-2.5 text-sm font-medium text-white transition-all duration-200 hover:-translate-y-px hover:shadow-md dark:bg-gray-100 dark:text-gray-900"
-                >
-                  Смотреть проекты
-                </Link>
-                <Link
-                  href="/about"
-                  className="rounded-lg border border-gray-300 px-6 py-2.5 text-sm font-medium text-gray-700 transition-all duration-200 hover:-translate-y-px hover:border-gray-400 dark:border-gray-700 dark:text-gray-300 dark:hover:border-gray-600"
-                >
-                  Обо мне
-                </Link>
-              </div>
-            </Reveal>
+              <cite className="mt-3 block text-xs font-medium tracking-widest text-gray-400 uppercase not-italic dark:text-gray-500">
+                Подход к управлению
+              </cite>
+            </motion.div>
           </div>
 
-          {/* Photo */}
-          <Reveal delay={0.15} direction="right">
-            <div>
-              <button
-                type="button"
-                className="group relative cursor-pointer border-none bg-transparent p-0 outline-none"
-                onClick={() => setIsVideoPlaying(true)}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault()
-                    setIsVideoPlaying(true)
-                  }
-                }}
-                aria-label="Воспроизвести анимированный аватар"
-              >
-                <div className="relative aspect-[3/4] w-full overflow-hidden rounded bg-gray-100 dark:bg-gray-800">
-                  <Image
-                    src="/static/images/avatar.png"
-                    alt="Александр Виноградов"
-                    width={680}
-                    height={907}
-                    className="h-full w-full object-cover object-center saturate-[0.85] transition-[filter] duration-500 group-hover:saturate-100"
-                    priority
+          {/* Photo — appears first in cascade */}
+          <motion.div {...photoReveal}>
+            <button
+              type="button"
+              className="group relative w-full cursor-pointer border-none bg-transparent p-0 outline-none"
+              onClick={() => setIsVideoPlaying(true)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault()
+                  setIsVideoPlaying(true)
+                }
+              }}
+              aria-label="Воспроизвести анимированный аватар"
+            >
+              <div className="relative aspect-[3/4] w-full overflow-hidden rounded bg-gray-100 dark:bg-gray-800">
+                <Image
+                  src="/static/images/avatar.png"
+                  alt="Александр Виноградов"
+                  width={680}
+                  height={907}
+                  className="h-full w-full object-cover object-center saturate-[0.85] transition-[filter] duration-500 group-hover:saturate-100"
+                  priority
+                />
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-[#f5f2ed] to-transparent dark:from-[#111110]" />
+                {isVideoPlaying && (
+                  <video
+                    src="/static/images/avatar.mp4"
+                    autoPlay
+                    muted
+                    playsInline
+                    preload="none"
+                    aria-label="Анимированный аватар Александра Виноградова"
+                    className="absolute inset-0 z-10 h-full w-full object-cover object-center"
+                    onEnded={() => setIsVideoPlaying(false)}
                   />
-                  <div className="pointer-events-none absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-[#f5f2ed] to-transparent dark:from-[#111110]" />
-                  {isVideoPlaying && (
-                    <video
-                      src="/static/images/avatar.mp4"
-                      autoPlay
-                      muted
-                      playsInline
-                      preload="none"
-                      aria-label="Анимированный аватар Александра Виноградова"
-                      className="absolute inset-0 z-10 h-full w-full object-cover object-center"
-                      onEnded={() => setIsVideoPlaying(false)}
-                    />
-                  )}
-                </div>
-              </button>
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* ═══ PULL QUOTE ═══ */}
-      <section className="py-16 sm:py-20">
-        <div className="max-w-3xl border-l-4 border-[#1b2d4e] pl-7 dark:border-[#8fa7cc]">
-          <WordReveal
-            text="Цифровая трансформация — это не про технологии. Это про то, как бизнес думает, принимает решения и создает ценность для клиента."
-            className="font-display text-2xl leading-snug font-normal text-gray-900 italic sm:text-3xl dark:text-gray-100"
-          />
-          <cite className="mt-4 block text-xs font-medium tracking-widest text-gray-400 uppercase not-italic dark:text-gray-500">
-            Подход к управлению
-          </cite>
+                )}
+              </div>
+            </button>
+          </motion.div>
         </div>
       </section>
 
