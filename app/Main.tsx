@@ -232,13 +232,15 @@ export default function Home() {
   // Mobile accordion: 'hero' | 0 | 1 | 2 | 3 | null
   const [openPosition, setOpenPosition] = useState<'hero' | number | null>('hero')
   const videoRef = useRef<HTMLVideoElement>(null)
+  const mobileVideoRef = useRef<HTMLVideoElement>(null)
   const prefersReducedMotion = useReducedMotion()
 
-  // Play video helper
+  // Play video helper — plays whichever video element is mounted
   const playVideo = useCallback(() => {
-    if (!videoRef.current) return
-    videoRef.current.currentTime = 0
-    videoRef.current.play()
+    const el = videoRef.current || mobileVideoRef.current
+    if (!el) return
+    el.currentTime = 0
+    el.play()
     setIsVideoPlaying(true)
   }, [])
 
@@ -310,7 +312,7 @@ export default function Home() {
 
         {/* Text content — overlaid */}
         <div className="relative z-10 mx-auto flex min-h-screen w-full max-w-[1380px] flex-col justify-start px-6 pt-[72px] sm:px-12 sm:pt-[140px]">
-          {/* Mobile photo */}
+          {/* Mobile photo/video */}
           <motion.div {...photoReveal} className="mb-8 md:hidden">
             <div className="relative aspect-[3/4] w-full overflow-hidden">
               <Image
@@ -320,6 +322,18 @@ export default function Home() {
                 height={907}
                 className="h-full w-full object-cover object-top saturate-[0.85]"
                 priority
+              />
+              <video
+                ref={mobileVideoRef}
+                src="/static/images/avatar.mp4"
+                muted
+                playsInline
+                preload="auto"
+                aria-label="Анимированный аватар Александра Виноградова"
+                className={`absolute inset-0 h-full w-full object-cover object-top transition-opacity duration-600 ${
+                  isVideoPlaying ? 'opacity-100' : 'opacity-0'
+                }`}
+                onEnded={() => setIsVideoPlaying(false)}
               />
               <div className="pointer-events-none absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-[#f5f2ed] to-transparent dark:from-[#111110]" />
             </div>
