@@ -216,7 +216,7 @@ export default function Home() {
   return (
     <>
       {/* ═══ HERO ═══ */}
-      <section className="relative min-h-screen overflow-hidden">
+      <section className="relative right-1/2 left-1/2 -mx-[50vw] min-h-screen w-screen overflow-hidden">
         {/* Photo/Video — background right 55% */}
         <motion.div
           {...photoReveal}
@@ -252,7 +252,7 @@ export default function Home() {
         </motion.div>
 
         {/* Text content — overlaid */}
-        <div className="relative z-10 flex min-h-screen flex-col justify-start pt-[120px] sm:pt-[140px]">
+        <div className="relative z-10 mx-auto flex min-h-screen w-full max-w-[1380px] flex-col justify-start px-6 pt-[120px] sm:px-12 sm:pt-[140px]">
           {/* Mobile photo */}
           <motion.div {...photoReveal} className="mb-8 md:hidden">
             <div className="relative aspect-[3/4] w-full overflow-hidden">
