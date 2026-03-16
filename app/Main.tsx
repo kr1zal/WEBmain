@@ -68,8 +68,8 @@ const positions = [
     ],
   },
   {
-    period: '2014 — н.в.',
-    duration: '11+ лет',
+    period: '2012 — н.в.',
+    duration: '13+ лет',
     role: 'Digital-стратег',
     company: 'Частная практика',
     oneLiner: '50+ проектов: FMCG, стартапы, gaming, crypto, e-commerce. Бюджеты до 120M ₽.',
@@ -80,9 +80,9 @@ const positions = [
   {
     period: '2014 — 2015',
     duration: '10 мес',
-    role: 'Интернет-маркетолог',
+    role: 'Ведущий маркетолог',
     company: 'Semenov Agency',
-    oneLiner: 'Рекламные кабинеты, аналитика, CRM-интеграции.',
+    oneLiner: 'Крупные проекты: Cosmoscow, ТЦ «Конструктор», HotWiFi. ROI 557–2082%.',
     metricNum: '2082%',
     metricLabel: 'Макс. ROI',
     extraMetrics: [],
