@@ -218,11 +218,12 @@ const speakingTopics = [
 
 // --- Typing roles ---
 const typingRoles = [
-  'IT Director',
-  'Chief AI Officer',
-  'E-commerce Expert',
-  'Спикер',
+  'Head of E-commerce',
   'Digital Transformation Lead',
+  'E-commerce Expert',
+  'Chief AI Officer',
+  'IT Director',
+  'Спикер',
 ]
 
 export default function Home() {
@@ -344,11 +345,11 @@ export default function Home() {
             {...heroFade(0.45)}
             className="mt-6 max-w-[480px] text-base leading-7 text-gray-600 dark:text-gray-300"
           >
-            Руководитель e-commerce и IT с{' '}
             <strong className="font-semibold text-gray-900 dark:text-gray-100">
-              11+ летним опытом
-            </strong>
-            . Строю IT-инфраструктуру, автоматизирую бизнес-процессы и масштабирую онлайн-продажи.
+              12 лет в digital, 7 на руководящих позициях.
+            </strong>{' '}
+            Строю и масштабирую e-commerce бизнесы — от стратегии и найма до P&L и операционной
+            прибыли.
           </motion.p>
 
           <motion.div {...heroFade(0.6)} className="mt-8 flex gap-3">
