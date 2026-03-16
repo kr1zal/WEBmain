@@ -2,7 +2,7 @@
 
 import Link from '@/components/Link'
 import Image from '@/components/Image'
-import { motion, useReducedMotion } from 'framer-motion'
+import { motion, useReducedMotion, AnimatePresence } from 'framer-motion'
 import { useState, useEffect, useCallback, useRef } from 'react'
 import {
   Reveal,
@@ -554,33 +554,35 @@ export default function Home() {
                   <polyline points="6 9 12 15 18 9" />
                 </motion.svg>
               </div>
-              <motion.div
-                initial={false}
-                animate={{
-                  height: openPosition === 'hero' ? 'auto' : 0,
-                  opacity: openPosition === 'hero' ? 1 : 0,
-                }}
-                transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
-                className="overflow-hidden"
-              >
-                <div className="border-t border-gray-200 px-4 pt-3 pb-4 dark:border-gray-800">
-                  <p className="text-[13px] leading-relaxed text-gray-500 dark:text-gray-400">
-                    {heroPosition.desc}
-                  </p>
-                  <div className="mt-3 flex flex-wrap gap-x-4 gap-y-2 border-t border-gray-200 pt-3 dark:border-gray-800">
-                    {heroPosition.stats.map((stat) => (
-                      <div key={stat.label} className="flex flex-col">
-                        <span className="font-display text-xl text-[#1b2d4e] dark:text-[#8fa7cc]">
-                          {stat.num}
-                        </span>
-                        <span className="text-[9px] font-semibold tracking-wider text-gray-400 uppercase dark:text-gray-500">
-                          {stat.label}
-                        </span>
+              <AnimatePresence initial={false}>
+                {openPosition === 'hero' && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
+                    className="overflow-hidden"
+                  >
+                    <div className="border-t border-gray-200 px-4 pt-3 pb-4 dark:border-gray-800">
+                      <p className="text-[13px] leading-relaxed text-gray-500 dark:text-gray-400">
+                        {heroPosition.desc}
+                      </p>
+                      <div className="mt-3 flex flex-wrap gap-x-4 gap-y-2 border-t border-gray-200 pt-3 dark:border-gray-800">
+                        {heroPosition.stats.map((stat) => (
+                          <div key={stat.label} className="flex flex-col">
+                            <span className="font-display text-xl text-[#1b2d4e] dark:text-[#8fa7cc]">
+                              {stat.num}
+                            </span>
+                            <span className="text-[9px] font-semibold tracking-wider text-gray-400 uppercase dark:text-gray-500">
+                              {stat.label}
+                            </span>
+                          </div>
+                        ))}
                       </div>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </button>
           </div>
 
@@ -627,35 +629,37 @@ export default function Home() {
                     <polyline points="6 9 12 15 18 9" />
                   </motion.svg>
                 </div>
-                <motion.div
-                  initial={false}
-                  animate={{
-                    height: openPosition === i ? 'auto' : 0,
-                    opacity: openPosition === i ? 1 : 0,
-                  }}
-                  transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
-                  className="overflow-hidden"
-                >
-                  <div className="border-t border-gray-200 px-4 pt-3 pb-4 dark:border-gray-800">
-                    <p className="text-[13px] leading-relaxed text-gray-500 dark:text-gray-400">
-                      {pos.oneLiner}
-                    </p>
-                    {pos.extraMetrics.length > 0 && (
-                      <div className="mt-3 flex flex-wrap gap-x-4 gap-y-2 border-t border-gray-200 pt-3 dark:border-gray-800">
-                        {pos.extraMetrics.map((m) => (
-                          <div key={m.label} className="flex flex-col">
-                            <span className="font-display text-xl text-[#1b2d4e] dark:text-[#8fa7cc]">
-                              {m.num}
-                            </span>
-                            <span className="text-[9px] font-semibold tracking-wider text-gray-400 uppercase dark:text-gray-500">
-                              {m.label}
-                            </span>
+                <AnimatePresence initial={false}>
+                  {openPosition === i && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
+                      className="overflow-hidden"
+                    >
+                      <div className="border-t border-gray-200 px-4 pt-3 pb-4 dark:border-gray-800">
+                        <p className="text-[13px] leading-relaxed text-gray-500 dark:text-gray-400">
+                          {pos.oneLiner}
+                        </p>
+                        {pos.extraMetrics.length > 0 && (
+                          <div className="mt-3 flex flex-wrap gap-x-4 gap-y-2 border-t border-gray-200 pt-3 dark:border-gray-800">
+                            {pos.extraMetrics.map((m) => (
+                              <div key={m.label} className="flex flex-col">
+                                <span className="font-display text-xl text-[#1b2d4e] dark:text-[#8fa7cc]">
+                                  {m.num}
+                                </span>
+                                <span className="text-[9px] font-semibold tracking-wider text-gray-400 uppercase dark:text-gray-500">
+                                  {m.label}
+                                </span>
+                              </div>
+                            ))}
                           </div>
-                        ))}
+                        )}
                       </div>
-                    )}
-                  </div>
-                </motion.div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </button>
             </div>
           ))}
