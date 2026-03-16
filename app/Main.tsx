@@ -379,53 +379,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ═══ COMPETENCIES (4-column lists) ═══ */}
-      <section className="py-10 sm:py-16">
-        <Reveal>
-          <div className="mb-12 flex items-baseline justify-between border-b-[3px] border-gray-900 pb-3 dark:border-gray-100">
-            <h2 className="font-display text-3xl tracking-tight text-gray-900 sm:text-4xl dark:text-gray-100">
-              Компетенции
-            </h2>
-            <span className="text-xs font-medium tracking-widest text-gray-400 uppercase dark:text-gray-500">
-              Области экспертизы
-            </span>
-          </div>
-        </Reveal>
-
-        <div className="border-t border-gray-200 pt-10 dark:border-gray-800">
-          <StaggerContainer className="grid grid-cols-2 lg:grid-cols-4" stagger={0.1}>
-            {competencies.map((col, i) => (
-              <StaggerItem
-                key={col.title}
-                className={`border-gray-200 px-5 py-8 sm:px-6 lg:px-8 dark:border-gray-800 ${
-                  i % 2 === 0 ? 'border-r' : ''
-                } ${i < 2 ? 'border-b lg:border-b-0' : ''} ${
-                  i < 3 ? 'lg:border-r' : 'lg:border-r-0'
-                }`}
-              >
-                <h3 className="group/title font-display relative inline-block text-lg text-gray-900 dark:text-gray-100">
-                  {col.title}
-                  <span className="absolute bottom-0 left-0 h-[1.5px] w-0 bg-[#1b2d4e] transition-all duration-300 group-hover/title:w-full dark:bg-[#8fa7cc]" />
-                </h3>
-                <ul className="mt-5 flex flex-col gap-0">
-                  {col.items.map((item, ii) => (
-                    <li
-                      key={`${col.title}-${ii}`}
-                      className="group/item flex items-start gap-2.5 py-2 transition-all duration-200 hover:pl-1"
-                    >
-                      <span className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-gray-300 transition-colors duration-200 group-hover/item:bg-[#1b2d4e] dark:bg-gray-700 dark:group-hover/item:bg-[#8fa7cc]" />
-                      <span className="text-sm leading-relaxed text-gray-600 transition-colors duration-200 group-hover/item:text-gray-900 dark:text-gray-400 dark:group-hover/item:text-gray-100">
-                        {item}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </StaggerItem>
-            ))}
-          </StaggerContainer>
-        </div>
-      </section>
-
       {/* ═══ PROJECTS ═══ */}
       <section className="py-10 sm:py-16">
         <Reveal>
@@ -523,6 +476,53 @@ export default function Home() {
             </Link>
           </div>
         </Reveal>
+      </section>
+
+      {/* ═══ COMPETENCIES (4-column lists) ═══ */}
+      <section className="py-10 sm:py-16">
+        <Reveal>
+          <div className="mb-12 flex items-baseline justify-between border-b-[3px] border-gray-900 pb-3 dark:border-gray-100">
+            <h2 className="font-display text-3xl tracking-tight text-gray-900 sm:text-4xl dark:text-gray-100">
+              Компетенции
+            </h2>
+            <span className="text-xs font-medium tracking-widest text-gray-400 uppercase dark:text-gray-500">
+              Области экспертизы
+            </span>
+          </div>
+        </Reveal>
+
+        <div className="border-t border-gray-200 pt-10 dark:border-gray-800">
+          <StaggerContainer className="grid grid-cols-2 lg:grid-cols-4" stagger={0.1}>
+            {competencies.map((col, i) => (
+              <StaggerItem
+                key={col.title}
+                className={`border-gray-200 px-5 py-8 sm:px-6 lg:px-8 dark:border-gray-800 ${
+                  i % 2 === 0 ? 'border-r' : ''
+                } ${i < 2 ? 'border-b lg:border-b-0' : ''} ${
+                  i < 3 ? 'lg:border-r' : 'lg:border-r-0'
+                }`}
+              >
+                <h3 className="group/title font-display relative inline-block text-lg text-gray-900 dark:text-gray-100">
+                  {col.title}
+                  <span className="absolute bottom-0 left-0 h-[1.5px] w-0 bg-[#1b2d4e] transition-all duration-300 group-hover/title:w-full dark:bg-[#8fa7cc]" />
+                </h3>
+                <ul className="mt-5 flex flex-col gap-0">
+                  {col.items.map((item, ii) => (
+                    <li
+                      key={`${col.title}-${ii}`}
+                      className="group/item flex items-start gap-2.5 py-2 transition-all duration-200 hover:pl-1"
+                    >
+                      <span className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-gray-300 transition-colors duration-200 group-hover/item:bg-[#1b2d4e] dark:bg-gray-700 dark:group-hover/item:bg-[#8fa7cc]" />
+                      <span className="text-sm leading-relaxed text-gray-600 transition-colors duration-200 group-hover/item:text-gray-900 dark:text-gray-400 dark:group-hover/item:text-gray-100">
+                        {item}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </StaggerItem>
+            ))}
+          </StaggerContainer>
+        </div>
       </section>
 
       {/* ═══ SPEAKING ═══ */}
