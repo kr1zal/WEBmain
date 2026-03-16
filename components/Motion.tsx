@@ -202,7 +202,11 @@ export function ScrollActiveCard({ children, className = '' }: ScrollActiveCardP
     : {}
 
   return (
-    <div ref={ref} className={`${className} ${isInView ? 'in-view' : ''}`} style={mobileStyle}>
+    <div
+      ref={ref}
+      className={`${className} ${isMobile && isInView ? 'in-view' : ''}`}
+      style={mobileStyle}
+    >
       {children}
     </div>
   )
