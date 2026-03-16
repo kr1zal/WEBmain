@@ -13,31 +13,79 @@ import {
 } from '@/components/Motion'
 import TypingEffect from '@/components/TypingEffect'
 
-// --- Experience data ---
-const experience = [
+// --- Impact numbers ---
+const impactNumbers = [
+  { num: '11+', label: 'лет в digital и e-commerce' },
+  { num: 'x87', label: 'рост выручки на ключевом проекте' },
+  { num: '80+', label: 'человек под управлением' },
+  { num: '50+', label: 'реализованных проектов' },
+]
+
+// --- Hero position ---
+const heroPosition = {
+  period: 'Янв 2020 — Июн 2025',
+  duration: '5 лет 6 мес',
+  role: 'Руководитель e-commerce бизнес-юнита',
+  company: 'ГК «Империал» — Фабрика мебели',
+  desc: 'Построил e-commerce направление с нуля. Полная P&L ответственность, создание 8 департаментов, найм и управление командой 60 человек. Масштабирование выручки с 300K до 26M ₽/мес.',
+  stats: [
+    { num: 'x87', label: 'Рост выручки' },
+    { num: '60', label: 'Команда' },
+    { num: '8', label: 'Департаментов' },
+    { num: '420%', label: 'ROI' },
+    { num: '19-20%', label: 'Опер. прибыль' },
+  ],
+}
+
+// --- Secondary positions ---
+const positions = [
   {
-    period: 'Янв 2020 — Июн 2025',
-    duration: '5 лет 6 мес',
-    role: 'Директор E-commerce / IT',
-    company: 'ГК «Империал» — Фабрика мебели',
-    desc: 'Руководство e-commerce направлением с полной P&L ответственностью. Масштабирование интернет-выручки с 300K до 26M ₽/мес. Цифровая трансформация всех бизнес-процессов. Управление командой до 60 человек в 7 департаментах.',
-    chips: ['P&L ответственность', '7 департаментов', 'Рост x87', '60 человек'],
+    period: '2021 — 2023',
+    duration: '2 года',
+    role: 'Директор E-commerce',
+    company: 'Частная клиника (NDA)',
+    oneLiner:
+      'Запуск онлайн-направления с нуля. Омниканальная экосистема, 5 департаментов, 15 человек.',
+    metricNum: 'x9',
+    metricLabel: 'Рост LTV',
+    extraMetrics: [
+      { num: 'x2', label: 'Выручка' },
+      { num: '18%', label: 'Прибыль' },
+      { num: '4.6+', label: 'NPS' },
+    ],
   },
   {
-    period: '2019 — 2020',
-    duration: '1 год',
+    period: '2022 — 2025',
+    duration: '4 кампании',
+    role: 'Digital Campaign Director',
+    company: 'Политические проекты (NDA)',
+    oneLiner: 'Цифровые экосистемы для избирательных кампаний. Контент-фабрика, AI-автоматизация.',
+    metricNum: '+37%',
+    metricLabel: 'Перевып. KPI',
+    extraMetrics: [
+      { num: '45%+', label: 'Охват ЦА' },
+      { num: '+40%', label: 'Share of Voice' },
+    ],
+  },
+  {
+    period: '2014 — н.в.',
+    duration: '11+ лет',
     role: 'Digital-консультант',
     company: 'Фриланс',
-    desc: 'Консультирование бизнеса по цифровизации и выходу в онлайн. Разработка digital-стратегий, аудит маркетинговых каналов, настройка аналитики и CRM-систем.',
-    chips: ['Digital-стратегия', 'CRM', 'Аналитика'],
+    oneLiner: '50+ проектов: FMCG, стартапы, gaming, crypto, e-commerce. Бюджеты до 120M ₽.',
+    metricNum: '300%+',
+    metricLabel: 'Средний ROI',
+    extraMetrics: [],
   },
   {
-    period: '2014 — 2019',
-    duration: '5 лет',
-    role: 'Интернет-маркетолог → Руководитель digital',
-    company: 'Рост через позиции',
-    desc: 'Карьерный рост от специалиста по продажам к интернет-маркетингу. Построение маркетинговых команд, управление рекламными бюджетами до 120M ₽ с ROI до 420%.',
-    chips: ['ROI 420%', 'Бюджет 120M', 'Построение команд'],
+    period: '2014 — 2015',
+    duration: '10 мес',
+    role: 'Интернет-маркетолог',
+    company: 'Semenov Agency',
+    oneLiner: 'Рекламные кабинеты, аналитика, CRM-интеграции.',
+    metricNum: '2082%',
+    metricLabel: 'Макс. ROI',
+    extraMetrics: [],
   },
 ]
 
@@ -180,6 +228,8 @@ const typingRoles = [
 export default function Home() {
   const [isVideoPlaying, setIsVideoPlaying] = useState(false)
   const [hasAutoPlayed, setHasAutoPlayed] = useState(false)
+  // Mobile accordion: 'hero' | 0 | 1 | 2 | 3 | null
+  const [openPosition, setOpenPosition] = useState<'hero' | number | null>('hero')
   const videoRef = useRef<HTMLVideoElement>(null)
   const prefersReducedMotion = useReducedMotion()
 
@@ -334,7 +384,7 @@ export default function Home() {
       {/* ═══ EXPERIENCE ═══ */}
       <section className="py-10 sm:py-16">
         <Reveal>
-          <div className="mb-12 flex items-baseline justify-between border-b-[3px] border-gray-900 pb-3 dark:border-gray-100">
+          <div className="mb-10 flex items-baseline justify-between border-b-[3px] border-gray-900 pb-3 sm:mb-12 dark:border-gray-100">
             <h2 className="font-display text-3xl tracking-tight text-gray-900 sm:text-4xl dark:text-gray-100">
               Опыт
             </h2>
@@ -344,39 +394,265 @@ export default function Home() {
           </div>
         </Reveal>
 
-        <div className="flex flex-col">
-          {experience.map((exp, i) => (
-            <Reveal key={exp.period} delay={i * 0.1}>
-              <div className="grid grid-cols-1 border-b border-gray-200 py-8 md:grid-cols-[240px_1fr] dark:border-gray-800">
-                <div className="pr-8 text-sm font-medium tracking-wide text-gray-400 uppercase dark:text-gray-500">
-                  {exp.period}
-                  <span className="mt-1 block text-xs normal-case opacity-70">{exp.duration}</span>
+        {/* Impact Numbers */}
+        <Reveal>
+          <div className="mb-10 grid grid-cols-2 gap-y-5 border-b border-gray-200 pb-7 sm:mb-12 sm:flex sm:gap-0 sm:pb-7 dark:border-gray-800">
+            {impactNumbers.map((item, i) => (
+              <div
+                key={item.num}
+                className={`${i % 2 === 1 ? 'border-l border-gray-200 pl-5 dark:border-gray-800' : 'pr-5'} sm:flex-1 ${i > 0 ? 'sm:border-l sm:border-gray-200 sm:pl-6 dark:sm:border-gray-800' : ''} sm:pr-6`}
+              >
+                <div className="font-display text-4xl text-[#1b2d4e] sm:text-5xl dark:text-[#8fa7cc]">
+                  {item.num}
                 </div>
-                <div className="mt-2 border-gray-200 md:mt-0 md:border-l md:pl-8 dark:border-gray-800">
-                  <h3 className="font-display text-xl text-gray-900 dark:text-gray-100">
-                    {exp.role}
-                  </h3>
-                  <div className="mt-1 text-sm font-medium text-[#1b2d4e] dark:text-[#8fa7cc]">
-                    {exp.company}
+                <div className="mt-1.5 text-xs text-gray-500 sm:text-[13px] dark:text-gray-400">
+                  {item.label}
+                </div>
+              </div>
+            ))}
+          </div>
+        </Reveal>
+
+        {/* ── Desktop: Hero + Rows ── */}
+        <div className="hidden md:block">
+          {/* Hero position */}
+          <Reveal>
+            <div className="grid grid-cols-[1fr_340px] gap-12 border-b border-gray-200 pb-10 dark:border-gray-800">
+              <div>
+                <div className="text-[11px] font-semibold tracking-[0.15em] text-gray-400 uppercase dark:text-gray-500">
+                  {heroPosition.period} · {heroPosition.duration}
+                </div>
+                <h3 className="font-display mt-3 text-[32px] leading-[1.2] text-gray-900 dark:text-gray-100">
+                  {heroPosition.role}
+                </h3>
+                <div className="mt-1.5 text-base font-medium text-[#1b2d4e] dark:text-[#8fa7cc]">
+                  {heroPosition.company}
+                </div>
+                <p className="mt-4 max-w-[580px] text-[15px] leading-[1.75] text-gray-600 dark:text-gray-300">
+                  {heroPosition.desc}
+                </p>
+              </div>
+              <div className="flex flex-col border-l border-gray-200 pl-12 dark:border-gray-800">
+                {heroPosition.stats.map((stat) => (
+                  <div
+                    key={stat.label}
+                    className="flex items-baseline justify-between gap-4 border-b border-gray-200 py-4 last:border-b-0 dark:border-gray-800"
+                  >
+                    <span className="font-display text-[28px] text-[#1b2d4e] dark:text-[#8fa7cc]">
+                      {stat.num}
+                    </span>
+                    <span className="text-xs text-gray-400 dark:text-gray-500">{stat.label}</span>
                   </div>
-                  <p className="mt-3 text-sm leading-7 text-gray-600 dark:text-gray-300">
-                    {exp.desc}
-                  </p>
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    {exp.chips.map((chip, ci) => (
-                      <span
-                        key={`${exp.period}-${ci}`}
-                        className="rounded-sm bg-[#e8dfd3] px-3 py-1 text-xs font-medium text-[#1b2d4e] dark:bg-[#2e2a24] dark:text-[#8fa7cc]"
-                      >
-                        {chip}
-                      </span>
-                    ))}
+                ))}
+              </div>
+            </div>
+          </Reveal>
+
+          {/* Secondary positions — compact rows */}
+          <div className="flex flex-col">
+            {positions.map((pos, i) => (
+              <Reveal key={pos.period} delay={i * 0.08}>
+                <div className="group grid grid-cols-[180px_1fr_auto] items-baseline gap-6 border-b border-gray-200 py-6 transition-all duration-200 hover:pl-2 dark:border-gray-800">
+                  <div>
+                    <div className="text-xs font-semibold tracking-[0.08em] text-gray-400 uppercase dark:text-gray-500">
+                      {pos.period}
+                    </div>
+                    <div className="mt-0.5 text-[11px] text-gray-400 opacity-70 dark:text-gray-500">
+                      {pos.duration}
+                    </div>
+                  </div>
+                  <div className="min-w-0">
+                    <h3 className="font-display text-xl text-gray-900 transition-colors duration-200 group-hover:text-[#1b2d4e] dark:text-gray-100 dark:group-hover:text-[#8fa7cc]">
+                      {pos.role}
+                    </h3>
+                    <div className="mt-0.5 text-[13px] font-medium text-[#1b2d4e] dark:text-[#8fa7cc]">
+                      {pos.company}
+                    </div>
+                    <p className="mt-1.5 text-[13px] leading-relaxed text-gray-500 dark:text-gray-400">
+                      {pos.oneLiner}
+                    </p>
+                  </div>
+                  <div className="text-right">
+                    <div className="font-display text-[28px] text-[#1b2d4e] dark:text-[#8fa7cc]">
+                      {pos.metricNum}
+                    </div>
+                    <div className="mt-1 text-[10px] font-semibold tracking-[0.08em] text-gray-400 uppercase dark:text-gray-500">
+                      {pos.metricLabel}
+                    </div>
                   </div>
                 </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+
+        {/* ── Mobile: Vertical Timeline ── */}
+        <div className="relative pl-7 md:hidden">
+          {/* Vertical line */}
+          <div className="absolute top-2 bottom-2 left-[5px] w-[1.5px] bg-gray-300 dark:bg-gray-700" />
+
+          {/* Hero node */}
+          <Reveal>
+            <div className="relative mb-2">
+              <div className="absolute top-4 -left-7 z-[2] h-3 w-3 rounded-full bg-[#1b2d4e] shadow-[0_0_0_3px_rgba(27,45,78,0.12)] dark:bg-[#8fa7cc] dark:shadow-[0_0_0_3px_rgba(143,167,204,0.15)]" />
+              <button
+                type="button"
+                className="w-full cursor-pointer overflow-hidden rounded border-l-[3px] border-[#1b2d4e] bg-white/80 text-left shadow-sm transition-shadow duration-300 dark:border-[#8fa7cc] dark:bg-[#1a1916]"
+                onClick={() => setOpenPosition(openPosition === 'hero' ? null : 'hero')}
+              >
+                <div className="flex items-center gap-3 px-4 py-4">
+                  <div className="min-w-0 flex-1">
+                    <div className="text-[10px] font-semibold tracking-[0.12em] text-gray-400 uppercase dark:text-gray-500">
+                      {heroPosition.period} · {heroPosition.duration}
+                    </div>
+                    <div className="font-display mt-1 text-xl leading-tight text-gray-900 dark:text-gray-100">
+                      {heroPosition.role}
+                    </div>
+                    <div className="mt-0.5 text-xs font-medium text-[#1b2d4e] dark:text-[#8fa7cc]">
+                      {heroPosition.company}
+                    </div>
+                  </div>
+                  <div className="shrink-0 text-right">
+                    <div className="font-display text-[26px] text-[#1b2d4e] dark:text-[#8fa7cc]">
+                      x87
+                    </div>
+                    <div className="text-[9px] font-semibold tracking-wider text-gray-400 uppercase dark:text-gray-500">
+                      Выручка
+                    </div>
+                  </div>
+                  <motion.svg
+                    animate={{ rotate: openPosition === 'hero' ? 180 : 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="h-5 w-5 shrink-0 text-gray-300 dark:text-gray-600"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                  >
+                    <polyline points="6 9 12 15 18 9" />
+                  </motion.svg>
+                </div>
+                <motion.div
+                  initial={false}
+                  animate={{
+                    height: openPosition === 'hero' ? 'auto' : 0,
+                    opacity: openPosition === 'hero' ? 1 : 0,
+                  }}
+                  transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
+                  className="overflow-hidden"
+                >
+                  <div className="border-t border-gray-200 px-4 pt-3 pb-4 dark:border-gray-800">
+                    <p className="text-[13px] leading-relaxed text-gray-500 dark:text-gray-400">
+                      {heroPosition.desc}
+                    </p>
+                    <div className="mt-3 flex flex-wrap gap-x-4 gap-y-2 border-t border-gray-200 pt-3 dark:border-gray-800">
+                      {heroPosition.stats.map((stat) => (
+                        <div key={stat.label} className="flex flex-col">
+                          <span className="font-display text-xl text-[#1b2d4e] dark:text-[#8fa7cc]">
+                            {stat.num}
+                          </span>
+                          <span className="text-[9px] font-semibold tracking-wider text-gray-400 uppercase dark:text-gray-500">
+                            {stat.label}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </motion.div>
+              </button>
+            </div>
+          </Reveal>
+
+          {/* Secondary nodes */}
+          {positions.map((pos, i) => (
+            <Reveal key={pos.period} delay={i * 0.08}>
+              <div className="relative mb-2">
+                <div
+                  className={`absolute top-[18px] -left-7 z-[2] h-2 w-2 rounded-full border-2 border-[#f5f2ed] transition-colors duration-300 dark:border-[#111110] ${openPosition === i ? 'bg-[#1b2d4e] dark:bg-[#8fa7cc]' : 'bg-gray-300 dark:bg-gray-600'}`}
+                />
+                <button
+                  type="button"
+                  className="w-full cursor-pointer overflow-hidden rounded bg-white/80 text-left shadow-sm transition-shadow duration-300 dark:bg-[#1a1916]"
+                  onClick={() => setOpenPosition(openPosition === i ? null : i)}
+                >
+                  <div className="flex items-center gap-3 px-4 py-3.5">
+                    <div className="min-w-0 flex-1">
+                      <div className="text-[10px] font-semibold tracking-[0.12em] text-gray-400 uppercase dark:text-gray-500">
+                        {pos.period} · {pos.duration}
+                      </div>
+                      <div className="font-display mt-0.5 text-[17px] leading-tight text-gray-900 dark:text-gray-100">
+                        {pos.role}
+                      </div>
+                      <div className="mt-0.5 text-xs font-medium text-[#1b2d4e] dark:text-[#8fa7cc]">
+                        {pos.company}
+                      </div>
+                    </div>
+                    <div className="shrink-0 text-right">
+                      <div className="font-display text-[22px] text-[#1b2d4e] dark:text-[#8fa7cc]">
+                        {pos.metricNum}
+                      </div>
+                      <div className="text-[9px] font-semibold tracking-wider text-gray-400 uppercase dark:text-gray-500">
+                        {pos.metricLabel}
+                      </div>
+                    </div>
+                    <motion.svg
+                      animate={{ rotate: openPosition === i ? 180 : 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="h-5 w-5 shrink-0 text-gray-300 dark:text-gray-600"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                    >
+                      <polyline points="6 9 12 15 18 9" />
+                    </motion.svg>
+                  </div>
+                  <motion.div
+                    initial={false}
+                    animate={{
+                      height: openPosition === i ? 'auto' : 0,
+                      opacity: openPosition === i ? 1 : 0,
+                    }}
+                    transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
+                    className="overflow-hidden"
+                  >
+                    <div className="border-t border-gray-200 px-4 pt-3 pb-4 dark:border-gray-800">
+                      <p className="text-[13px] leading-relaxed text-gray-500 dark:text-gray-400">
+                        {pos.oneLiner}
+                      </p>
+                      {pos.extraMetrics.length > 0 && (
+                        <div className="mt-3 flex flex-wrap gap-x-4 gap-y-2 border-t border-gray-200 pt-3 dark:border-gray-800">
+                          {pos.extraMetrics.map((m) => (
+                            <div key={m.label} className="flex flex-col">
+                              <span className="font-display text-xl text-[#1b2d4e] dark:text-[#8fa7cc]">
+                                {m.num}
+                              </span>
+                              <span className="text-[9px] font-semibold tracking-wider text-gray-400 uppercase dark:text-gray-500">
+                                {m.label}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </motion.div>
+                </button>
               </div>
             </Reveal>
           ))}
         </div>
+
+        {/* CTA */}
+        <Reveal delay={0.2}>
+          <div className="mt-8 text-center">
+            <Link
+              href="/about"
+              className="text-sm font-medium text-gray-400 transition-colors hover:text-gray-900 dark:text-gray-500 dark:hover:text-gray-100"
+            >
+              Полная история →
+            </Link>
+          </div>
+        </Reveal>
       </section>
 
       {/* ═══ PROJECTS ═══ */}
