@@ -235,12 +235,20 @@ export default function Home() {
   const mobileVideoRef = useRef<HTMLVideoElement>(null)
   const prefersReducedMotion = useReducedMotion()
 
-  // Play video helper — plays whichever video element is mounted
+  // Play video helper — plays whichever video element is visible
   const playVideo = useCallback(() => {
-    const el = videoRef.current || mobileVideoRef.current
+    // Prefer mobile video on small screens, desktop on large
+    const mobile = mobileVideoRef.current
+    const desktop = videoRef.current
+    const el =
+      mobile && mobile.offsetParent !== null
+        ? mobile
+        : desktop && desktop.offsetParent !== null
+          ? desktop
+          : null
     if (!el) return
     el.currentTime = 0
-    el.play()
+    el.play().catch(() => {})
     setIsVideoPlaying(true)
   }, [])
 
