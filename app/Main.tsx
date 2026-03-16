@@ -502,12 +502,12 @@ export default function Home() {
         </div>
 
         {/* ── Mobile: Vertical Timeline ── */}
-        <div className="relative pl-7 md:hidden">
+        <div className="relative flex flex-col gap-2 pl-7 md:hidden">
           {/* Vertical line */}
           <div className="absolute top-2 bottom-2 left-[5px] w-[1.5px] bg-gray-300 dark:bg-gray-700" />
 
           {/* Hero node */}
-          <div className="relative mb-2">
+          <div className="relative">
             <div className="absolute top-4 -left-7 z-[2] h-3 w-3 rounded-full bg-[#1b2d4e] shadow-[0_0_0_3px_rgba(27,45,78,0.12)] dark:bg-[#8fa7cc] dark:shadow-[0_0_0_3px_rgba(143,167,204,0.15)]" />
             <button
               type="button"
@@ -578,7 +578,7 @@ export default function Home() {
 
           {/* Secondary nodes */}
           {positions.map((pos, i) => (
-            <div key={pos.period} className="relative mb-2">
+            <div key={pos.period} className="relative">
               <div
                 className={`absolute top-[18px] -left-7 z-[2] h-2 w-2 rounded-full border-2 border-[#f5f2ed] transition-colors duration-300 dark:border-[#111110] ${openPosition === i ? 'bg-[#1b2d4e] dark:bg-[#8fa7cc]' : 'bg-gray-300 dark:bg-gray-600'}`}
               />
