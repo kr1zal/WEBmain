@@ -59,11 +59,12 @@ const positions = [
     duration: '4 кампании',
     role: 'Digital Campaign Director',
     company: 'Политические проекты (NDA)',
-    oneLiner: 'Цифровые экосистемы для избирательных кампаний. Контент-фабрика, AI-автоматизация.',
-    metricNum: '+37%',
-    metricLabel: 'Перевып. KPI',
+    oneLiner:
+      'Полный цикл digital-кампаний: стратегия, команда, контент-фабрика, AI-автоматизация. Охват 45%+ целевой аудитории.',
+    metricNum: '4/4',
+    metricLabel: 'Победы',
     extraMetrics: [
-      { num: '45%+', label: 'Охват ЦА' },
+      { num: '+37%', label: 'Перевып. KPI' },
       { num: '+40%', label: 'Share of Voice' },
     ],
   },
@@ -161,18 +162,18 @@ const featuredProjects = [
     role: 'Founder / Full-stack Developer',
     desc: 'Мобильное приложение в App Store для покупки спортивных добавок со встроенным интервальным таймером и видеозаписью тренировок. Собственный бренд БАДов.',
     tags: ['React Native', 'Expo', 'TypeScript', 'Supabase', 'Redux', 'iOS Native'],
-    link: 'https://bixirun.ru',
-    linkText: 'bixirun.ru',
+    link: 'https://apps.apple.com/ru/app/bixirun/id6751546585',
+    linkText: 'App Store',
   },
 ]
 
 const gridProjects = [
   {
     num: '01',
-    title: 'Запуск интернет-магазина Imperial',
-    role: 'Руководитель проекта',
-    desc: 'Полный цикл создания e-commerce платформы: от выбора стека до запуска в продакшн.',
-    tags: ['Next.js', '1С', 'REST API', 'PostgreSQL'],
+    title: 'Создание и масштабирование e-commerce Imperial',
+    role: 'Head of E-commerce',
+    desc: 'Полный цикл создания digital-направления в производственной компании: стратегия, команда, инфраструктура, операции.',
+    tags: ['E-com', 'Мебель', 'P&L', 'С нуля'],
   },
   {
     num: '02',
@@ -185,8 +186,8 @@ const gridProjects = [
     num: '03',
     title: 'Маркетплейс-экспансия',
     role: 'Head of E-commerce',
-    desc: 'Выход на Wildberries, Ozon и Lamoda. Автоматизация фидов, ценообразования, контента.',
-    tags: ['Wildberries', 'Ozon', 'Lamoda', 'API'],
+    desc: 'Выход на WB, Ozon, СберМегаМаркет, Я.Маркет. Одни из первых в нише крупногабарита.',
+    tags: ['FBO', 'FBS', 'rFBS', 'DBS'],
   },
   {
     num: '04',
@@ -283,11 +284,11 @@ export default function Home() {
   return (
     <>
       {/* ═══ HERO ═══ */}
-      <section className="relative right-1/2 left-1/2 -mx-[50vw] min-h-screen w-screen overflow-hidden">
+      <section className="relative right-1/2 left-1/2 -mx-[50vw] min-h-[calc(100svh-64px)] w-screen overflow-hidden">
         {/* Photo/Video — background right 55% */}
         <motion.div
           {...photoReveal}
-          className="absolute top-0 right-0 hidden h-full w-[55%] overflow-hidden md:block"
+          className="absolute top-0 right-0 hidden h-full w-[50%] overflow-hidden md:block lg:w-[55%]"
           onMouseEnter={() => {
             if (!videoRef.current || (!videoRef.current.paused && !videoRef.current.ended)) return
             playVideo()
@@ -319,7 +320,7 @@ export default function Home() {
         </motion.div>
 
         {/* Text content — overlaid */}
-        <div className="relative z-10 mx-auto flex min-h-screen w-full max-w-[1380px] flex-col justify-start px-6 pt-[72px] sm:px-12 sm:pt-[140px]">
+        <div className="relative z-10 mx-auto flex min-h-[calc(100svh-64px)] w-full max-w-[1380px] flex-col justify-start px-6 pt-[72px] sm:px-12 sm:pt-[100px] lg:pt-[140px]">
           {/* Mobile photo/video */}
           <motion.div {...photoReveal} className="mb-8 md:hidden">
             <div className="relative aspect-[3/4] w-full overflow-hidden">
@@ -349,7 +350,7 @@ export default function Home() {
 
           <motion.h1
             {...heroFade(0.15)}
-            className="font-display max-w-[500px] text-5xl leading-[1.05] tracking-tight text-gray-900 sm:text-6xl lg:text-[clamp(48px,6vw,80px)] dark:text-gray-100"
+            className="font-display max-w-[500px] text-5xl leading-[1.05] tracking-tight text-gray-900 sm:text-6xl lg:text-[clamp(48px,5vw,72px)] xl:text-[clamp(56px,6vw,80px)] dark:text-gray-100"
           >
             Александр
             <br />
@@ -390,7 +391,7 @@ export default function Home() {
           </motion.div>
 
           {/* Quote — bottom of hero */}
-          <motion.div {...heroFade(0.8)} className="mt-auto pt-16 pb-12">
+          <motion.div {...heroFade(0.8)} className="mt-auto pt-10 pb-8 lg:pt-16 lg:pb-12">
             <div className="max-w-[520px] border-l-[3px] border-[#1b2d4e] pl-5 dark:border-[#8fa7cc]">
               <p className="font-display text-lg leading-[1.5] font-normal text-gray-900 italic dark:text-gray-100">
                 Цифровая трансформация — это не про технологии. Это про то, как бизнес думает,
@@ -440,7 +441,7 @@ export default function Home() {
         <div className="hidden md:block">
           {/* Hero position */}
           <Reveal>
-            <div className="grid grid-cols-[1fr_340px] gap-12 border-b border-gray-200 pb-10 dark:border-gray-800">
+            <div className="grid grid-cols-[1fr_280px] gap-8 border-b border-gray-200 pb-10 lg:grid-cols-[1fr_340px] lg:gap-12 dark:border-gray-800">
               <div>
                 <div className="text-[11px] font-semibold tracking-[0.15em] text-gray-400 uppercase dark:text-gray-500">
                   {heroPosition.period} · {heroPosition.duration}
@@ -791,14 +792,14 @@ export default function Home() {
         </Reveal>
 
         <div className="border-t border-gray-200 pt-10 dark:border-gray-800">
-          <StaggerContainer className="grid grid-cols-2 lg:grid-cols-4" stagger={0.1}>
+          <StaggerContainer className="grid grid-cols-2 xl:grid-cols-4" stagger={0.1}>
             {competencies.map((col, i) => (
               <StaggerItem
                 key={col.title}
-                className={`border-gray-200 px-5 py-8 sm:px-6 lg:px-8 dark:border-gray-800 ${
+                className={`border-gray-200 px-5 py-8 sm:px-6 xl:px-8 dark:border-gray-800 ${
                   i % 2 === 0 ? 'border-r' : ''
-                } ${i < 2 ? 'border-b lg:border-b-0' : ''} ${
-                  i < 3 ? 'lg:border-r' : 'lg:border-r-0'
+                } ${i < 2 ? 'border-b xl:border-b-0' : ''} ${
+                  i < 3 ? 'xl:border-r' : 'xl:border-r-0'
                 }`}
               >
                 <h3 className="group/title font-display relative inline-block text-lg text-gray-900 dark:text-gray-100">
