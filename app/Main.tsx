@@ -879,7 +879,7 @@ export default function Home() {
           </div>
         </Reveal>
 
-        <StaggerContainer className="grid grid-cols-1 gap-4 sm:grid-cols-3" stagger={0.1}>
+        <StaggerContainer className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4" stagger={0.1}>
           {speakingTopics.map((topic) => (
             <StaggerItem key={topic.num}>
               <motion.div
@@ -887,15 +887,15 @@ export default function Home() {
                   prefersReducedMotion ? {} : { y: -2, boxShadow: '0 8px 32px rgba(0,0,0,0.06)' }
                 }
                 transition={{ type: 'spring', stiffness: 400, damping: 25 }}
-                className="h-full rounded border border-gray-200 bg-white/80 p-7 dark:border-gray-800 dark:bg-[#1a1916]"
+                className="h-full rounded border border-gray-200 bg-white/80 p-4 sm:p-7 dark:border-gray-800 dark:bg-[#1a1916]"
               >
-                <div className="font-display text-2xl text-[#1b2d4e] opacity-40 dark:text-[#8fa7cc]">
+                <div className="font-display text-xl text-[#1b2d4e] opacity-40 sm:text-2xl dark:text-[#8fa7cc]">
                   {topic.num}
                 </div>
-                <h3 className="font-display mt-3 text-lg leading-snug text-gray-900 dark:text-gray-100">
+                <h3 className="font-display mt-2 text-[15px] leading-snug text-gray-900 sm:mt-3 sm:text-lg dark:text-gray-100">
                   {topic.title}
                 </h3>
-                <p className="mt-2.5 text-sm leading-relaxed text-gray-600 dark:text-gray-300">
+                <p className="mt-1.5 text-xs leading-relaxed text-gray-600 sm:mt-2.5 sm:text-sm dark:text-gray-300">
                   {topic.desc}
                 </p>
               </motion.div>
