@@ -15,7 +15,7 @@ import TypingEffect from '@/components/TypingEffect'
 
 // --- Impact numbers ---
 const impactNumbers = [
-  { num: '11+', label: 'лет в digital и e-commerce' },
+  { num: '13+', label: 'лет в digital и e-commerce' },
   { num: 'x87', label: 'рост выручки на ключевом проекте' },
   { num: '80+', label: 'человек под управлением' },
   { num: '50+', label: 'реализованных проектов' },
@@ -42,7 +42,7 @@ const positions = [
   {
     period: '2021 — 2023',
     duration: '2 года',
-    role: 'Директор E-commerce',
+    role: 'Head of E-commerce',
     company: 'Частная клиника (NDA)',
     oneLiner:
       'Запуск онлайн-направления с нуля. Омниканальная экосистема, 5 департаментов, 15 человек.',
@@ -121,7 +121,7 @@ const competencies = [
   {
     title: 'E-commerce',
     items: [
-      'Маркетплейсы (WB, Ozon, Lamoda)',
+      'Маркетплейсы (WB, Ozon, СберМега, Я.Маркет, МВидео, Леруа Мерлен, KazanExpress)',
       'Собственный интернет-магазин',
       'WMS / фулфилмент',
       'CRM и сквозная аналитика',
@@ -191,10 +191,24 @@ const gridProjects = [
   },
   {
     num: '04',
-    title: 'BI-аналитика и дашборды',
-    role: 'Product Owner',
-    desc: 'Система сквозной аналитики: от рекламных каналов до повторных покупок.',
-    tags: ['Grafana', 'PostgreSQL', 'ETL', 'KPI'],
+    title: 'Сквозная аналитика и управление на данных',
+    role: 'IT Director',
+    desc: 'Построение BI-системы для принятия решений: real-time дашборды, unit-экономика, P&L по каналам и продуктам.',
+    tags: ['BI', 'Unit-экономика', 'P&L', 'Real-time'],
+  },
+  {
+    num: '05',
+    title: 'Омниканальная экосистема для клиники',
+    role: 'Head of E-commerce',
+    desc: 'От первого клика до повторного визита: привлечение, запись, сопровождение, возврат.',
+    tags: ['MedTech', 'CRM', 'NPS', 'Retention'],
+  },
+  {
+    num: '06',
+    title: 'AI-контент-фабрика',
+    role: 'Campaign Director',
+    desc: 'Автоматизация полного цикла: от идеи до публикации. 200+ коротких видео и 40+ текстов в месяц, охват 2M+.',
+    tags: ['HaiGen', 'Kling', 'n8n', 'Python'],
   },
 ]
 
@@ -369,7 +383,7 @@ export default function Home() {
             className="mt-6 max-w-[480px] text-base leading-7 text-gray-600 dark:text-gray-300"
           >
             <strong className="font-semibold text-gray-900 dark:text-gray-100">
-              12 лет в digital, 7 на руководящих позициях.
+              13 лет в digital, 7 на руководящих позициях.
             </strong>{' '}
             Строю и масштабирую e-commerce бизнесы — от стратегии и найма до P&L и операционной
             прибыли.
