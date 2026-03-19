@@ -174,6 +174,7 @@ const gridProjects = [
     role: 'Head of E-commerce',
     desc: 'Полный цикл создания digital-направления в производственной компании: стратегия, команда, инфраструктура, операции.',
     tags: ['E-com', 'Мебель', 'P&L', 'С нуля'],
+    href: '/projects/imperial-furniture',
   },
   {
     num: '02',
@@ -181,6 +182,7 @@ const gridProjects = [
     role: 'IT Director',
     desc: 'Внедрение WMS, штрихкодирование, автоматизация приёмки и отгрузки. Сокращение ошибок на 80%.',
     tags: ['WMS', '1С ERP', 'Barcode', 'Процессы'],
+    href: '/projects/imperial-furniture',
   },
   {
     num: '03',
@@ -188,6 +190,7 @@ const gridProjects = [
     role: 'Head of E-commerce',
     desc: 'Выход на WB, Ozon, СберМегаМаркет, Я.Маркет. Одни из первых в нише крупногабарита.',
     tags: ['FBO', 'FBS', 'rFBS', 'DBS'],
+    href: '/projects/imperial-furniture',
   },
   {
     num: '04',
@@ -195,6 +198,7 @@ const gridProjects = [
     role: 'IT Director',
     desc: 'Построение BI-системы для принятия решений: real-time дашборды, unit-экономика, P&L по каналам и продуктам.',
     tags: ['BI', 'Unit-экономика', 'P&L', 'Real-time'],
+    href: '/projects/imperial-furniture',
   },
   {
     num: '05',
@@ -202,6 +206,7 @@ const gridProjects = [
     role: 'Head of E-commerce',
     desc: 'От первого клика до повторного визита: привлечение, запись, сопровождение, возврат.',
     tags: ['MedTech', 'CRM', 'NPS', 'Retention'],
+    href: '/projects/medtech-clinic',
   },
   {
     num: '06',
@@ -209,6 +214,7 @@ const gridProjects = [
     role: 'Campaign Director',
     desc: 'Автоматизация полного цикла: от идеи до публикации. 200+ коротких видео и 40+ текстов в месяц, охват 2M+.',
     tags: ['HaiGen', 'Kling', 'n8n', 'Python'],
+    href: '/projects/political-campaigns',
   },
 ]
 
@@ -253,7 +259,7 @@ const typingRoles = [
   'E-commerce Expert',
   'Chief AI Officer',
   'IT Director',
-  'Спикер',
+  'Speaker',
 ]
 
 export default function Home() {
@@ -763,36 +769,42 @@ export default function Home() {
 
         {/* Grid projects */}
         <StaggerContainer className="grid grid-cols-1 gap-4 sm:grid-cols-2" stagger={0.08}>
-          {gridProjects.map((p) => (
-            <StaggerItem key={p.num}>
-              <ScrollActiveCard className="group relative flex h-full flex-col overflow-hidden border border-gray-200 bg-white/80 p-8 transition-all duration-500 ease-out hover:-translate-y-1 hover:border-[#1b2d4e] hover:shadow-[0_20px_60px_rgba(0,0,0,0.06)] sm:p-10 dark:border-gray-800 dark:bg-[#1a1916] dark:hover:border-[#8fa7cc] dark:hover:shadow-[0_20px_60px_rgba(0,0,0,0.3)] [&.in-view]:border-[#1b2d4e] [&.in-view]:shadow-[0_20px_60px_rgba(0,0,0,0.06)] dark:[&.in-view]:border-[#8fa7cc] dark:[&.in-view]:shadow-[0_20px_60px_rgba(0,0,0,0.3)]">
-                {/* Left accent line */}
-                <div className="absolute top-0 left-0 h-0 w-1 bg-[#1b2d4e] transition-all duration-500 ease-out group-hover:h-full group-[.in-view]:h-full dark:bg-[#8fa7cc]" />
-                <div className="font-display mb-6 text-5xl leading-none font-light text-gray-300 transition-colors duration-400 group-hover:text-[#1b2d4e] group-[.in-view]:text-[#1b2d4e] dark:text-gray-700 dark:group-hover:text-[#8fa7cc] dark:group-[.in-view]:text-[#8fa7cc]">
-                  {p.num}
-                </div>
-                <h3 className="font-display text-xl text-gray-900 sm:text-2xl dark:text-gray-100">
-                  {p.title}
-                </h3>
-                <div className="mt-1.5 text-xs font-semibold tracking-[.12em] text-[#1b2d4e] uppercase dark:text-[#8fa7cc]">
-                  {p.role}
-                </div>
-                <p className="mt-4 text-sm leading-relaxed font-light text-gray-500 dark:text-gray-400">
-                  {p.desc}
-                </p>
-                <div className="mt-auto flex flex-wrap gap-2 pt-6">
-                  {p.tags.map((tag, ti) => (
-                    <span
-                      key={`${p.num}-${ti}`}
-                      className="border border-gray-300 px-3 py-1 text-[11px] font-medium tracking-wider text-gray-500 uppercase transition-all duration-300 group-hover:border-[#1b2d4e]/50 group-hover:text-[#1b2d4e] group-[.in-view]:border-[#1b2d4e]/50 group-[.in-view]:text-[#1b2d4e] dark:border-gray-700 dark:text-gray-400 dark:group-hover:border-[#8fa7cc]/50 dark:group-hover:text-[#8fa7cc] dark:group-[.in-view]:border-[#8fa7cc]/50 dark:group-[.in-view]:text-[#8fa7cc]"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </ScrollActiveCard>
-            </StaggerItem>
-          ))}
+          {gridProjects.map((p) => {
+            const CardWrapper = p.href ? Link : 'div'
+            const cardProps = p.href ? { href: p.href } : {}
+            return (
+              <StaggerItem key={p.num}>
+                <CardWrapper {...cardProps}>
+                  <ScrollActiveCard className="group relative flex h-full flex-col overflow-hidden border border-gray-200 bg-white/80 p-8 transition-all duration-500 ease-out hover:-translate-y-1 hover:border-[#1b2d4e] hover:shadow-[0_20px_60px_rgba(0,0,0,0.06)] sm:p-10 dark:border-gray-800 dark:bg-[#1a1916] dark:hover:border-[#8fa7cc] dark:hover:shadow-[0_20px_60px_rgba(0,0,0,0.3)] [&.in-view]:border-[#1b2d4e] [&.in-view]:shadow-[0_20px_60px_rgba(0,0,0,0.06)] dark:[&.in-view]:border-[#8fa7cc] dark:[&.in-view]:shadow-[0_20px_60px_rgba(0,0,0,0.3)]">
+                    {/* Left accent line */}
+                    <div className="absolute top-0 left-0 h-0 w-1 bg-[#1b2d4e] transition-all duration-500 ease-out group-hover:h-full group-[.in-view]:h-full dark:bg-[#8fa7cc]" />
+                    <div className="font-display mb-6 text-5xl leading-none font-light text-gray-300 transition-colors duration-400 group-hover:text-[#1b2d4e] group-[.in-view]:text-[#1b2d4e] dark:text-gray-700 dark:group-hover:text-[#8fa7cc] dark:group-[.in-view]:text-[#8fa7cc]">
+                      {p.num}
+                    </div>
+                    <h3 className="font-display text-xl text-gray-900 sm:text-2xl dark:text-gray-100">
+                      {p.title}
+                    </h3>
+                    <div className="mt-1.5 text-xs font-semibold tracking-[.12em] text-[#1b2d4e] uppercase dark:text-[#8fa7cc]">
+                      {p.role}
+                    </div>
+                    <p className="mt-4 text-sm leading-relaxed font-light text-gray-500 dark:text-gray-400">
+                      {p.desc}
+                    </p>
+                    <div className="mt-auto flex flex-wrap gap-2 pt-6">
+                      {p.tags.map((tag, ti) => (
+                        <span
+                          key={`${p.num}-${ti}`}
+                          className="border border-gray-300 px-3 py-1 text-[11px] font-medium tracking-wider text-gray-500 uppercase transition-all duration-300 group-hover:border-[#1b2d4e]/50 group-hover:text-[#1b2d4e] group-[.in-view]:border-[#1b2d4e]/50 group-[.in-view]:text-[#1b2d4e] dark:border-gray-700 dark:text-gray-400 dark:group-hover:border-[#8fa7cc]/50 dark:group-hover:text-[#8fa7cc] dark:group-[.in-view]:border-[#8fa7cc]/50 dark:group-[.in-view]:text-[#8fa7cc]"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </ScrollActiveCard>
+                </CardWrapper>
+              </StaggerItem>
+            )
+          })}
         </StaggerContainer>
 
         <Reveal delay={0.2}>
@@ -862,7 +874,7 @@ export default function Home() {
               Выступления
             </h2>
             <span className="text-xs font-medium tracking-widest text-gray-400 uppercase dark:text-gray-500">
-              Спикер
+              Готов выступить спикером
             </span>
           </div>
         </Reveal>
