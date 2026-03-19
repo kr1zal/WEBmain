@@ -61,30 +61,27 @@ const contacts = [
 export default function Footer() {
   return (
     <footer className="mt-10 border-t border-gray-200 dark:border-gray-800">
-      <div className="flex items-center justify-between border-t border-gray-200 py-4 dark:border-gray-800">
-        <div className="flex items-center gap-3">
-          <span className="text-xs tracking-widest text-gray-400 uppercase dark:text-gray-500">
-            © {new Date().getFullYear()} {siteMetadata.author}
-          </span>
-          <span className="text-gray-300 dark:text-gray-700">·</span>
-          <div className="flex items-center gap-4">
-            {contacts.map((c) => (
-              <a
-                key={c.label}
-                href={c.href}
-                target={c.href.startsWith('http') ? '_blank' : undefined}
-                rel={c.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                aria-label={c.label}
-                className="text-gray-400 transition-colors duration-200 hover:text-[#1b2d4e] dark:text-gray-600 dark:hover:text-[#8fa7cc]"
-              >
-                {c.icon}
-              </a>
-            ))}
-          </div>
+      <div className="flex flex-col items-center gap-3 border-t border-gray-200 py-4 sm:flex-row sm:justify-between dark:border-gray-800">
+        <span className="text-xs tracking-widest text-gray-400 uppercase dark:text-gray-500">
+          © {new Date().getFullYear()} {siteMetadata.author}
+        </span>
+        <div className="flex items-center gap-4">
+          {contacts.map((c) => (
+            <a
+              key={c.label}
+              href={c.href}
+              target={c.href.startsWith('http') ? '_blank' : undefined}
+              rel={c.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+              aria-label={c.label}
+              className="text-gray-400 transition-colors duration-200 hover:text-[#1b2d4e] dark:text-gray-600 dark:hover:text-[#8fa7cc]"
+            >
+              {c.icon}
+            </a>
+          ))}
+          <Link href="/" className="font-display text-sm text-gray-400 dark:text-gray-500">
+            AV.
+          </Link>
         </div>
-        <Link href="/" className="font-display text-sm text-gray-400 dark:text-gray-500">
-          AV.
-        </Link>
       </div>
     </footer>
   )
