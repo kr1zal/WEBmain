@@ -43,49 +43,45 @@ export default function ProjectLayout({ content, next, prev, children }: LayoutP
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-4 lg:gap-x-12">
           {/* Sidebar — first in DOM for mobile, reordered via CSS on desktop */}
           <div className="order-1 lg:order-2 lg:col-span-1">
-            <Reveal>
-              <div className="sticky top-20 flex flex-col gap-6 border border-gray-200 bg-white/80 p-6 dark:border-gray-800 dark:bg-[#1a1916]">
-                {role && (
-                  <div>
-                    <h3 className="mb-1 text-xs font-semibold tracking-wider text-gray-400 uppercase dark:text-gray-500">
-                      Роль
-                    </h3>
-                    <div className="text-sm font-medium text-gray-900 dark:text-gray-100">
-                      {role}
-                    </div>
-                  </div>
-                )}
+            <div className="flex flex-col gap-6 border border-gray-200 bg-white/80 p-6 lg:sticky lg:top-20 dark:border-gray-800 dark:bg-[#1a1916]">
+              {role && (
+                <div>
+                  <h3 className="mb-1 text-xs font-semibold tracking-wider text-gray-400 uppercase dark:text-gray-500">
+                    Роль
+                  </h3>
+                  <div className="text-sm font-medium text-gray-900 dark:text-gray-100">{role}</div>
+                </div>
+              )}
 
-                {period && (
-                  <div>
-                    <h3 className="mb-1 text-xs font-semibold tracking-wider text-gray-400 uppercase dark:text-gray-500">
-                      Период
-                    </h3>
-                    <div className="text-sm font-medium text-gray-900 dark:text-gray-100">
-                      {period}
-                    </div>
+              {period && (
+                <div>
+                  <h3 className="mb-1 text-xs font-semibold tracking-wider text-gray-400 uppercase dark:text-gray-500">
+                    Период
+                  </h3>
+                  <div className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                    {period}
                   </div>
-                )}
+                </div>
+              )}
 
-                {techStack && techStack.length > 0 && (
-                  <div>
-                    <h3 className="mb-3 text-xs font-semibold tracking-wider text-gray-400 uppercase dark:text-gray-500">
-                      Технологии
-                    </h3>
-                    <div className="flex flex-wrap gap-1.5">
-                      {techStack.map((tech) => (
-                        <span
-                          key={tech}
-                          className="border border-gray-200 px-2.5 py-1 text-xs font-medium tracking-wider text-gray-600 uppercase dark:border-gray-700 dark:text-gray-400"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
+              {techStack && techStack.length > 0 && (
+                <div>
+                  <h3 className="mb-3 text-xs font-semibold tracking-wider text-gray-400 uppercase dark:text-gray-500">
+                    Технологии
+                  </h3>
+                  <div className="flex flex-wrap gap-1.5">
+                    {techStack.map((tech) => (
+                      <span
+                        key={tech}
+                        className="border border-gray-200 px-2.5 py-1 text-xs font-medium tracking-wider text-gray-600 uppercase dark:border-gray-700 dark:text-gray-400"
+                      >
+                        {tech}
+                      </span>
+                    ))}
                   </div>
-                )}
-              </div>
-            </Reveal>
+                </div>
+              )}
+            </div>
           </div>
 
           {/* Main Content */}
