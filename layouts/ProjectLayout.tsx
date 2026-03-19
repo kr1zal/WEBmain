@@ -41,56 +41,9 @@ export default function ProjectLayout({ content, next, prev, children }: LayoutP
         </header>
 
         <div className="grid grid-cols-1 gap-10 xl:grid-cols-4 xl:gap-x-12">
-          {/* Main Content */}
-          <div className="xl:col-span-3">
-            {imgSrc && (
-              <ImageReveal className="mb-10 w-full">
-                <div className="relative w-full overflow-hidden border border-gray-200 dark:border-gray-800">
-                  <Image
-                    src={imgSrc}
-                    alt={title}
-                    width={1200}
-                    height={630}
-                    className="h-auto w-full object-cover"
-                    priority
-                  />
-                </div>
-              </ImageReveal>
-            )}
-
-            <Reveal delay={0.15}>
-              <div className="prose prose-lg dark:prose-invert max-w-none">
-                {children}
-
-                {content.gallery && content.gallery.length > 0 && (
-                  <div className="mt-12 border-t border-gray-200 pt-8 dark:border-gray-800">
-                    <h2 className="font-display mb-6 text-2xl text-gray-900 dark:text-gray-100">
-                      Галерея
-                    </h2>
-                    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                      {content.gallery.map((img, index) => (
-                        <ImageReveal key={index} delay={index * 0.1}>
-                          <div className="overflow-hidden border border-gray-200 dark:border-gray-800">
-                            <Image
-                              src={img}
-                              alt={`${title} — изображение ${index + 1}`}
-                              width={800}
-                              height={600}
-                              className="h-full w-full object-cover"
-                            />
-                          </div>
-                        </ImageReveal>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
-            </Reveal>
-          </div>
-
-          {/* Sidebar */}
-          <div className="xl:col-span-1">
-            <Reveal delay={0.2}>
+          {/* Sidebar — first in DOM for mobile, reordered via CSS on desktop */}
+          <div className="order-1 xl:order-2 xl:col-span-1">
+            <Reveal>
               <div className="sticky top-20 flex flex-col gap-6 border border-gray-200 bg-white/80 p-6 dark:border-gray-800 dark:bg-[#1a1916]">
                 {role && (
                   <div>
@@ -133,6 +86,51 @@ export default function ProjectLayout({ content, next, prev, children }: LayoutP
                 )}
               </div>
             </Reveal>
+          </div>
+
+          {/* Main Content */}
+          <div className="order-2 xl:order-1 xl:col-span-3">
+            {imgSrc && (
+              <ImageReveal className="mb-10 w-full">
+                <div className="relative w-full overflow-hidden border border-gray-200 dark:border-gray-800">
+                  <Image
+                    src={imgSrc}
+                    alt={title}
+                    width={1200}
+                    height={630}
+                    className="h-auto w-full object-cover"
+                    priority
+                  />
+                </div>
+              </ImageReveal>
+            )}
+
+            <div className="prose prose-lg dark:prose-invert max-w-none">
+              {children}
+
+              {content.gallery && content.gallery.length > 0 && (
+                <div className="mt-12 border-t border-gray-200 pt-8 dark:border-gray-800">
+                  <h2 className="font-display mb-6 text-2xl text-gray-900 dark:text-gray-100">
+                    Галерея
+                  </h2>
+                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                    {content.gallery.map((img, index) => (
+                      <ImageReveal key={index} delay={index * 0.05}>
+                        <div className="overflow-hidden border border-gray-200 dark:border-gray-800">
+                          <Image
+                            src={img}
+                            alt={`${title} — изображение ${index + 1}`}
+                            width={800}
+                            height={600}
+                            className="h-full w-full object-cover"
+                          />
+                        </div>
+                      </ImageReveal>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         </div>
 
