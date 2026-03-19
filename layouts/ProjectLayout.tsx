@@ -40,9 +40,9 @@ export default function ProjectLayout({ content, next, prev, children }: LayoutP
           )}
         </header>
 
-        <div className="grid grid-cols-1 gap-10 xl:grid-cols-4 xl:gap-x-12">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-4 lg:gap-x-12">
           {/* Sidebar — first in DOM for mobile, reordered via CSS on desktop */}
-          <div className="order-1 xl:order-2 xl:col-span-1">
+          <div className="order-1 lg:order-2 lg:col-span-1">
             <Reveal>
               <div className="sticky top-20 flex flex-col gap-6 border border-gray-200 bg-white/80 p-6 dark:border-gray-800 dark:bg-[#1a1916]">
                 {role && (
@@ -89,7 +89,7 @@ export default function ProjectLayout({ content, next, prev, children }: LayoutP
           </div>
 
           {/* Main Content */}
-          <div className="order-2 xl:order-1 xl:col-span-3">
+          <div className="order-2 lg:order-1 lg:col-span-3">
             {imgSrc && (
               <ImageReveal className="mb-10 w-full">
                 <div className="relative w-full overflow-hidden border border-gray-200 dark:border-gray-800">
