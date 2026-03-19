@@ -869,7 +869,7 @@ export default function Home() {
       {/* ═══ SPEAKING ═══ */}
       <section className="py-10 sm:py-16">
         <Reveal>
-          <div className="mb-12 flex items-baseline justify-between border-b-[3px] border-gray-900 pb-3 dark:border-gray-100">
+          <div className="mb-12 flex flex-col gap-2 border-b-[3px] border-gray-900 pb-3 sm:flex-row sm:items-baseline sm:justify-between dark:border-gray-100">
             <h2 className="font-display text-3xl tracking-tight text-gray-900 sm:text-4xl dark:text-gray-100">
               Выступления
             </h2>
