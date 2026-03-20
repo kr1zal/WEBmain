@@ -1,29 +1,12 @@
-import { Authors, allAuthors } from 'contentlayer/generated'
-import { components } from '@/components/MDXComponents'
-import { MDXLayoutRenderer } from 'pliny/mdx-components'
-import AuthorLayout from '@/layouts/AuthorLayout'
-import { coreContent } from 'pliny/utils/contentlayer'
+import AboutLayout from '@/layouts/AboutLayout'
 import { genPageMetadata } from 'app/seo'
-import { notFound } from 'next/navigation'
 
 export const metadata = genPageMetadata({
   title: 'Обо мне',
   description:
-    'Александр Виноградов — IT Директор с 11+ летним опытом в e-commerce и цифровой трансформации. Рост выручки в 87 раз, команды до 60 человек.',
+    'Александр Виноградов — IT Директор и Head of E-commerce с 13+ летним опытом. Рост выручки в 87 раз, команды до 60 человек, 5 политических побед из 5.',
 })
 
 export default function Page() {
-  const author = allAuthors.find((p) => p.slug === 'default') as Authors
-  if (!author) {
-    return notFound()
-  }
-  const mainContent = coreContent(author)
-
-  return (
-    <>
-      <AuthorLayout content={mainContent}>
-        <MDXLayoutRenderer code={author.body.code} components={components} />
-      </AuthorLayout>
-    </>
-  )
+  return <AboutLayout />
 }
