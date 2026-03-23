@@ -116,6 +116,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         color="#5bbad5"
       />
       <meta name="yandex-verification" content="35dffbad8821a256" />
+      <meta name="google-site-verification" content="aFfvWj7aKx0gD2m9kejO4lDY32ijnVOgl6J2eC-EZz0" />
       <meta name="msapplication-TileColor" content="#000000" />
       <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fff" />
       <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000" />
