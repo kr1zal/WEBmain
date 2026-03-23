@@ -14,7 +14,7 @@ const chapters = [
   { id: 'ch3', label: 'Глава III', title: 'Школа управления', toc: 'Школа управления' },
   { id: 'ch4', label: 'Глава IV', title: 'Точка сборки', toc: 'Точка сборки' },
   { id: 'ch5', label: 'Глава V', title: 'Команда', toc: 'Команда' },
-  { id: 'ch6', label: 'Глава VI', title: 'Параллельно', toc: 'Параллельно' },
+  { id: 'ch6', label: 'Глава VI', title: 'За пределами', toc: 'За пределами' },
   { id: 'ch7', label: 'Глава VII', title: 'Собственные продукты', toc: 'Собственные продукты' },
   { id: 'ch8', label: '', title: 'Как я думаю', toc: 'Как я думаю' },
 ]
@@ -317,7 +317,7 @@ function StoryContent() {
       </div>
 
       {/* Ch 6 */}
-      <ChapterHeading id="ch6" label="Глава VI" title="Параллельно" />
+      <ChapterHeading id="ch6" label="Глава VI" title="За пределами" />
       <div className="mt-5">
         <P>
           <Strong>Медицина.</Strong> Частная клиника, полностью офлайновая — запись в тетрадку, ни
