@@ -68,7 +68,7 @@ module.exports = () => {
     output,
     basePath,
     reactStrictMode: true,
-    trailingSlash: false,
+    trailingSlash: true,
     pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
     eslint: {
       // Warning: This allows production builds to successfully complete even if
