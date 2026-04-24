@@ -272,29 +272,28 @@ export default function Home() {
   const mobileVideoRef = useRef<HTMLVideoElement>(null)
   const prefersReducedMotion = useReducedMotion()
 
-  // Scroll-anchor: remember the clicked card's top before state change,
-  // then after layout commit compensate window.scrollBy so the clicked
-  // card stays on the same viewport pixel — no jump.
-  const pendingAnchor = useRef<{ key: string; top: number } | null>(null)
+  // On mobile: when a card opens, smooth-scroll it to the vertical center
+  // of the viewport. Applied after React's layout commit via useLayoutEffect
+  // so the card's post-commit geometry is the one being scrolled to.
+  const pendingCenter = useRef<string | null>(null)
 
   const togglePosition = useCallback((key: 'hero' | number) => {
-    const el = cardRefs.current[String(key)]
-    if (el) {
-      pendingAnchor.current = { key: String(key), top: el.getBoundingClientRect().top }
-    }
-    setOpenPosition((prev) => (prev === key ? null : key))
+    setOpenPosition((prev) => {
+      const willOpen = prev !== key
+      pendingCenter.current = willOpen ? String(key) : null
+      return willOpen ? key : null
+    })
   }, [])
 
   useLayoutEffect(() => {
-    const anchor = pendingAnchor.current
-    if (!anchor) return
-    pendingAnchor.current = null
-    const el = cardRefs.current[anchor.key]
+    const key = pendingCenter.current
+    if (!key) return
+    pendingCenter.current = null
+    if (typeof window === 'undefined') return
+    if (!window.matchMedia('(max-width: 767px)').matches) return
+    const el = cardRefs.current[key]
     if (!el) return
-    const delta = el.getBoundingClientRect().top - anchor.top
-    if (Math.abs(delta) > 0.5) {
-      window.scrollBy({ top: delta, left: 0, behavior: 'auto' })
-    }
+    el.scrollIntoView({ block: 'center', behavior: 'smooth' })
   }, [openPosition])
 
   // Play video helper — plays whichever video element is visible
