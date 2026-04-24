@@ -266,10 +266,30 @@ export default function Home() {
   const [isVideoPlaying, setIsVideoPlaying] = useState(false)
   const [hasAutoPlayed, setHasAutoPlayed] = useState(false)
   // Mobile accordion: 'hero' | 0 | 1 | 2 | 3 | null
-  const [openPosition, setOpenPosition] = useState<'hero' | number | null>('hero')
+  const [openPosition, setOpenPosition] = useState<'hero' | number | null>(null)
+  const cardRefs = useRef<Record<string, HTMLButtonElement | null>>({})
   const videoRef = useRef<HTMLVideoElement>(null)
   const mobileVideoRef = useRef<HTMLVideoElement>(null)
   const prefersReducedMotion = useReducedMotion()
+
+  // Open/close accordion card; on mobile scroll it to top so content
+  // below does not jump under the user when height animation fires.
+  const togglePosition = useCallback(
+    (key: 'hero' | number) => {
+      const willOpen = openPosition !== key
+      setOpenPosition(willOpen ? key : null)
+      if (
+        willOpen &&
+        typeof window !== 'undefined' &&
+        window.matchMedia('(max-width: 767px)').matches
+      ) {
+        requestAnimationFrame(() => {
+          cardRefs.current[String(key)]?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        })
+      }
+    },
+    [openPosition]
+  )
 
   // Play video helper — plays whichever video element is visible
   const playVideo = useCallback(() => {
@@ -551,12 +571,16 @@ export default function Home() {
           <div className="absolute top-2 bottom-2 left-[5px] w-[1.5px] bg-gray-300 dark:bg-gray-700" />
 
           {/* Hero node */}
-          <div className="relative">
+          <div className="relative scroll-mt-4">
             <div className="absolute top-4 -left-7 z-[2] h-3 w-3 rounded-full bg-[#1b2d4e] shadow-[0_0_0_3px_rgba(27,45,78,0.12)] dark:bg-[#8fa7cc] dark:shadow-[0_0_0_3px_rgba(143,167,204,0.15)]" />
             <button
+              ref={(el) => {
+                cardRefs.current.hero = el
+              }}
               type="button"
-              className="w-full cursor-pointer overflow-hidden rounded border-l-[3px] border-[#1b2d4e] bg-white/80 text-left shadow-sm transition-shadow duration-300 dark:border-[#8fa7cc] dark:bg-[#1a1916]"
-              onClick={() => setOpenPosition(openPosition === 'hero' ? null : 'hero')}
+              aria-expanded={openPosition === 'hero'}
+              className="w-full cursor-pointer overflow-hidden rounded border-l-[3px] border-[#1b2d4e] bg-white/80 text-left shadow-sm transition-shadow duration-300 focus-visible:ring-2 focus-visible:ring-[#1b2d4e]/40 focus-visible:outline-none dark:border-[#8fa7cc] dark:bg-[#1a1916] dark:focus-visible:ring-[#8fa7cc]/40"
+              onClick={() => togglePosition('hero')}
             >
               <div className="flex items-center gap-3 px-4 py-4">
                 <div className="min-w-0 flex-1">
@@ -624,14 +648,18 @@ export default function Home() {
 
           {/* Secondary nodes */}
           {positions.map((pos, i) => (
-            <div key={pos.period} className="relative">
+            <div key={pos.period} className="relative scroll-mt-4">
               <div
                 className={`absolute top-[18px] -left-7 z-[2] h-2 w-2 rounded-full border-2 border-[#f5f2ed] transition-colors duration-300 dark:border-[#111110] ${openPosition === i ? 'bg-[#1b2d4e] dark:bg-[#8fa7cc]' : 'bg-gray-300 dark:bg-gray-600'}`}
               />
               <button
+                ref={(el) => {
+                  cardRefs.current[String(i)] = el
+                }}
                 type="button"
-                className="w-full cursor-pointer overflow-hidden rounded bg-white/80 text-left shadow-sm transition-shadow duration-300 dark:bg-[#1a1916]"
-                onClick={() => setOpenPosition(openPosition === i ? null : i)}
+                aria-expanded={openPosition === i}
+                className="w-full cursor-pointer overflow-hidden rounded bg-white/80 text-left shadow-sm transition-shadow duration-300 focus-visible:ring-2 focus-visible:ring-[#1b2d4e]/40 focus-visible:outline-none dark:bg-[#1a1916] dark:focus-visible:ring-[#8fa7cc]/40"
+                onClick={() => togglePosition(i)}
               >
                 <div className="flex items-center gap-3 px-4 py-3.5">
                   <div className="min-w-0 flex-1">
