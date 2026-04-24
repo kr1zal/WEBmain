@@ -2,8 +2,8 @@
 
 import Link from '@/components/Link'
 import Image from '@/components/Image'
-import { motion, useReducedMotion, AnimatePresence } from 'framer-motion'
-import { useState, useEffect, useCallback, useRef } from 'react'
+import { motion, useReducedMotion } from 'framer-motion'
+import { useState, useEffect, useLayoutEffect, useCallback, useRef } from 'react'
 import {
   Reveal,
   StaggerContainer,
@@ -272,24 +272,30 @@ export default function Home() {
   const mobileVideoRef = useRef<HTMLVideoElement>(null)
   const prefersReducedMotion = useReducedMotion()
 
-  // Open/close accordion card; on mobile scroll it to top so content
-  // below does not jump under the user when height animation fires.
-  const togglePosition = useCallback(
-    (key: 'hero' | number) => {
-      const willOpen = openPosition !== key
-      setOpenPosition(willOpen ? key : null)
-      if (
-        willOpen &&
-        typeof window !== 'undefined' &&
-        window.matchMedia('(max-width: 767px)').matches
-      ) {
-        requestAnimationFrame(() => {
-          cardRefs.current[String(key)]?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-        })
-      }
-    },
-    [openPosition]
-  )
+  // Scroll-anchor: remember the clicked card's top before state change,
+  // then after layout commit compensate window.scrollBy so the clicked
+  // card stays on the same viewport pixel — no jump.
+  const pendingAnchor = useRef<{ key: string; top: number } | null>(null)
+
+  const togglePosition = useCallback((key: 'hero' | number) => {
+    const el = cardRefs.current[String(key)]
+    if (el) {
+      pendingAnchor.current = { key: String(key), top: el.getBoundingClientRect().top }
+    }
+    setOpenPosition((prev) => (prev === key ? null : key))
+  }, [])
+
+  useLayoutEffect(() => {
+    const anchor = pendingAnchor.current
+    if (!anchor) return
+    pendingAnchor.current = null
+    const el = cardRefs.current[anchor.key]
+    if (!el) return
+    const delta = el.getBoundingClientRect().top - anchor.top
+    if (Math.abs(delta) > 0.5) {
+      window.scrollBy({ top: delta, left: 0, behavior: 'auto' })
+    }
+  }, [openPosition])
 
   // Play video helper — plays whichever video element is visible
   const playVideo = useCallback(() => {
@@ -572,14 +578,16 @@ export default function Home() {
 
           {/* Hero node */}
           <div className="relative scroll-mt-4">
-            <div className="absolute top-4 -left-7 z-[2] h-3 w-3 rounded-full bg-[#1b2d4e] shadow-[0_0_0_3px_rgba(27,45,78,0.12)] dark:bg-[#8fa7cc] dark:shadow-[0_0_0_3px_rgba(143,167,204,0.15)]" />
+            <div
+              className={`absolute top-1/2 -left-7 z-[2] h-3 w-3 -translate-y-1/2 rounded-full transition-colors duration-300 ${openPosition === 'hero' ? 'bg-[#1b2d4e] shadow-[0_0_0_3px_rgba(27,45,78,0.12)] dark:bg-[#8fa7cc] dark:shadow-[0_0_0_3px_rgba(143,167,204,0.15)]' : 'border-2 border-[#f5f2ed] bg-gray-300 shadow-[0_0_0_3px_rgba(0,0,0,0.04)] dark:border-[#111110] dark:bg-gray-600 dark:shadow-[0_0_0_3px_rgba(255,255,255,0.04)]'}`}
+            />
             <button
               ref={(el) => {
                 cardRefs.current.hero = el
               }}
               type="button"
               aria-expanded={openPosition === 'hero'}
-              className="w-full cursor-pointer overflow-hidden rounded border-l-[3px] border-[#1b2d4e] bg-white/80 text-left shadow-sm transition-shadow duration-300 focus-visible:ring-2 focus-visible:ring-[#1b2d4e]/40 focus-visible:outline-none dark:border-[#8fa7cc] dark:bg-[#1a1916] dark:focus-visible:ring-[#8fa7cc]/40"
+              className={`w-full cursor-pointer overflow-hidden rounded border-l-[3px] bg-white/80 text-left shadow-sm transition-[border-color,box-shadow] duration-300 focus-visible:ring-2 focus-visible:ring-[#1b2d4e]/40 focus-visible:outline-none dark:bg-[#1a1916] dark:focus-visible:ring-[#8fa7cc]/40 ${openPosition === 'hero' ? 'border-[#1b2d4e] dark:border-[#8fa7cc]' : 'border-transparent'}`}
               onClick={() => togglePosition('hero')}
             >
               <div className="flex items-center gap-3 px-4 py-4">
@@ -614,35 +622,31 @@ export default function Home() {
                   <polyline points="6 9 12 15 18 9" />
                 </motion.svg>
               </div>
-              <AnimatePresence initial={false}>
-                {openPosition === 'hero' && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
-                    className="overflow-hidden"
-                  >
-                    <div className="border-t border-gray-200 px-4 pt-3 pb-4 dark:border-gray-800">
-                      <p className="text-[13px] leading-relaxed text-gray-500 dark:text-gray-400">
-                        {heroPosition.desc}
-                      </p>
-                      <div className="mt-3 flex flex-wrap gap-x-4 gap-y-2 border-t border-gray-200 pt-3 dark:border-gray-800">
-                        {heroPosition.stats.map((stat) => (
-                          <div key={stat.label} className="flex flex-col">
-                            <span className="font-display text-xl text-[#1b2d4e] dark:text-[#8fa7cc]">
-                              {stat.num}
-                            </span>
-                            <span className="text-[9px] font-semibold tracking-wider text-gray-400 uppercase dark:text-gray-500">
-                              {stat.label}
-                            </span>
-                          </div>
-                        ))}
-                      </div>
+              {openPosition === 'hero' && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <div className="border-t border-gray-200 px-4 pt-3 pb-4 dark:border-gray-800">
+                    <p className="text-[13px] leading-relaxed text-gray-500 dark:text-gray-400">
+                      {heroPosition.desc}
+                    </p>
+                    <div className="mt-3 flex flex-wrap gap-x-4 gap-y-2 border-t border-gray-200 pt-3 dark:border-gray-800">
+                      {heroPosition.stats.map((stat) => (
+                        <div key={stat.label} className="flex flex-col">
+                          <span className="font-display text-xl text-[#1b2d4e] dark:text-[#8fa7cc]">
+                            {stat.num}
+                          </span>
+                          <span className="text-[9px] font-semibold tracking-wider text-gray-400 uppercase dark:text-gray-500">
+                            {stat.label}
+                          </span>
+                        </div>
+                      ))}
                     </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+                  </div>
+                </motion.div>
+              )}
             </button>
           </div>
 
@@ -650,7 +654,7 @@ export default function Home() {
           {positions.map((pos, i) => (
             <div key={pos.period} className="relative scroll-mt-4">
               <div
-                className={`absolute top-[18px] -left-7 z-[2] h-2 w-2 rounded-full border-2 border-[#f5f2ed] transition-colors duration-300 dark:border-[#111110] ${openPosition === i ? 'bg-[#1b2d4e] dark:bg-[#8fa7cc]' : 'bg-gray-300 dark:bg-gray-600'}`}
+                className={`absolute top-1/2 -left-7 z-[2] h-3 w-3 -translate-y-1/2 rounded-full border-2 border-[#f5f2ed] transition-colors duration-300 dark:border-[#111110] ${openPosition === i ? 'bg-[#1b2d4e] dark:bg-[#8fa7cc]' : 'bg-gray-300 dark:bg-gray-600'}`}
               />
               <button
                 ref={(el) => {
@@ -658,7 +662,7 @@ export default function Home() {
                 }}
                 type="button"
                 aria-expanded={openPosition === i}
-                className="w-full cursor-pointer overflow-hidden rounded bg-white/80 text-left shadow-sm transition-shadow duration-300 focus-visible:ring-2 focus-visible:ring-[#1b2d4e]/40 focus-visible:outline-none dark:bg-[#1a1916] dark:focus-visible:ring-[#8fa7cc]/40"
+                className={`w-full cursor-pointer overflow-hidden rounded border-l-[3px] bg-white/80 text-left shadow-sm transition-[border-color,box-shadow] duration-300 focus-visible:ring-2 focus-visible:ring-[#1b2d4e]/40 focus-visible:outline-none dark:bg-[#1a1916] dark:focus-visible:ring-[#8fa7cc]/40 ${openPosition === i ? 'border-[#1b2d4e] dark:border-[#8fa7cc]' : 'border-transparent'}`}
                 onClick={() => togglePosition(i)}
               >
                 <div className="flex items-center gap-3 px-4 py-3.5">
@@ -693,37 +697,33 @@ export default function Home() {
                     <polyline points="6 9 12 15 18 9" />
                   </motion.svg>
                 </div>
-                <AnimatePresence initial={false}>
-                  {openPosition === i && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: 'auto', opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
-                      className="overflow-hidden"
-                    >
-                      <div className="border-t border-gray-200 px-4 pt-3 pb-4 dark:border-gray-800">
-                        <p className="text-[13px] leading-relaxed text-gray-500 dark:text-gray-400">
-                          {pos.oneLiner}
-                        </p>
-                        {pos.extraMetrics.length > 0 && (
-                          <div className="mt-3 flex flex-wrap gap-x-4 gap-y-2 border-t border-gray-200 pt-3 dark:border-gray-800">
-                            {pos.extraMetrics.map((m) => (
-                              <div key={m.label} className="flex flex-col">
-                                <span className="font-display text-xl text-[#1b2d4e] dark:text-[#8fa7cc]">
-                                  {m.num}
-                                </span>
-                                <span className="text-[9px] font-semibold tracking-wider text-gray-400 uppercase dark:text-gray-500">
-                                  {m.label}
-                                </span>
-                              </div>
-                            ))}
-                          </div>
-                        )}
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                {openPosition === i && (
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <div className="border-t border-gray-200 px-4 pt-3 pb-4 dark:border-gray-800">
+                      <p className="text-[13px] leading-relaxed text-gray-500 dark:text-gray-400">
+                        {pos.oneLiner}
+                      </p>
+                      {pos.extraMetrics.length > 0 && (
+                        <div className="mt-3 flex flex-wrap gap-x-4 gap-y-2 border-t border-gray-200 pt-3 dark:border-gray-800">
+                          {pos.extraMetrics.map((m) => (
+                            <div key={m.label} className="flex flex-col">
+                              <span className="font-display text-xl text-[#1b2d4e] dark:text-[#8fa7cc]">
+                                {m.num}
+                              </span>
+                              <span className="text-[9px] font-semibold tracking-wider text-gray-400 uppercase dark:text-gray-500">
+                                {m.label}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </motion.div>
+                )}
               </button>
             </div>
           ))}
