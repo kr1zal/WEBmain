@@ -10,7 +10,7 @@ const siteMetadata = {
   siteUrl: 'https://avinogradov.pro',
   siteRepo: 'https://github.com/kr1zal/WEBmain',
   siteLogo: `${process.env.BASE_PATH || ''}/static/images/logo.png`,
-  socialBanner: `${process.env.BASE_PATH || ''}/static/images/twitter-card.png`,
+  socialBanner: `${process.env.BASE_PATH || ''}/static/images/og-image.png`,
   stickyNav: true,
   email: 'kr1zal@yandex.ru',
   github: 'https://github.com/kr1zal',
