@@ -18,7 +18,7 @@ interface LayoutProps {
 }
 
 export default function ProjectLayout({ content, next, prev, children }: LayoutProps) {
-  const { title, description, imgSrc, role, period, techStack, hero } = content
+  const { title, description, imgSrc, imgSize, role, period, techStack, hero } = content
 
   return (
     <>
@@ -60,8 +60,8 @@ export default function ProjectLayout({ content, next, prev, children }: LayoutP
                   <Image
                     src={imgSrc}
                     alt={title}
-                    width={1200}
-                    height={630}
+                    width={imgSize?.width ?? 1200}
+                    height={imgSize?.height ?? 630}
                     className="h-auto w-full object-cover"
                     priority
                   />
