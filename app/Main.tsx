@@ -323,32 +323,17 @@ export default function Home() {
     return () => clearTimeout(timer)
   }, [prefersReducedMotion, hasAutoPlayed, playVideo])
 
-  // Hero mount animation variants
-  const heroFade = (delay: number) =>
-    prefersReducedMotion
-      ? {}
-      : {
-          initial: { opacity: 0, y: 24 },
-          animate: { opacity: 1, y: 0 },
-          transition: { duration: 0.7, delay, ease: [0.25, 0.1, 0.25, 1] },
-        }
-
-  const photoReveal = prefersReducedMotion
-    ? {}
-    : {
-        initial: { opacity: 0, scale: 0.97, filter: 'blur(6px)' },
-        animate: { opacity: 1, scale: 1, filter: 'blur(0px)' },
-        transition: { duration: 1, delay: 0, ease: [0.25, 0.1, 0.25, 1] },
-      }
+  // Hero: появление первого экрана CSS-анимацией (.hero-fade / .hero-photo в css/tailwind.css) —
+  // играет с первой отрисовки, не ждёт JS и гидрации; при prefers-reduced-motion отключена там же
+  const heroDelay = (delay: number) => ({ animationDelay: `${delay}s` })
 
   return (
     <>
       {/* ═══ HERO ═══ */}
       <section className="relative right-1/2 left-1/2 -mx-[50vw] min-h-[calc(100svh-64px)] w-screen overflow-hidden">
         {/* Photo/Video — background right 55% */}
-        <motion.div
-          {...photoReveal}
-          className="absolute top-0 right-0 hidden h-full w-[50%] overflow-hidden md:block lg:w-[55%]"
+        <div
+          className="hero-photo absolute top-0 right-0 hidden h-full w-[50%] overflow-hidden md:block lg:w-[55%]"
           onMouseEnter={() => {
             if (!videoRef.current || (!videoRef.current.paused && !videoRef.current.ended)) return
             playVideo()
@@ -377,12 +362,12 @@ export default function Home() {
           {/* Gradients — left fade + bottom fade */}
           <div className="pointer-events-none absolute inset-0 z-[2] bg-[linear-gradient(to_right,#f5f2ed_0%,transparent_40%)] dark:bg-[linear-gradient(to_right,#111110_0%,transparent_40%)]" />
           <div className="pointer-events-none absolute inset-0 z-[2] bg-[linear-gradient(to_top,#f5f2ed_0%,transparent_30%)] dark:bg-[linear-gradient(to_top,#111110_0%,transparent_30%)]" />
-        </motion.div>
+        </div>
 
         {/* Text content — overlaid */}
         <div className="relative z-10 mx-auto flex min-h-[calc(100svh-64px)] w-full max-w-[1380px] flex-col justify-start px-6 pt-[72px] sm:px-12 sm:pt-[100px] lg:pt-[140px]">
           {/* Mobile photo/video */}
-          <motion.div {...photoReveal} className="mb-8 md:hidden">
+          <div className="hero-photo mb-8 md:hidden">
             <div className="relative aspect-[3/4] w-full overflow-hidden">
               <Image
                 src="/static/images/avatar.png"
@@ -406,36 +391,36 @@ export default function Home() {
               />
               <div className="pointer-events-none absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-[#f5f2ed] to-transparent dark:from-[#111110]" />
             </div>
-          </motion.div>
+          </div>
 
-          <motion.h1
-            {...heroFade(0.15)}
-            className="font-display max-w-[500px] text-5xl leading-[1.05] tracking-tight text-gray-900 sm:text-6xl lg:text-[clamp(48px,5vw,72px)] xl:text-[clamp(56px,6vw,80px)] dark:text-gray-100"
+          <h1
+            style={heroDelay(0.15)}
+            className="hero-fade font-display max-w-[500px] text-5xl leading-[1.05] tracking-tight text-gray-900 sm:text-6xl lg:text-[clamp(48px,5vw,72px)] xl:text-[clamp(56px,6vw,80px)] dark:text-gray-100"
           >
             Александр
             <br />
             Виноградов
-          </motion.h1>
+          </h1>
 
-          <motion.div
-            {...heroFade(0.35)}
-            className="mt-5 h-7 text-lg font-medium text-[#1b2d4e] dark:text-[#8fa7cc]"
+          <div
+            style={heroDelay(0.35)}
+            className="hero-fade mt-5 h-7 text-lg font-medium text-[#1b2d4e] dark:text-[#8fa7cc]"
           >
             <TypingEffect words={typingRoles} />
-          </motion.div>
+          </div>
 
-          <motion.p
-            {...heroFade(0.45)}
-            className="mt-6 max-w-[480px] text-base leading-7 text-gray-600 dark:text-gray-300"
+          <p
+            style={heroDelay(0.45)}
+            className="hero-fade mt-6 max-w-[480px] text-base leading-7 text-gray-600 dark:text-gray-300"
           >
             <strong className="font-semibold text-gray-900 dark:text-gray-100">
               13 лет в digital, 7 на руководящих позициях.
             </strong>{' '}
             Строю и масштабирую e-commerce бизнесы — от стратегии и найма до P&L и операционной
             прибыли.
-          </motion.p>
+          </p>
 
-          <motion.div {...heroFade(0.6)} className="mt-8 flex gap-3">
+          <div style={heroDelay(0.6)} className="hero-fade mt-8 flex gap-3">
             <Link
               href="/projects"
               className="rounded-lg bg-gray-900 px-6 py-2.5 text-sm font-medium text-white transition-all duration-200 hover:-translate-y-px hover:shadow-md dark:bg-gray-100 dark:text-gray-900"
@@ -448,10 +433,10 @@ export default function Home() {
             >
               Обо мне
             </Link>
-          </motion.div>
+          </div>
 
           {/* Quote — bottom of hero */}
-          <motion.div {...heroFade(0.8)} className="mt-auto pt-10 pb-8 lg:pt-16 lg:pb-12">
+          <div style={heroDelay(0.8)} className="hero-fade mt-auto pt-10 pb-8 lg:pt-16 lg:pb-12">
             <div className="max-w-[520px] border-l-[3px] border-[#1b2d4e] pl-5 dark:border-[#8fa7cc]">
               <p className="font-display text-lg leading-[1.5] font-normal text-gray-900 italic dark:text-gray-100">
                 Цифровая трансформация — это не про технологии. Это про то, как бизнес думает,
@@ -461,7 +446,7 @@ export default function Home() {
                 Подход к управлению
               </cite>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 

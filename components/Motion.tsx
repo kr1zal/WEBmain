@@ -1,16 +1,101 @@
 'use client'
 
 import {
-  motion,
+  animate,
+  inView,
   useReducedMotion,
   useMotionValue,
   useTransform,
   useInView,
-  animate,
 } from 'framer-motion'
-import { ReactNode, useEffect, useRef, useState } from 'react'
+import {
+  ReactNode,
+  RefObject,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+  useSyncExternalStore,
+} from 'react'
 
-// --- Reveal on scroll ---
+// --- Reveal on scroll (Reveal, StaggerContainer + StaggerItem, ImageReveal) ---
+// Серверный HTML ничего не прячет: без JS и до гидрации контент виден. Прячет клиент, в layout-эффекте
+// до отрисовки: при гидрации только элементы ниже окна (то, что уже на экране или выше, остаётся как
+// есть, без вспышки), при монтировании после перехода по ссылке все, как обычный whileInView.
+// Спрятанное проявляется, когда входит в окно.
+
+const EASE = 'cubic-bezier(0.25, 0.1, 0.25, 1)'
+const REDUCED_MOTION = '(prefers-reduced-motion: reduce)'
+
+interface Hidden {
+  opacity: number
+  x?: number
+  y?: number
+  scale?: number
+  filter?: string
+}
+
+const noSubscribe = () => () => {}
+
+/** false — компонент гидрирует серверный HTML (первая загрузка), true — смонтирован на клиенте (переход). */
+function useMountedOnClient() {
+  const onClient = useSyncExternalStore(
+    noSubscribe,
+    () => true,
+    () => false
+  )
+  const [mountedOnClient] = useState(onClient)
+  return mountedOnClient
+}
+
+/** stagger задан — проявляются вложенные [data-stagger-item] по очереди, иначе сам элемент. */
+function useReveal(
+  ref: RefObject<HTMLDivElement | null>,
+  { opacity, x = 0, y = 0, scale = 1, filter }: Hidden,
+  { duration, delay = 0, stagger }: { duration: number; delay?: number; stagger?: number }
+) {
+  const mountedOnClient = useMountedOnClient()
+
+  useLayoutEffect(() => {
+    const root = ref.current
+    if (!root || window.matchMedia(REDUCED_MOTION).matches) return
+    if (!mountedOnClient && root.getBoundingClientRect().top < window.innerHeight) return
+
+    const targets =
+      stagger === undefined
+        ? [root]
+        : [...root.querySelectorAll<HTMLElement>('[data-stagger-item]')]
+    const from = {
+      opacity: String(opacity),
+      transform: `translate(${x}px, ${y}px) scale(${scale})`,
+      ...(filter && { filter }),
+    }
+    for (const el of targets) Object.assign(el.style, from)
+
+    // WAAPI с fill: backwards держит начальный кадр на время задержки; inline-стили снимаются сразу,
+    // после анимации на элементе ничего не остаётся
+    return inView(
+      root,
+      () => {
+        targets.forEach((el, i) => {
+          el.animate(
+            [from, { opacity: '1', transform: 'none', ...(filter && { filter: 'none' }) }],
+            {
+              duration: duration * 1000,
+              delay: (delay + (stagger ?? 0) * i) * 1000,
+              easing: EASE,
+              fill: 'backwards',
+            }
+          )
+          el.style.removeProperty('opacity')
+          el.style.removeProperty('transform')
+          el.style.removeProperty('filter')
+        })
+      },
+      { amount: 0.05 }
+    )
+  }, [ref, mountedOnClient, opacity, x, y, scale, filter, duration, delay, stagger])
+}
 
 interface RevealProps {
   children: ReactNode
@@ -20,6 +105,13 @@ interface RevealProps {
   duration?: number
 }
 
+const directionOffset = {
+  up: { y: 24 },
+  down: { y: -24 },
+  left: { x: 24 },
+  right: { x: -24 },
+}
+
 export function Reveal({
   children,
   className = '',
@@ -27,29 +119,17 @@ export function Reveal({
   direction = 'up',
   duration = 0.6,
 }: RevealProps) {
-  const prefersReducedMotion = useReducedMotion()
-
-  const directionOffset = {
-    up: { y: 24 },
-    down: { y: -24 },
-    left: { x: 24 },
-    right: { x: -24 },
-  }
-
-  if (prefersReducedMotion) {
-    return <div className={className}>{children}</div>
-  }
+  const ref = useRef<HTMLDivElement>(null)
+  useReveal(
+    ref,
+    { opacity: 0, ...directionOffset[direction] },
+    { duration: duration * 0.67, delay }
+  )
 
   return (
-    <motion.div
-      initial={{ opacity: 0, ...directionOffset[direction] }}
-      whileInView={{ opacity: 1, x: 0, y: 0 }}
-      viewport={{ once: true, amount: 0.05 }}
-      transition={{ duration: duration * 0.67, delay, ease: [0.25, 0.1, 0.25, 1] }}
-      className={className}
-    >
+    <div ref={ref} className={className}>
       {children}
-    </motion.div>
+    </div>
   )
 }
 
@@ -66,29 +146,13 @@ export function StaggerContainer({
   className = '',
   stagger = 0.1,
 }: StaggerContainerProps) {
-  const prefersReducedMotion = useReducedMotion()
-
-  if (prefersReducedMotion) {
-    return <div className={className}>{children}</div>
-  }
+  const ref = useRef<HTMLDivElement>(null)
+  useReveal(ref, { opacity: 0, y: 24 }, { duration: 0.4, stagger })
 
   return (
-    <motion.div
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.05 }}
-      variants={{
-        hidden: {},
-        visible: {
-          transition: {
-            staggerChildren: stagger,
-          },
-        },
-      }}
-      className={className}
-    >
+    <div ref={ref} className={className}>
       {children}
-    </motion.div>
+    </div>
   )
 }
 
@@ -100,19 +164,9 @@ export function StaggerItem({
   className?: string
 }) {
   return (
-    <motion.div
-      variants={{
-        hidden: { opacity: 0, y: 24 },
-        visible: {
-          opacity: 1,
-          y: 0,
-          transition: { duration: 0.4, ease: [0.25, 0.1, 0.25, 1] },
-        },
-      }}
-      className={className}
-    >
+    <div data-stagger-item className={className}>
       {children}
-    </motion.div>
+    </div>
   )
 }
 
@@ -221,21 +275,12 @@ interface ImageRevealProps {
 }
 
 export function ImageReveal({ children, className = '', delay = 0 }: ImageRevealProps) {
-  const prefersReducedMotion = useReducedMotion()
-
-  if (prefersReducedMotion) {
-    return <div className={className}>{children}</div>
-  }
+  const ref = useRef<HTMLDivElement>(null)
+  useReveal(ref, { opacity: 0, scale: 0.98, filter: 'blur(2px)' }, { duration: 0.5, delay })
 
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.98, filter: 'blur(2px)' }}
-      whileInView={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
-      viewport={{ once: true, amount: 0.05 }}
-      transition={{ duration: 0.5, delay, ease: [0.25, 0.1, 0.25, 1] }}
-      className={className}
-    >
+    <div ref={ref} className={className}>
       {children}
-    </motion.div>
+    </div>
   )
 }
