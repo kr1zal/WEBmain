@@ -7,6 +7,7 @@ import Link from '@/components/Link'
 import Image from '@/components/Image'
 import ScrollTopAndComment from '@/components/ScrollTopAndComment'
 import { Reveal, ImageReveal } from '@/components/Motion'
+import RevioHero from '@/components/case/RevioHero'
 
 interface LayoutProps {
   content: CoreContent<Project>
@@ -16,7 +17,7 @@ interface LayoutProps {
 }
 
 export default function ProjectLayout({ content, next, prev, children }: LayoutProps) {
-  const { title, description, imgSrc, role, period, techStack } = content
+  const { title, description, imgSrc, role, period, techStack, hero } = content
 
   return (
     <>
@@ -86,7 +87,9 @@ export default function ProjectLayout({ content, next, prev, children }: LayoutP
 
           {/* Main Content */}
           <div className="order-2 lg:order-1 lg:col-span-3">
-            {imgSrc && (
+            {/* RevioMP: вместо картинки над текстом hero-сцена продукта (components/case/RevioHero.tsx) */}
+            {hero === 'reviomp' && <RevioHero />}
+            {imgSrc && hero !== 'reviomp' && (
               <ImageReveal className="mb-10 w-full">
                 <div className="relative w-full overflow-hidden border border-gray-200 dark:border-gray-800">
                   <Image

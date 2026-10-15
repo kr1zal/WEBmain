@@ -6,6 +6,8 @@ import Image from './Image'
 import CustomLink from './Link'
 import TableWrapper from './TableWrapper'
 import BixirunDiagram from './BixirunDiagram'
+import RevioDiagram from './RevioDiagram'
+import Screens from './case/Screens'
 
 export const components: MDXComponents = {
   Image,
@@ -15,4 +17,6 @@ export const components: MDXComponents = {
   table: TableWrapper,
   BlogNewsletterForm,
   BixirunDiagram,
+  RevioDiagram,
+  Screens,
 }

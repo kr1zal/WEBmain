@@ -52,7 +52,7 @@ sshpass -e rsync -avz --delete -e "ssh -o StrictHostKeyChecking=accept-new" \
 git add . && git commit -m "..." && git push origin main
 ```
 
-SSH-доступ настроен паролем (не ключом). Сервер: `kr1zalf2.beget.tech`. Логин: `kr1zalf2`. Корень сайта: `~/avinogradov.pro/public_html/`.
+SSH-доступ: пароль и ключ `~/.ssh/id_ed25519` (ключ принят, `ssh -o BatchMode=yes` проходит — проверено 15.10.2026). Сервер: `kr1zalf2.beget.tech`. Логин: `kr1zalf2`. Корень сайта: `~/avinogradov.pro/public_html/`.
 
 ### DNS / SSL / Домен
 
@@ -95,6 +95,10 @@ app/
 components/
   SchemaPersonLd.tsx      # Server component с JSON-LD Schema.org Person разметкой.
                           # Используется в layout.tsx для Google Knowledge Panel.
+  RevioDiagram.tsx        # Схема RevioMP (источники → ядро → кабинет) по образцу BixirunDiagram.
+  case/                   # Страница проекта RevioMP: RevioHero.tsx (hero-сцены продукта),
+                          # Screens.tsx (сетка кадров, пара «десктоп / телефон», кадр на всю
+                          # ширину), hero/* (копия сцены с reviomp.ru). См. раздел ниже.
   MetricsStrip.tsx        # (вне основного дизайна, сейчас не используется)
   ... прочие: Image, Link, Header, Footer, Motion, ThemeSwitch, Pre, SocialIcon, ...
 
@@ -104,7 +108,9 @@ public/
   .htaccess               # ErrorDocument 404 /404.html (брендированный 404).
   static/favicons/        # Фавиконки (16, 32, 120, apple-touch, safari, manifest).
                           # 120×120 специально для Яндекс.Вебмастера.
-  static/images/          # Аватар, твиттер-карта, фото проектов.
+  static/images/          # Аватар, og-картинка, фото проектов.
+  static/images/reviomp/  # Кадры демо-кабинета reviomp.ru для страницы проекта (cab-*, land-*,
+                          # обложка cover-1200x630.jpg) и hero/* — снимки hero-сцены.
 
 data/
   siteMetadata.js         # Глобальная конфигурация (title, description, URL, social).
@@ -156,11 +162,22 @@ next.config.js            # CSP, trailingSlash, images config, webpack svgr
 
 ## Контент (MDX + Contentlayer2)
 
-- **Проекты:** `data/projects/*.mdx` — frontmatter: `title, description, imgSrc, role, period, techStack, repo, gallery`.
+- **Проекты:** `data/projects/*.mdx` — frontmatter: `title, description, imgSrc, role, period, techStack, repo, gallery`, необязательное `hero` (`'reviomp'` = вместо картинки `imgSrc` над текстом рендерится `<RevioHero />`; `imgSrc` остаётся для карточек и OG).
 - **Блог:** `data/blog/*.mdx` — `title, date, tags, draft, summary, authors`.
 - **Авторы:** `data/authors/*.mdx` — `name, avatar, occupation, company, social links`.
 
 Contentlayer генерирует типизированные данные в `.contentlayer/` при `yarn dev` / `yarn build`.
+
+## Страница проекта RevioMP (`/projects/reviomp-analytics`)
+
+Переделана 15.10.2026 (owner: менять только наполнение страницы, шрифты и всё сайтовое не трогать).
+
+- **Текст** — `data/projects/reviomp-analytics.mdx`, манера и порядок разделов как у `bixirun-app.mdx`: «Как появился проект / Что внутри / Архитектура / Скриншоты / Решения / Технологический стек / Что под капотом / Статус». Числа «Что под капотом» — срез кода RevioMP на 10.10.2026 (дата названа в тексте). Без тире «—» в прозе, без упоминаний нейросетей, без планов. Тысячи, «тыс.» и даты — через `&nbsp;`.
+- **Hero в шапке** — `components/case/RevioHero.tsx` + `components/case/hero/*`: копия hero-сцены главной reviomp.ru (репозиторий `Projects/Analitics`, `frontend/src/pages/landing/components/hero/`, снимки `frontend/src/assets/hero/*.webp`). Отличия копии от продукта: нет подложки, заголовка, кнопок и переключателя вкладок под экраном; окно телефона — полный экран 390 × 844 (в продукте 390 × 593), пределы прокрутки слоёв пересчитаны под него (`heroScenes.ts`, `CONTENT_H`/`SCROLL_*`); от 768 px десктопная и телефонная сцены стоят рядом одной высоты (`revio-hero.css`, колонки `1.0213fr 0.4621fr`), уже 768 px — только телефон; снимки телефона грузятся на любой ширине. Пауза вне окна, при reduced motion — первый кадр. Если сцена продукта меняется — переносить файлы заново и повторять эти отличия.
+- **Скриншоты** — `components/case/Screens.tsx`: `items` (сетка 2 колонки, кадры одной высоты), `pair` (широкий кадр + телефон одной высоты), `wide` (кадр на всю ширину). Каждый кадр на странице один раз. Кадры сняты с демо-кабинета reviomp.ru 09–10.10.2026 (1440 и 390 px), лежат в `public/static/images/reviomp/`; при пересъёмке сохранять размеры из `width/height` в MDX.
+- **Схема** — `components/RevioDiagram.tsx`, зарегистрирована в `components/MDXComponents.tsx` вместе со `Screens`.
+- **Шаблон** — в `layouts/ProjectLayout.tsx` одна ветка: `hero === 'reviomp'` → `<RevioHero />` вместо `<Image imgSrc>`; поле `hero` объявлено в `contentlayer.config.ts`.
+- **Проверка** — `rm -rf out .next && EXPORT=1 UNOPTIMIZED=1 yarn build`, затем страница на 390 / 768 / 1024 / 1280 / 1440: обе лупы движутся, кадры сцены загружены (10 десктоп + 13 телефон), горизонтального скролла нет, вне окна сцена на паузе.
 
 ## Env-переменные (.env.example)
 

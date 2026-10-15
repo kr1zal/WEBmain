@@ -155,6 +155,8 @@ export const Project = defineDocumentType(() => ({
     title: { type: 'string', required: true },
     description: { type: 'string', required: true },
     imgSrc: { type: 'string' },
+    // 'reviomp' = hero-сцена продукта вместо картинки imgSrc над текстом (layouts/ProjectLayout.tsx)
+    hero: { type: 'string' },
     href: { type: 'string' },
     techStack: { type: 'list', of: { type: 'string' } },
     period: { type: 'string' },

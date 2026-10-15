@@ -1,0 +1,198 @@
+/*
+ * Hero-сцены RevioMP в шапке страницы проекта (перенос с reviomp.ru, 15.10.2026): экран кабинета
+ * с лупой (десктоп) и «кабинет в кадре» (телефон). Подложки и табов нет: сцены стоят прямо на фоне
+ * сайта; от 768 px обе рядом одной высоты (окно телефона — полный экран 390 × 844), уже 768 px —
+ * только телефон. Геометрия и кадры — heroScenes.ts.
+ */
+.revio-hero {
+  --hero-ink: #0b0b0d;
+  --hero-accent: #e8480c;
+  position: relative;
+}
+.revio-hero-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+.revio-hero-desk {
+  display: none;
+}
+.revio-hero-phone {
+  width: min(100%, 420px);
+  margin: 0 auto;
+}
+@media (min-width: 768px) {
+  /* доли колонок = отношения сторон сцен при одной высоте: десктоп 720/705, телефон 390/844 → 1,0213 : 0,4621 */
+  .revio-hero-row {
+    grid-template-columns: minmax(0, 1.0213fr) minmax(0, 0.4621fr);
+    gap: 32px;
+    align-items: start;
+  }
+  .revio-hero-desk {
+    display: block;
+  }
+  .revio-hero-phone {
+    width: auto;
+    margin: 0;
+  }
+}
+
+/* ── общие части сцен ── */
+.hd-stage,
+.hp-stage {
+  position: relative;
+  width: 100%;
+  container-type: inline-size;
+}
+.hero-pic {
+  display: contents;
+}
+.hd-stage img,
+.hp-stage img {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: block;
+  max-width: none;
+  user-select: none;
+  pointer-events: none;
+}
+.hd-edge,
+.hp-edge {
+  position: absolute;
+  inset: 0;
+  box-sizing: border-box;
+  border: 1px solid rgba(17, 24, 39, 0.1);
+  pointer-events: none;
+}
+.hd-hl,
+.hp-hl {
+  position: absolute;
+  box-sizing: border-box;
+  border: 2px solid var(--hero-accent);
+  opacity: 0;
+}
+.hp-hl {
+  border-width: 1.5px;
+}
+.hd-lens,
+.hp-lens {
+  position: absolute;
+  left: 0;
+  top: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #f7f8fa;
+  box-shadow:
+    0 0 0 2px #fff,
+    0 0 0 3.5px var(--hero-ink),
+    0 18px 36px -12px rgba(17, 24, 39, 0.45);
+  transform-origin: 50% 50%;
+  z-index: 3;
+}
+.hd-inner,
+.hp-inner {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.hd-cap,
+.hp-cap {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  box-sizing: border-box;
+  background: #0b0b0d;
+  color: #f4f4f5;
+  font-weight: 500;
+  line-height: 1;
+  box-shadow: 0 6px 16px -6px rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  z-index: 4;
+}
+.hd-cap-dot,
+.hp-cap-dot {
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--hero-accent);
+}
+
+/* ── десктоп ── */
+.hd-frame {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: #f7f8fa;
+  box-shadow:
+    0 40px 80px -40px rgba(17, 24, 39, 0.35),
+    0 12px 24px -12px rgba(17, 24, 39, 0.12);
+  z-index: 1;
+}
+.hd-screens,
+.hd-hlwrap {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+}
+.hd-ripple {
+  position: absolute;
+  box-sizing: border-box;
+  border-radius: 50%;
+  border: 2px solid var(--hero-accent);
+  opacity: 0;
+  z-index: 2;
+}
+
+/* ── телефон ── */
+.hp-window {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  overflow: hidden;
+  background: #f9fbfc; /* = фон снимков кабинета: поле под нижним меню в конце прокрутки не отличается */
+  box-shadow:
+    0 30px 60px -30px rgba(17, 24, 39, 0.35),
+    0 10px 20px -10px rgba(17, 24, 39, 0.12);
+  z-index: 1;
+}
+.hp-screens,
+.hp-hlwrap {
+  position: absolute;
+  inset: 0;
+}
+.hp-tap {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(17, 17, 20, 0.55);
+  box-shadow: 0 0 0 2px #fff;
+  opacity: 0;
+  z-index: 5;
+}
+.hp-rip {
+  position: absolute;
+  box-sizing: border-box;
+  border-radius: 50%;
+  border: 1.5px solid var(--hero-accent);
+  opacity: 0;
+  z-index: 5;
+}
+
+/* ── ожидание снимков, пауза вне экрана и режим «меньше движения» ── */
+/* пауза ставится всем анимациям обеих сцен разом — такт лупы и экранов не расходится; data-hero-wait —
+   сцены стоят на первом кадре, пока не загружены все их снимки (RevioHero) */
+.revio-hero:is([data-hero-paused], [data-hero-wait]) :is(.hd-stage, .hp-stage) * {
+  animation-play-state: paused !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  :is(.hd-stage, .hp-stage) * {
+    animation: none !important;
+  }
+  .hd-mark-a,
+  .hp-mark-a {
+    opacity: 1 !important;
+  }
+}
