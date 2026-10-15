@@ -14,7 +14,8 @@ const compat = new FlatCompat({
 
 export default [
   {
-    ignores: [],
+    // next-env.d.ts генерирует Next.js (triple-slash reference на .next/types), править нельзя
+    ignores: ['next-env.d.ts'],
   },
   js.configs.recommended,
   ...compat.extends(

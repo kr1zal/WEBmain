@@ -45,3 +45,16 @@ yarn-error.log*
 
 # Contentlayer
 .contentlayer
+
+# local drafts, resume, audit notes: personal data and working files, not part of the site
+/content/
+/docs/
+
+# Claude Code local settings
+/.claude/
+
+# typescript incremental build info
+tsconfig.tsbuildinfo
+
+# npm lockfile: the project uses yarn.lock (Yarn 3 via corepack)
+package-lock.json
