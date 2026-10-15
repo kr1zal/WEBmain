@@ -16,7 +16,7 @@
 - **Animations:** Framer Motion 12.23.24
 - **UI:** Headless UI 2.2.0
 - **Theme:** next-themes 0.4.6
-- **Font:** Space Grotesk + DM Serif Display (Google Fonts)
+- **Font:** Prata (заголовки, `font-display`) + Golos Text (текст), Google Fonts через `next/font`, subsets `latin` + `cyrillic`
 - **Analytics:** Яндекс.Метрика (счётчик `108207327`, с Webvisor)
 - **Search:** KBar (client-side)
 - **Package Manager:** Yarn 3.6.1 (через corepack)
@@ -156,6 +156,7 @@ next.config.js            # CSP, trailingSlash, images config, webpack svgr
 - **Scripts в `<body>`, не в `<html>`.** React 19 ругается hydration error если `<script>` или `<noscript>` — прямые потомки `<html>`. Размещаются внутри `<body>` перед `<ThemeProviders>`.
 - **Никакого inline-HTML-инъектирования в layout.tsx.** Яндекс.Метрика подключается через `<Script src="/yandex-metrika.js" />`, Schema.org — через отдельный компонент `SchemaPersonLd`. Если понадобится добавить inline-скрипт — создавать отдельный серверный компонент.
 - **CSP в `next.config.js`** разрешает `script-src` для `*.yandex.ru`, `giscus.app`, `analytics.umami.is`. При добавлении новых внешних скриптов — сразу добавлять в CSP.
+- **Шрифты с кириллицей обязательны.** Space Grotesk и DM Serif кириллицы не имели, весь русский текст шёл системным fallback (заменены 15.10.2026). Новый шрифт брать только с `cyrillic` в `subsets`. Prata шире DM Serif примерно на 10%, поэтому в `css/tailwind.css` у `.font-display, h1, h2, h3` стоят `font-size-adjust: 0.48` (x-height прежнего шрифта) и `text-wrap: balance`. Без них заголовки перестраиваются. У Prata одно начертание (400, без курсива): `font-bold` и `italic` браузер рисует сам.
 - **`matchMedia('(max-width: 767px)')`** для разделения mobile/desktop JS-логики (соответствует Tailwind `md:` breakpoint 768px).
 - **Серверный HTML ничего не прячет.** `Reveal`, `ImageReveal`, `StaggerContainer`/`StaggerItem` (`components/Motion.tsx`) рендерятся видимыми; прячет клиент в layout-эффекте: при гидрации только элементы ниже окна, после перехода по ссылке все, проявление — WAAPI при входе в окно. Hero главной проявляется CSS-анимацией (`.hero-fade`/`.hero-photo` в `css/tailwind.css`), не ждёт JS. Не возвращать `initial={{ opacity: 0 }}` у framer-motion на контенте: без JS и до гидрации страница пустая. Проверка: `grep -c 'opacity:0' out/index.html` = 0.
 - **`app/template.tsx`** при первом монтировании (гидрации) не анимирует (`initial={false}`, флаг на уровне модуля), анимация перехода только при переходах по ссылкам.

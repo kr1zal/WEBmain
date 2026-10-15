@@ -8,9 +8,9 @@
 @theme {
   /* Font families */
   --font-sans:
-    var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+    var(--font-golos), ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
     'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  --font-display: var(--font-dm-serif), Georgia, serif;
+  --font-display: var(--font-prata), Georgia, serif;
 
   /* Colors — Neutral enterprise palette */
   --color-primary-50: oklch(0.975 0.006 260);
@@ -49,18 +49,9 @@
   --z-80: 80;
 }
 
-/* Digits rendered in DM Serif Display across the entire site */
-@font-face {
-  font-family: 'Space Grotesk Digits';
-  src: local('DM Serif Display'), local('DMSerifDisplay-Regular');
-  unicode-range: U+0030-0039; /* 0-9 */
-  font-weight: 100 900;
-  font-display: swap;
-}
-
 @layer base {
   body {
-    font-family: 'Space Grotesk Digits', var(--font-sans);
+    font-family: var(--font-sans);
   }
 
   *,
@@ -87,6 +78,16 @@
   h2,
   h3 {
     font-family: var(--font-display);
+  }
+
+  /* Prata шире и выше DM Serif Display: x-height приведена к прежнему шрифту, чтобы
+     заголовки не перестраивались, а строки балансируются, чтобы слово не оставалось одно. */
+  .font-display,
+  h1,
+  h2,
+  h3 {
+    font-size-adjust: 0.48;
+    text-wrap: balance;
   }
 }
 

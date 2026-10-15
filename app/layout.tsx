@@ -2,7 +2,7 @@ import 'css/tailwind.css'
 import 'pliny/search/algolia.css'
 import 'remark-github-blockquote-alert/alert.css'
 
-import { Space_Grotesk, DM_Serif_Display } from 'next/font/google'
+import { Golos_Text, Prata } from 'next/font/google'
 import Script from 'next/script'
 import { Analytics, AnalyticsConfig } from 'pliny/analytics'
 import { SearchProvider, SearchConfig } from 'pliny/search'
@@ -14,17 +14,17 @@ import siteMetadata from '@/data/siteMetadata'
 import { ThemeProviders } from './theme-providers'
 import { Metadata } from 'next'
 
-const spaceGrotesk = Space_Grotesk({
-  subsets: ['latin', 'latin-ext'],
+const golosText = Golos_Text({
+  subsets: ['latin', 'cyrillic'],
   display: 'swap',
-  variable: '--font-space-grotesk',
+  variable: '--font-golos',
 })
 
-const dmSerifDisplay = DM_Serif_Display({
+const prata = Prata({
   weight: '400',
-  subsets: ['latin', 'latin-ext'],
+  subsets: ['latin', 'cyrillic'],
   display: 'swap',
-  variable: '--font-dm-serif',
+  variable: '--font-prata',
 })
 
 export const metadata: Metadata = {
@@ -90,7 +90,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang={siteMetadata.language}
-      className={`${spaceGrotesk.variable} ${dmSerifDisplay.variable} scroll-smooth`}
+      className={`${golosText.variable} ${prata.variable} scroll-smooth`}
       suppressHydrationWarning
     >
       <head>
