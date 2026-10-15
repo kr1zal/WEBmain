@@ -1,23 +1,23 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
+
+// Первое монтирование — гидрация серверного HTML: страница уже на экране, проявлять её заново
+// нельзя (вспышка). Анимация перехода только при последующих переходах по ссылкам.
+let isFirstMount = true
 
 export default function Template({ children }: { children: React.ReactNode }) {
   const prefersReducedMotion = useReducedMotion()
-  const [isMounted, setIsMounted] = useState(false)
+  const [animateIn] = useState(() => !isFirstMount)
 
   useEffect(() => {
-    setIsMounted(true)
+    isFirstMount = false
   }, [])
-
-  if (prefersReducedMotion || !isMounted) {
-    return <>{children}</>
-  }
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 8 }}
+      initial={animateIn && !prefersReducedMotion ? { opacity: 0, y: 8 } : false}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
     >

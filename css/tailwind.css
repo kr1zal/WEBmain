@@ -186,3 +186,34 @@ input:-webkit-autofill:focus {
   display: inline-block;
   vertical-align: middle;
 }
+
+/* Появление первого экрана главной (app/Main.tsx): CSS-анимация с первой отрисовки, не ждёт JS и гидрации */
+@keyframes hero-fade {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+}
+
+@keyframes hero-photo {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+    filter: blur(6px);
+  }
+}
+
+.hero-fade {
+  animation: hero-fade 0.7s cubic-bezier(0.25, 0.1, 0.25, 1) backwards;
+}
+
+.hero-photo {
+  animation: hero-photo 1s cubic-bezier(0.25, 0.1, 0.25, 1) backwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-fade,
+  .hero-photo {
+    animation: none;
+  }
+}

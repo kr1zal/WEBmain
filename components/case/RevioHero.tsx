@@ -93,7 +93,7 @@ export default function RevioHero() {
   }, [])
 
   return (
-    <div ref={ref} className="revio-hero not-prose mb-10" data-hero-wait={started ? undefined : ''}>
+    <div ref={ref} className="revio-hero not-prose" data-hero-wait={started ? undefined : ''}>
       <style>{SCENE_CSS}</style>
       <div className="revio-hero-row">
         <div className="revio-hero-desk">
