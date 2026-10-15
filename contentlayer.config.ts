@@ -1,5 +1,6 @@
 import { defineDocumentType, ComputedFields, makeSource } from 'contentlayer2/source-files'
-import { writeFileSync } from 'fs'
+import { readFileSync, writeFileSync } from 'fs'
+import { imageSize } from 'image-size'
 import readingTime from 'reading-time'
 import { slug } from 'github-slugger'
 import path from 'path'
@@ -155,6 +156,8 @@ export const Project = defineDocumentType(() => ({
     title: { type: 'string', required: true },
     description: { type: 'string', required: true },
     imgSrc: { type: 'string' },
+    // кадрирование imgSrc в карточке /projects (CSS object-position, например 'top'); по умолчанию центр
+    imgPosition: { type: 'string' },
     // 'reviomp' = hero-сцена продукта вместо картинки imgSrc над текстом (layouts/ProjectLayout.tsx)
     hero: { type: 'string' },
     href: { type: 'string' },
@@ -171,6 +174,15 @@ export const Project = defineDocumentType(() => ({
     slug: {
       type: 'string',
       resolve: (doc) => doc._raw.flattenedPath.replace(/^projects\//, ''),
+    },
+    // реальные размеры imgSrc: шапка кейса резервирует под картинку ровно её место, без сдвига при загрузке
+    imgSize: {
+      type: 'json',
+      resolve: (doc) => {
+        if (!doc.imgSrc) return null
+        const { width, height } = imageSize(readFileSync(path.join(root, 'public', doc.imgSrc)))
+        return { width, height }
+      },
     },
   },
 }))

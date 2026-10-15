@@ -117,8 +117,10 @@ public/
   static/favicons/        # Фавиконки (16, 32, 120, apple-touch, safari, manifest).
                           # 120×120 специально для Яндекс.Вебмастера.
   static/images/          # Аватар, og-картинка, фото проектов.
-  static/images/reviomp/  # Кадры демо-кабинета reviomp.ru для страницы проекта (cab-*, land-*,
-                          # обложка cover-1200x630.jpg) и hero/* — снимки hero-сцены.
+  static/images/reviomp/  # Кадры демо-кабинета reviomp.ru для страницы проекта (cab-*, land-*)
+                          # и hero/* — снимки hero-сцены.
+  static/images/covers/   # Обложки кейсов 1200×630 (сейчас reviomp-analytics), делает
+                          # tools/covers/gen-scenes.py.
 
 data/
   siteMetadata.js         # Глобальная конфигурация (title, description, URL, social).
@@ -130,6 +132,9 @@ data/
 
 css/                      # tailwind.css, prism.css
 scripts/                  # postbuild.mjs (pliny sitemap), rss.mjs
+tools/covers/             # gen-scenes.py: картинки кейсов через OpenRouter в стилистике обложек
+                          # BIXIRUN и Империала (ДНК стиля и промпты в шапке файла), --cover
+                          # сохраняет сцену как обложку 1200×630. tools/covers/out/ в .gitignore.
 next.config.js            # CSP, trailingSlash, images config, webpack svgr
 ```
 
@@ -170,7 +175,7 @@ next.config.js            # CSP, trailingSlash, images config, webpack svgr
 
 ## Контент (MDX + Contentlayer2)
 
-- **Проекты:** `data/projects/*.mdx` — frontmatter: `title, description, imgSrc, role, period, techStack, repo, gallery`, `lastmod` (дата последней правки, идёт в `lastModified` sitemap), необязательное `hero` (`'reviomp'` = вместо картинки `imgSrc` над текстом рендерится `<RevioHero />`; `imgSrc` остаётся для карточек и OG).
+- **Проекты:** `data/projects/*.mdx` — frontmatter: `title, description, imgSrc, role, period, techStack, repo, gallery`, `lastmod` (дата последней правки, идёт в `lastModified` sitemap), необязательное `hero` (`'reviomp'` = вместо картинки `imgSrc` над текстом рендерится `<RevioHero />`; `imgSrc` остаётся для карточек и OG), необязательное `imgPosition` (CSS object-position картинки в карточке /projects, карточка кропает до 16:10; у МедТех `'top'`, чтобы фигура не резалась). Вычисляемое `imgSize` — реальные размеры `imgSrc` через `image-size`: шапка кейса резервирует место ровно под картинку, поэтому квадратные и портретные обложки не сдвигают вёрстку при загрузке.
 - **Блог:** `data/blog/*.mdx` — `title, date, tags, draft, summary, authors`.
 - **Авторы:** `data/authors/*.mdx` — `name, avatar, occupation, company, social links`.
 

@@ -8,10 +8,11 @@ interface CardProps {
   title: string
   description: string
   imgSrc?: string
+  imgPosition?: string
   href?: string
 }
 
-const Card = ({ title, description, imgSrc, href }: CardProps) => {
+const Card = ({ title, description, imgSrc, imgPosition, href }: CardProps) => {
   const prefersReducedMotion = useReducedMotion()
 
   return (
@@ -37,6 +38,7 @@ const Card = ({ title, description, imgSrc, href }: CardProps) => {
                 alt={title}
                 src={imgSrc}
                 className="aspect-[16/10] w-full object-cover"
+                style={{ objectPosition: imgPosition }}
                 width={544}
                 height={340}
               />
@@ -48,6 +50,7 @@ const Card = ({ title, description, imgSrc, href }: CardProps) => {
               alt={title}
               src={imgSrc}
               className="aspect-[16/10] w-full object-cover"
+              style={{ objectPosition: imgPosition }}
               width={544}
               height={340}
             />

@@ -30,6 +30,7 @@ export default function Projects() {
                 title={project.title}
                 description={project.description}
                 imgSrc={project.imgSrc}
+                imgPosition={project.imgPosition}
                 href={`/projects/${project.slug}`}
               />
             </Reveal>
