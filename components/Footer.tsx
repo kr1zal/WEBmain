@@ -60,9 +60,9 @@ const contacts = [
 
 export default function Footer() {
   return (
-    <footer className="mt-10 border-t border-gray-200 dark:border-gray-800">
-      <div className="flex flex-col items-center gap-3 border-t border-gray-200 py-4 sm:flex-row sm:justify-between dark:border-gray-800">
-        <span className="text-xs tracking-widest text-gray-400 uppercase dark:text-gray-500">
+    <footer className="mt-10 border-t border-gray-200">
+      <div className="flex flex-col items-center gap-3 border-t border-gray-200 py-4 sm:flex-row sm:justify-between">
+        <span className="text-xs tracking-widest text-gray-400 uppercase">
           © {new Date().getFullYear()} {siteMetadata.author}
         </span>
         <div className="flex items-center gap-4">
@@ -73,12 +73,12 @@ export default function Footer() {
               target={c.href.startsWith('http') ? '_blank' : undefined}
               rel={c.href.startsWith('http') ? 'noopener noreferrer' : undefined}
               aria-label={c.label}
-              className="text-gray-400 transition-colors duration-200 hover:text-[#1b2d4e] dark:text-gray-600 dark:hover:text-[#8fa7cc]"
+              className="text-gray-400 transition-colors duration-200 hover:text-[#1b2d4e]"
             >
               {c.icon}
             </a>
           ))}
-          <Link href="/" className="font-display text-sm text-gray-400 dark:text-gray-500">
+          <Link href="/" className="font-display text-sm text-gray-400">
             AV.
           </Link>
         </div>

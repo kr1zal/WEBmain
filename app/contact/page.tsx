@@ -128,11 +128,11 @@ export default function ContactPage() {
     <div className="pt-24 pb-16 sm:pt-28">
       {/* Header */}
       <Reveal>
-        <div className="mb-8 flex items-baseline justify-between border-b-[3px] border-[#1b2d4e] pb-3 dark:border-[#8fa7cc]">
-          <h1 className="font-display text-3xl tracking-tight text-[#1b2d4e] sm:text-4xl dark:text-gray-100">
+        <div className="mb-8 flex items-baseline justify-between border-b-[3px] border-[#1b2d4e] pb-3">
+          <h1 className="font-display text-3xl tracking-tight text-[#1b2d4e] sm:text-4xl">
             Контакт
           </h1>
-          <span className="text-xs font-medium tracking-widest text-gray-400 uppercase dark:text-gray-500">
+          <span className="text-xs font-medium tracking-widest text-gray-400 uppercase">
             На связи
           </span>
         </div>
@@ -143,48 +143,38 @@ export default function ContactPage() {
         {/* Left — statement + meta */}
         <Reveal>
           <div>
-            <p className="max-w-[480px] text-[22px] leading-[1.45] font-light text-[#1a1a1a] sm:text-[26px] dark:text-gray-100">
-              Обсудим{' '}
-              <strong className="font-semibold text-[#1b2d4e] dark:text-[#8fa7cc]">
-                e-commerce стратегию
-              </strong>
+            <p className="max-w-[480px] text-[22px] leading-[1.45] font-light text-[#1a1a1a] sm:text-[26px]">
+              Обсудим <strong className="font-semibold text-[#1b2d4e]">e-commerce стратегию</strong>
               , цифровую трансформацию или возможности сотрудничества
             </p>
 
             {/* Status */}
-            <div className="mt-5 inline-flex items-center gap-2 border border-[#e0dcd6] px-3 py-1.5 dark:border-gray-700">
+            <div className="mt-5 inline-flex items-center gap-2 border border-[#e0dcd6] px-3 py-1.5">
               <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-500" />
-              <span className="text-xs font-medium text-[#666] dark:text-gray-400">
-                Открыт для предложений
-              </span>
+              <span className="text-xs font-medium text-[#666]">Открыт для предложений</span>
             </div>
 
             {/* Meta */}
             <div className="mt-6 flex flex-col gap-2.5">
               <div className="flex items-center gap-2.5">
-                <span className="text-[#bbb] dark:text-gray-600">
+                <span className="text-[#bbb]">
                   <ClockIcon />
                 </span>
-                <span className="text-[13px] text-[#888] dark:text-gray-500">
-                  <strong className="font-medium text-[#555] dark:text-gray-400">Москва</strong>,
-                  UTC+3
+                <span className="text-[13px] text-[#888]">
+                  <strong className="font-medium text-[#555]">Москва</strong>, UTC+3
                 </span>
               </div>
               <div className="flex items-center gap-2.5">
-                <span className="text-[#bbb] dark:text-gray-600">
+                <span className="text-[#bbb]">
                   <PinIcon />
                 </span>
-                <span className="text-[13px] text-[#888] dark:text-gray-500">
-                  Удалённо · Россия и СНГ
-                </span>
+                <span className="text-[13px] text-[#888]">Удалённо · Россия и СНГ</span>
               </div>
               <div className="flex items-center gap-2.5">
-                <span className="text-[#bbb] dark:text-gray-600">
+                <span className="text-[#bbb]">
                   <MonitorIcon />
                 </span>
-                <span className="text-[13px] text-[#888] dark:text-gray-500">
-                  COO · Head of E-com · Консалтинг
-                </span>
+                <span className="text-[13px] text-[#888]">COO · Head of E-com · Консалтинг</span>
               </div>
             </div>
           </div>
@@ -197,15 +187,13 @@ export default function ContactPage() {
               <Magnetic strength={0.08}>
                 <div
                   className={`group flex items-start justify-between gap-4 py-5 transition-all duration-200 hover:pl-2 ${
-                    i < contacts.length - 1
-                      ? 'border-b border-[#e0dcd6] dark:border-gray-700/50'
-                      : ''
+                    i < contacts.length - 1 ? 'border-b border-[#e0dcd6]' : ''
                   }`}
                 >
                   {/* Left side */}
                   <div className="min-w-0">
                     <div className="flex items-center gap-2">
-                      <span className="text-[11px] font-semibold tracking-[0.1em] text-[#999] uppercase dark:text-gray-500">
+                      <span className="text-[11px] font-semibold tracking-[0.1em] text-[#999] uppercase">
                         {c.label}
                       </span>
                       {c.preferred && (
@@ -220,31 +208,27 @@ export default function ContactPage() {
                         href={c.href}
                         target={c.href.startsWith('http') ? '_blank' : undefined}
                         rel={c.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                        className="text-lg font-medium text-[#1a1a1a] no-underline transition-colors group-hover:text-[#1b2d4e] sm:text-xl dark:text-gray-200 dark:group-hover:text-[#8fa7cc]"
+                        className="text-lg font-medium text-[#1a1a1a] no-underline transition-colors group-hover:text-[#1b2d4e] sm:text-xl"
                       >
                         {c.value}
                       </a>
                     </div>
 
                     <div className="mt-1.5 flex flex-wrap items-center gap-2 sm:gap-3">
-                      <span className="text-[13px] text-[#999] dark:text-gray-500">
-                        {c.context}
-                      </span>
+                      <span className="text-[13px] text-[#999]">{c.context}</span>
                       {c.response && (
-                        <span className="inline-flex shrink-0 items-center gap-1.5 border border-[#e8e5e0] px-2 py-0.5 whitespace-nowrap dark:border-gray-700/50">
+                        <span className="inline-flex shrink-0 items-center gap-1.5 border border-[#e8e5e0] px-2 py-0.5 whitespace-nowrap">
                           <svg
                             viewBox="0 0 24 24"
                             fill="none"
                             stroke="currentColor"
                             strokeWidth="1.5"
-                            className="h-3 w-3 text-[#ccc] dark:text-gray-600"
+                            className="h-3 w-3 text-[#ccc]"
                           >
                             <circle cx="12" cy="12" r="10" />
                             <path d="M12 6v6l4 2" />
                           </svg>
-                          <span className="text-[11px] font-medium text-[#aaa] dark:text-gray-500">
-                            {c.response}
-                          </span>
+                          <span className="text-[11px] font-medium text-[#aaa]">{c.response}</span>
                         </span>
                       )}
                     </div>
@@ -255,7 +239,7 @@ export default function ContactPage() {
                     {c.copyable && (
                       <button
                         onClick={copyEmail}
-                        className="flex h-8 w-8 items-center justify-center border border-[#e0dcd6] text-[#bbb] transition-all hover:border-[#1b2d4e] hover:text-[#1b2d4e] dark:border-gray-700 dark:text-gray-600 dark:hover:border-[#8fa7cc] dark:hover:text-[#8fa7cc]"
+                        className="flex h-8 w-8 items-center justify-center border border-[#e0dcd6] text-[#bbb] transition-all hover:border-[#1b2d4e] hover:text-[#1b2d4e]"
                         title="Скопировать email"
                       >
                         <CopyIcon />
@@ -265,7 +249,7 @@ export default function ContactPage() {
                       href={c.href}
                       target={c.href.startsWith('http') ? '_blank' : undefined}
                       rel={c.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                      className="flex h-8 w-8 items-center justify-center border border-[#e0dcd6] text-[#bbb] transition-all hover:border-[#1b2d4e] hover:text-[#1b2d4e] dark:border-gray-700 dark:text-gray-600 dark:hover:border-[#8fa7cc] dark:hover:text-[#8fa7cc]"
+                      className="flex h-8 w-8 items-center justify-center border border-[#e0dcd6] text-[#bbb] transition-all hover:border-[#1b2d4e] hover:text-[#1b2d4e]"
                       title="Открыть"
                     >
                       <ArrowIcon />
@@ -280,7 +264,7 @@ export default function ContactPage() {
 
       {/* Toast */}
       <div
-        className={`fixed bottom-8 left-1/2 z-50 -translate-x-1/2 bg-[#1b2d4e] px-5 py-2.5 text-[13px] font-medium text-white transition-all duration-300 dark:bg-[#8fa7cc] dark:text-[#111110] ${
+        className={`fixed bottom-8 left-1/2 z-50 -translate-x-1/2 bg-[#1b2d4e] px-5 py-2.5 text-[13px] font-medium text-white transition-all duration-300 ${
           toast ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-24 opacity-0'
         }`}
       >

@@ -360,8 +360,8 @@ export default function Home() {
             onEnded={() => setIsVideoPlaying(false)}
           />
           {/* Gradients — left fade + bottom fade */}
-          <div className="pointer-events-none absolute inset-0 z-[2] bg-[linear-gradient(to_right,#f5f2ed_0%,transparent_40%)] dark:bg-[linear-gradient(to_right,#111110_0%,transparent_40%)]" />
-          <div className="pointer-events-none absolute inset-0 z-[2] bg-[linear-gradient(to_top,#f5f2ed_0%,transparent_30%)] dark:bg-[linear-gradient(to_top,#111110_0%,transparent_30%)]" />
+          <div className="pointer-events-none absolute inset-0 z-[2] bg-[linear-gradient(to_right,#f5f2ed_0%,transparent_40%)]" />
+          <div className="pointer-events-none absolute inset-0 z-[2] bg-[linear-gradient(to_top,#f5f2ed_0%,transparent_30%)]" />
         </div>
 
         {/* Text content — overlaid */}
@@ -389,13 +389,13 @@ export default function Home() {
                 }`}
                 onEnded={() => setIsVideoPlaying(false)}
               />
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-[#f5f2ed] to-transparent dark:from-[#111110]" />
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-[#f5f2ed] to-transparent" />
             </div>
           </div>
 
           <h1
             style={heroDelay(0.15)}
-            className="hero-fade font-display max-w-[500px] text-5xl leading-[1.05] tracking-tight text-gray-900 sm:text-6xl lg:text-[clamp(48px,5vw,72px)] xl:text-[clamp(56px,6vw,80px)] dark:text-gray-100"
+            className="hero-fade font-display max-w-[500px] text-5xl leading-[1.05] tracking-tight text-gray-900 sm:text-6xl lg:text-[clamp(48px,5vw,72px)] xl:text-[clamp(56px,6vw,80px)]"
           >
             Александр
             <br />
@@ -404,16 +404,16 @@ export default function Home() {
 
           <div
             style={heroDelay(0.35)}
-            className="hero-fade mt-5 h-7 text-lg font-medium text-[#1b2d4e] dark:text-[#8fa7cc]"
+            className="hero-fade mt-5 h-7 text-lg font-medium text-[#1b2d4e]"
           >
             <TypingEffect words={typingRoles} />
           </div>
 
           <p
             style={heroDelay(0.45)}
-            className="hero-fade mt-6 max-w-[480px] text-base leading-7 text-gray-600 dark:text-gray-300"
+            className="hero-fade mt-6 max-w-[480px] text-base leading-7 text-gray-600"
           >
-            <strong className="font-semibold text-gray-900 dark:text-gray-100">
+            <strong className="font-semibold text-gray-900">
               13 лет в digital, 7 на руководящих позициях.
             </strong>{' '}
             Строю и масштабирую e-commerce бизнесы — от стратегии и найма до P&L и операционной
@@ -423,13 +423,13 @@ export default function Home() {
           <div style={heroDelay(0.6)} className="hero-fade mt-8 flex gap-3">
             <Link
               href="/projects"
-              className="rounded-lg bg-gray-900 px-6 py-2.5 text-sm font-medium text-white transition-all duration-200 hover:-translate-y-px hover:shadow-md dark:bg-gray-100 dark:text-gray-900"
+              className="rounded-lg bg-gray-900 px-6 py-2.5 text-sm font-medium text-white transition-all duration-200 hover:-translate-y-px hover:shadow-md"
             >
               Смотреть проекты
             </Link>
             <Link
               href="/about"
-              className="rounded-lg border border-gray-300 px-6 py-2.5 text-sm font-medium text-gray-700 transition-all duration-200 hover:-translate-y-px hover:border-gray-400 dark:border-gray-700 dark:text-gray-300 dark:hover:border-gray-600"
+              className="rounded-lg border border-gray-300 px-6 py-2.5 text-sm font-medium text-gray-700 transition-all duration-200 hover:-translate-y-px hover:border-gray-400"
             >
               Обо мне
             </Link>
@@ -437,12 +437,12 @@ export default function Home() {
 
           {/* Quote — bottom of hero */}
           <div style={heroDelay(0.8)} className="hero-fade mt-auto pt-10 pb-8 lg:pt-16 lg:pb-12">
-            <div className="max-w-[520px] border-l-[3px] border-[#1b2d4e] pl-5 dark:border-[#8fa7cc]">
-              <p className="font-display text-lg leading-[1.5] font-normal text-gray-900 italic dark:text-gray-100">
+            <div className="max-w-[520px] border-l-[3px] border-[#1b2d4e] pl-5">
+              <p className="font-display text-lg leading-[1.5] font-normal text-gray-900 italic">
                 Цифровая трансформация — это не про технологии. Это про то, как бизнес думает,
                 принимает решения и создает ценность для клиента.
               </p>
-              <cite className="mt-3 block text-[11px] font-medium tracking-[0.12em] text-gray-400 uppercase not-italic dark:text-gray-500">
+              <cite className="mt-3 block text-[11px] font-medium tracking-[0.12em] text-gray-400 uppercase not-italic">
                 Подход к управлению
               </cite>
             </div>
@@ -453,11 +453,9 @@ export default function Home() {
       {/* ═══ EXPERIENCE ═══ */}
       <section className="py-10 sm:py-16">
         <Reveal>
-          <div className="mb-10 flex items-baseline justify-between border-b-[3px] border-gray-900 pb-3 sm:mb-12 dark:border-gray-100">
-            <h2 className="font-display text-3xl tracking-tight text-gray-900 sm:text-4xl dark:text-gray-100">
-              Опыт
-            </h2>
-            <span className="text-xs font-medium tracking-widest text-gray-400 uppercase dark:text-gray-500">
+          <div className="mb-10 flex items-baseline justify-between border-b-[3px] border-gray-900 pb-3 sm:mb-12">
+            <h2 className="font-display text-3xl tracking-tight text-gray-900 sm:text-4xl">Опыт</h2>
+            <span className="text-xs font-medium tracking-widest text-gray-400 uppercase">
               Карьерный путь
             </span>
           </div>
@@ -465,18 +463,14 @@ export default function Home() {
 
         {/* Impact Numbers */}
         <Reveal>
-          <div className="mb-10 grid grid-cols-2 gap-y-5 border-b border-gray-200 pb-7 sm:mb-12 sm:flex sm:gap-0 sm:pb-7 dark:border-gray-800">
+          <div className="mb-10 grid grid-cols-2 gap-y-5 border-b border-gray-200 pb-7 sm:mb-12 sm:flex sm:gap-0 sm:pb-7">
             {impactNumbers.map((item, i) => (
               <div
                 key={item.num}
-                className={`${i % 2 === 1 ? 'border-l border-gray-200 pl-5 dark:border-gray-800' : 'pr-5'} sm:flex-1 ${i > 0 ? 'sm:border-l sm:border-gray-200 sm:pl-6 dark:sm:border-gray-800' : ''} sm:pr-6`}
+                className={`${i % 2 === 1 ? 'border-l border-gray-200 pl-5' : 'pr-5'} sm:flex-1 ${i > 0 ? 'sm:border-l sm:border-gray-200 sm:pl-6' : ''} sm:pr-6`}
               >
-                <div className="font-display text-4xl text-[#1b2d4e] sm:text-5xl dark:text-[#8fa7cc]">
-                  {item.num}
-                </div>
-                <div className="mt-1.5 text-xs text-gray-500 sm:text-[13px] dark:text-gray-400">
-                  {item.label}
-                </div>
+                <div className="font-display text-4xl text-[#1b2d4e] sm:text-5xl">{item.num}</div>
+                <div className="mt-1.5 text-xs text-gray-500 sm:text-[13px]">{item.label}</div>
               </div>
             ))}
           </div>
@@ -486,31 +480,29 @@ export default function Home() {
         <div className="hidden md:block">
           {/* Hero position */}
           <Reveal>
-            <div className="grid grid-cols-[1fr_280px] gap-8 border-b border-gray-200 pb-10 lg:grid-cols-[1fr_340px] lg:gap-12 dark:border-gray-800">
+            <div className="grid grid-cols-[1fr_280px] gap-8 border-b border-gray-200 pb-10 lg:grid-cols-[1fr_340px] lg:gap-12">
               <div>
-                <div className="text-[11px] font-semibold tracking-[0.15em] text-gray-400 uppercase dark:text-gray-500">
+                <div className="text-[11px] font-semibold tracking-[0.15em] text-gray-400 uppercase">
                   {heroPosition.period} · {heroPosition.duration}
                 </div>
-                <h3 className="font-display mt-3 text-[32px] leading-[1.2] text-gray-900 dark:text-gray-100">
+                <h3 className="font-display mt-3 text-[32px] leading-[1.2] text-gray-900">
                   {heroPosition.role}
                 </h3>
-                <div className="mt-1.5 text-base font-medium text-[#1b2d4e] dark:text-[#8fa7cc]">
+                <div className="mt-1.5 text-base font-medium text-[#1b2d4e]">
                   {heroPosition.company}
                 </div>
-                <p className="mt-4 max-w-[580px] text-[15px] leading-[1.75] text-gray-600 dark:text-gray-300">
+                <p className="mt-4 max-w-[580px] text-[15px] leading-[1.75] text-gray-600">
                   {heroPosition.desc}
                 </p>
               </div>
-              <div className="flex flex-col border-l border-gray-200 pl-12 dark:border-gray-800">
+              <div className="flex flex-col border-l border-gray-200 pl-12">
                 {heroPosition.stats.map((stat) => (
                   <div
                     key={stat.label}
-                    className="flex items-baseline justify-between gap-4 border-b border-gray-200 py-4 last:border-b-0 dark:border-gray-800"
+                    className="flex items-baseline justify-between gap-4 border-b border-gray-200 py-4 last:border-b-0"
                   >
-                    <span className="font-display text-[28px] text-[#1b2d4e] dark:text-[#8fa7cc]">
-                      {stat.num}
-                    </span>
-                    <span className="text-xs text-gray-400 dark:text-gray-500">{stat.label}</span>
+                    <span className="font-display text-[28px] text-[#1b2d4e]">{stat.num}</span>
+                    <span className="text-xs text-gray-400">{stat.label}</span>
                   </div>
                 ))}
               </div>
@@ -521,31 +513,29 @@ export default function Home() {
           <div className="flex flex-col">
             {positions.map((pos, i) => (
               <Reveal key={pos.period} delay={i * 0.08}>
-                <div className="group grid grid-cols-[180px_1fr_auto] items-baseline gap-6 border-b border-gray-200 py-6 transition-all duration-200 hover:pl-2 dark:border-gray-800">
+                <div className="group grid grid-cols-[180px_1fr_auto] items-baseline gap-6 border-b border-gray-200 py-6 transition-all duration-200 hover:pl-2">
                   <div>
-                    <div className="text-xs font-semibold tracking-[0.08em] text-gray-400 uppercase dark:text-gray-500">
+                    <div className="text-xs font-semibold tracking-[0.08em] text-gray-400 uppercase">
                       {pos.period}
                     </div>
-                    <div className="mt-0.5 text-[11px] text-gray-400 opacity-70 dark:text-gray-500">
+                    <div className="mt-0.5 text-[11px] text-gray-400 opacity-70">
                       {pos.duration}
                     </div>
                   </div>
                   <div className="min-w-0">
-                    <h3 className="font-display text-xl text-gray-900 transition-colors duration-200 group-hover:text-[#1b2d4e] dark:text-gray-100 dark:group-hover:text-[#8fa7cc]">
+                    <h3 className="font-display text-xl text-gray-900 transition-colors duration-200 group-hover:text-[#1b2d4e]">
                       {pos.role}
                     </h3>
-                    <div className="mt-0.5 text-[13px] font-medium text-[#1b2d4e] dark:text-[#8fa7cc]">
+                    <div className="mt-0.5 text-[13px] font-medium text-[#1b2d4e]">
                       {pos.company}
                     </div>
-                    <p className="mt-1.5 text-[13px] leading-relaxed text-gray-500 dark:text-gray-400">
+                    <p className="mt-1.5 text-[13px] leading-relaxed text-gray-500">
                       {pos.oneLiner}
                     </p>
                   </div>
                   <div className="text-right">
-                    <div className="font-display text-[28px] text-[#1b2d4e] dark:text-[#8fa7cc]">
-                      {pos.metricNum}
-                    </div>
-                    <div className="mt-1 text-[10px] font-semibold tracking-[0.08em] text-gray-400 uppercase dark:text-gray-500">
+                    <div className="font-display text-[28px] text-[#1b2d4e]">{pos.metricNum}</div>
+                    <div className="mt-1 text-[10px] font-semibold tracking-[0.08em] text-gray-400 uppercase">
                       {pos.metricLabel}
                     </div>
                   </div>
@@ -558,12 +548,12 @@ export default function Home() {
         {/* ── Mobile: Vertical Timeline ── */}
         <div className="relative flex flex-col gap-2 pl-7 md:hidden">
           {/* Vertical line */}
-          <div className="absolute top-2 bottom-2 left-[5px] w-[1.5px] bg-gray-300 dark:bg-gray-700" />
+          <div className="absolute top-2 bottom-2 left-[5px] w-[1.5px] bg-gray-300" />
 
           {/* Hero node */}
           <div className="relative scroll-mt-4">
             <div
-              className={`absolute top-1/2 -left-7 z-[2] h-3 w-3 -translate-y-1/2 rounded-full transition-colors duration-300 ${openPosition === 'hero' ? 'bg-[#1b2d4e] shadow-[0_0_0_3px_rgba(27,45,78,0.12)] dark:bg-[#8fa7cc] dark:shadow-[0_0_0_3px_rgba(143,167,204,0.15)]' : 'border-2 border-[#f5f2ed] bg-gray-300 shadow-[0_0_0_3px_rgba(0,0,0,0.04)] dark:border-[#111110] dark:bg-gray-600 dark:shadow-[0_0_0_3px_rgba(255,255,255,0.04)]'}`}
+              className={`absolute top-1/2 -left-7 z-[2] h-3 w-3 -translate-y-1/2 rounded-full transition-colors duration-300 ${openPosition === 'hero' ? 'bg-[#1b2d4e] shadow-[0_0_0_3px_rgba(27,45,78,0.12)]' : 'border-2 border-[#f5f2ed] bg-gray-300 shadow-[0_0_0_3px_rgba(0,0,0,0.04)]'}`}
             />
             <button
               ref={(el) => {
@@ -571,33 +561,31 @@ export default function Home() {
               }}
               type="button"
               aria-expanded={openPosition === 'hero'}
-              className={`w-full cursor-pointer overflow-hidden rounded border-l-[3px] bg-white/80 text-left shadow-sm transition-[border-color,box-shadow] duration-300 focus-visible:ring-2 focus-visible:ring-[#1b2d4e]/40 focus-visible:outline-none dark:bg-[#1a1916] dark:focus-visible:ring-[#8fa7cc]/40 ${openPosition === 'hero' ? 'border-[#1b2d4e] dark:border-[#8fa7cc]' : 'border-transparent'}`}
+              className={`w-full cursor-pointer overflow-hidden rounded border-l-[3px] bg-white/80 text-left shadow-sm transition-[border-color,box-shadow] duration-300 focus-visible:ring-2 focus-visible:ring-[#1b2d4e]/40 focus-visible:outline-none ${openPosition === 'hero' ? 'border-[#1b2d4e]' : 'border-transparent'}`}
               onClick={() => togglePosition('hero')}
             >
               <div className="flex items-center gap-3 px-4 py-4">
                 <div className="min-w-0 flex-1">
-                  <div className="text-[10px] font-semibold tracking-[0.12em] text-gray-400 uppercase dark:text-gray-500">
+                  <div className="text-[10px] font-semibold tracking-[0.12em] text-gray-400 uppercase">
                     {heroPosition.period} · {heroPosition.duration}
                   </div>
-                  <div className="font-display mt-1 text-xl leading-tight text-gray-900 dark:text-gray-100">
+                  <div className="font-display mt-1 text-xl leading-tight text-gray-900">
                     {heroPosition.role}
                   </div>
-                  <div className="mt-0.5 text-xs font-medium text-[#1b2d4e] dark:text-[#8fa7cc]">
+                  <div className="mt-0.5 text-xs font-medium text-[#1b2d4e]">
                     {heroPosition.company}
                   </div>
                 </div>
                 <div className="shrink-0 text-right">
-                  <div className="font-display text-[26px] text-[#1b2d4e] dark:text-[#8fa7cc]">
-                    x87
-                  </div>
-                  <div className="text-[9px] font-semibold tracking-wider text-gray-400 uppercase dark:text-gray-500">
+                  <div className="font-display text-[26px] text-[#1b2d4e]">x87</div>
+                  <div className="text-[9px] font-semibold tracking-wider text-gray-400 uppercase">
                     Выручка
                   </div>
                 </div>
                 <motion.svg
                   animate={{ rotate: openPosition === 'hero' ? 180 : 0 }}
                   transition={{ duration: 0.3 }}
-                  className="h-5 w-5 shrink-0 text-gray-300 dark:text-gray-600"
+                  className="h-5 w-5 shrink-0 text-gray-300"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
@@ -612,17 +600,13 @@ export default function Home() {
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.2 }}
                 >
-                  <div className="border-t border-gray-200 px-4 pt-3 pb-4 dark:border-gray-800">
-                    <p className="text-[13px] leading-relaxed text-gray-500 dark:text-gray-400">
-                      {heroPosition.desc}
-                    </p>
-                    <div className="mt-3 flex flex-wrap gap-x-4 gap-y-2 border-t border-gray-200 pt-3 dark:border-gray-800">
+                  <div className="border-t border-gray-200 px-4 pt-3 pb-4">
+                    <p className="text-[13px] leading-relaxed text-gray-500">{heroPosition.desc}</p>
+                    <div className="mt-3 flex flex-wrap gap-x-4 gap-y-2 border-t border-gray-200 pt-3">
                       {heroPosition.stats.map((stat) => (
                         <div key={stat.label} className="flex flex-col">
-                          <span className="font-display text-xl text-[#1b2d4e] dark:text-[#8fa7cc]">
-                            {stat.num}
-                          </span>
-                          <span className="text-[9px] font-semibold tracking-wider text-gray-400 uppercase dark:text-gray-500">
+                          <span className="font-display text-xl text-[#1b2d4e]">{stat.num}</span>
+                          <span className="text-[9px] font-semibold tracking-wider text-gray-400 uppercase">
                             {stat.label}
                           </span>
                         </div>
@@ -638,7 +622,7 @@ export default function Home() {
           {positions.map((pos, i) => (
             <div key={pos.period} className="relative scroll-mt-4">
               <div
-                className={`absolute top-1/2 -left-7 z-[2] h-3 w-3 -translate-y-1/2 rounded-full border-2 border-[#f5f2ed] transition-colors duration-300 dark:border-[#111110] ${openPosition === i ? 'bg-[#1b2d4e] dark:bg-[#8fa7cc]' : 'bg-gray-300 dark:bg-gray-600'}`}
+                className={`absolute top-1/2 -left-7 z-[2] h-3 w-3 -translate-y-1/2 rounded-full border-2 border-[#f5f2ed] transition-colors duration-300 ${openPosition === i ? 'bg-[#1b2d4e]' : 'bg-gray-300'}`}
               />
               <button
                 ref={(el) => {
@@ -646,33 +630,29 @@ export default function Home() {
                 }}
                 type="button"
                 aria-expanded={openPosition === i}
-                className={`w-full cursor-pointer overflow-hidden rounded border-l-[3px] bg-white/80 text-left shadow-sm transition-[border-color,box-shadow] duration-300 focus-visible:ring-2 focus-visible:ring-[#1b2d4e]/40 focus-visible:outline-none dark:bg-[#1a1916] dark:focus-visible:ring-[#8fa7cc]/40 ${openPosition === i ? 'border-[#1b2d4e] dark:border-[#8fa7cc]' : 'border-transparent'}`}
+                className={`w-full cursor-pointer overflow-hidden rounded border-l-[3px] bg-white/80 text-left shadow-sm transition-[border-color,box-shadow] duration-300 focus-visible:ring-2 focus-visible:ring-[#1b2d4e]/40 focus-visible:outline-none ${openPosition === i ? 'border-[#1b2d4e]' : 'border-transparent'}`}
                 onClick={() => togglePosition(i)}
               >
                 <div className="flex items-center gap-3 px-4 py-3.5">
                   <div className="min-w-0 flex-1">
-                    <div className="text-[10px] font-semibold tracking-[0.12em] text-gray-400 uppercase dark:text-gray-500">
+                    <div className="text-[10px] font-semibold tracking-[0.12em] text-gray-400 uppercase">
                       {pos.period} · {pos.duration}
                     </div>
-                    <div className="font-display mt-0.5 text-[17px] leading-tight text-gray-900 dark:text-gray-100">
+                    <div className="font-display mt-0.5 text-[17px] leading-tight text-gray-900">
                       {pos.role}
                     </div>
-                    <div className="mt-0.5 text-xs font-medium text-[#1b2d4e] dark:text-[#8fa7cc]">
-                      {pos.company}
-                    </div>
+                    <div className="mt-0.5 text-xs font-medium text-[#1b2d4e]">{pos.company}</div>
                   </div>
                   <div className="shrink-0 text-right">
-                    <div className="font-display text-[22px] text-[#1b2d4e] dark:text-[#8fa7cc]">
-                      {pos.metricNum}
-                    </div>
-                    <div className="text-[9px] font-semibold tracking-wider text-gray-400 uppercase dark:text-gray-500">
+                    <div className="font-display text-[22px] text-[#1b2d4e]">{pos.metricNum}</div>
+                    <div className="text-[9px] font-semibold tracking-wider text-gray-400 uppercase">
                       {pos.metricLabel}
                     </div>
                   </div>
                   <motion.svg
                     animate={{ rotate: openPosition === i ? 180 : 0 }}
                     transition={{ duration: 0.3 }}
-                    className="h-5 w-5 shrink-0 text-gray-300 dark:text-gray-600"
+                    className="h-5 w-5 shrink-0 text-gray-300"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
@@ -687,18 +667,14 @@ export default function Home() {
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.2 }}
                   >
-                    <div className="border-t border-gray-200 px-4 pt-3 pb-4 dark:border-gray-800">
-                      <p className="text-[13px] leading-relaxed text-gray-500 dark:text-gray-400">
-                        {pos.oneLiner}
-                      </p>
+                    <div className="border-t border-gray-200 px-4 pt-3 pb-4">
+                      <p className="text-[13px] leading-relaxed text-gray-500">{pos.oneLiner}</p>
                       {pos.extraMetrics.length > 0 && (
-                        <div className="mt-3 flex flex-wrap gap-x-4 gap-y-2 border-t border-gray-200 pt-3 dark:border-gray-800">
+                        <div className="mt-3 flex flex-wrap gap-x-4 gap-y-2 border-t border-gray-200 pt-3">
                           {pos.extraMetrics.map((m) => (
                             <div key={m.label} className="flex flex-col">
-                              <span className="font-display text-xl text-[#1b2d4e] dark:text-[#8fa7cc]">
-                                {m.num}
-                              </span>
-                              <span className="text-[9px] font-semibold tracking-wider text-gray-400 uppercase dark:text-gray-500">
+                              <span className="font-display text-xl text-[#1b2d4e]">{m.num}</span>
+                              <span className="text-[9px] font-semibold tracking-wider text-gray-400 uppercase">
                                 {m.label}
                               </span>
                             </div>
@@ -718,7 +694,7 @@ export default function Home() {
           <div className="mt-8 text-center">
             <Link
               href="/about"
-              className="text-sm font-medium text-gray-400 transition-colors hover:text-gray-900 dark:text-gray-500 dark:hover:text-gray-100"
+              className="text-sm font-medium text-gray-400 transition-colors hover:text-gray-900"
             >
               Полная история →
             </Link>
@@ -729,11 +705,11 @@ export default function Home() {
       {/* ═══ PROJECTS ═══ */}
       <section className="py-10 sm:py-16">
         <Reveal>
-          <div className="mb-12 flex items-baseline justify-between border-b-[3px] border-gray-900 pb-3 dark:border-gray-100">
-            <h2 className="font-display text-3xl tracking-tight text-gray-900 sm:text-4xl dark:text-gray-100">
+          <div className="mb-12 flex items-baseline justify-between border-b-[3px] border-gray-900 pb-3">
+            <h2 className="font-display text-3xl tracking-tight text-gray-900 sm:text-4xl">
               Проекты
             </h2>
-            <span className="text-xs font-medium tracking-widest text-gray-400 uppercase dark:text-gray-500">
+            <span className="text-xs font-medium tracking-widest text-gray-400 uppercase">
               Избранные реализации
             </span>
           </div>
@@ -742,26 +718,22 @@ export default function Home() {
         {/* Featured projects */}
         {featuredProjects.map((p, i) => (
           <Reveal key={p.title} delay={i * 0.1}>
-            <ScrollActiveCard className="group relative mb-4 overflow-hidden border border-gray-200 bg-white/80 p-8 transition-all duration-500 ease-out hover:-translate-y-1 hover:border-[#1b2d4e] hover:shadow-[0_20px_60px_rgba(0,0,0,0.06)] sm:p-10 dark:border-gray-800 dark:bg-[#1a1916] dark:hover:border-[#8fa7cc] dark:hover:shadow-[0_20px_60px_rgba(0,0,0,0.3)] [&.in-view]:border-[#1b2d4e] [&.in-view]:shadow-[0_20px_60px_rgba(0,0,0,0.06)] dark:[&.in-view]:border-[#8fa7cc] dark:[&.in-view]:shadow-[0_20px_60px_rgba(0,0,0,0.3)]">
+            <ScrollActiveCard className="group relative mb-4 overflow-hidden border border-gray-200 bg-white/80 p-8 transition-all duration-500 ease-out hover:-translate-y-1 hover:border-[#1b2d4e] hover:shadow-[0_20px_60px_rgba(0,0,0,0.06)] sm:p-10 [&.in-view]:border-[#1b2d4e] [&.in-view]:shadow-[0_20px_60px_rgba(0,0,0,0.06)]">
               {/* Left accent line */}
-              <div className="absolute top-0 left-0 h-0 w-1 bg-[#1b2d4e] transition-all duration-500 ease-out group-hover:h-full group-[.in-view]:h-full dark:bg-[#8fa7cc]" />
-              <span className="inline-block border border-[#1b2d4e] px-2.5 py-0.5 text-[11px] font-semibold tracking-widest text-[#1b2d4e] uppercase transition-colors duration-300 group-hover:border-[#1b2d4e]/40 dark:border-[#8fa7cc] dark:text-[#8fa7cc]">
+              <div className="absolute top-0 left-0 h-0 w-1 bg-[#1b2d4e] transition-all duration-500 ease-out group-hover:h-full group-[.in-view]:h-full" />
+              <span className="inline-block border border-[#1b2d4e] px-2.5 py-0.5 text-[11px] font-semibold tracking-widest text-[#1b2d4e] uppercase transition-colors duration-300 group-hover:border-[#1b2d4e]/40">
                 {p.badge}
               </span>
-              <h3 className="font-display mt-4 text-2xl text-gray-900 sm:text-3xl dark:text-gray-100">
-                {p.title}
-              </h3>
-              <div className="mt-1 text-xs font-semibold tracking-[.12em] text-[#1b2d4e] uppercase dark:text-[#8fa7cc]">
+              <h3 className="font-display mt-4 text-2xl text-gray-900 sm:text-3xl">{p.title}</h3>
+              <div className="mt-1 text-xs font-semibold tracking-[.12em] text-[#1b2d4e] uppercase">
                 {p.role}
               </div>
-              <p className="mt-4 max-w-2xl text-sm leading-7 font-light text-gray-500 dark:text-gray-400">
-                {p.desc}
-              </p>
+              <p className="mt-4 max-w-2xl text-sm leading-7 font-light text-gray-500">{p.desc}</p>
               <div className="mt-5 flex flex-wrap gap-2">
                 {p.tags.map((tag, ti) => (
                   <span
                     key={`${p.title}-${ti}`}
-                    className="border border-gray-300 px-3 py-1 text-[11px] font-medium tracking-wider text-gray-500 uppercase transition-all duration-300 group-hover:border-[#1b2d4e]/50 group-hover:text-[#1b2d4e] group-[.in-view]:border-[#1b2d4e]/50 group-[.in-view]:text-[#1b2d4e] dark:border-gray-700 dark:text-gray-400 dark:group-hover:border-[#8fa7cc]/50 dark:group-hover:text-[#8fa7cc] dark:group-[.in-view]:border-[#8fa7cc]/50 dark:group-[.in-view]:text-[#8fa7cc]"
+                    className="border border-gray-300 px-3 py-1 text-[11px] font-medium tracking-wider text-gray-500 uppercase transition-all duration-300 group-hover:border-[#1b2d4e]/50 group-hover:text-[#1b2d4e] group-[.in-view]:border-[#1b2d4e]/50 group-[.in-view]:text-[#1b2d4e]"
                   >
                     {tag}
                   </span>
@@ -771,7 +743,7 @@ export default function Home() {
                 href={p.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-[#1b2d4e] transition-[gap] duration-200 hover:gap-2.5 dark:text-[#8fa7cc]"
+                className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-[#1b2d4e] transition-[gap] duration-200 hover:gap-2.5"
               >
                 {p.linkText} <span>→</span>
               </a>
@@ -787,26 +759,24 @@ export default function Home() {
             return (
               <StaggerItem key={p.num}>
                 <CardWrapper {...cardProps}>
-                  <ScrollActiveCard className="group relative flex h-full flex-col overflow-hidden border border-gray-200 bg-white/80 p-8 transition-all duration-500 ease-out hover:-translate-y-1 hover:border-[#1b2d4e] hover:shadow-[0_20px_60px_rgba(0,0,0,0.06)] sm:p-10 dark:border-gray-800 dark:bg-[#1a1916] dark:hover:border-[#8fa7cc] dark:hover:shadow-[0_20px_60px_rgba(0,0,0,0.3)] [&.in-view]:border-[#1b2d4e] [&.in-view]:shadow-[0_20px_60px_rgba(0,0,0,0.06)] dark:[&.in-view]:border-[#8fa7cc] dark:[&.in-view]:shadow-[0_20px_60px_rgba(0,0,0,0.3)]">
+                  <ScrollActiveCard className="group relative flex h-full flex-col overflow-hidden border border-gray-200 bg-white/80 p-8 transition-all duration-500 ease-out hover:-translate-y-1 hover:border-[#1b2d4e] hover:shadow-[0_20px_60px_rgba(0,0,0,0.06)] sm:p-10 [&.in-view]:border-[#1b2d4e] [&.in-view]:shadow-[0_20px_60px_rgba(0,0,0,0.06)]">
                     {/* Left accent line */}
-                    <div className="absolute top-0 left-0 h-0 w-1 bg-[#1b2d4e] transition-all duration-500 ease-out group-hover:h-full group-[.in-view]:h-full dark:bg-[#8fa7cc]" />
-                    <div className="font-display mb-6 text-5xl leading-none font-light text-gray-300 transition-colors duration-400 group-hover:text-[#1b2d4e] group-[.in-view]:text-[#1b2d4e] dark:text-gray-700 dark:group-hover:text-[#8fa7cc] dark:group-[.in-view]:text-[#8fa7cc]">
+                    <div className="absolute top-0 left-0 h-0 w-1 bg-[#1b2d4e] transition-all duration-500 ease-out group-hover:h-full group-[.in-view]:h-full" />
+                    <div className="font-display mb-6 text-5xl leading-none font-light text-gray-300 transition-colors duration-400 group-hover:text-[#1b2d4e] group-[.in-view]:text-[#1b2d4e]">
                       {p.num}
                     </div>
-                    <h3 className="font-display text-xl text-gray-900 sm:text-2xl dark:text-gray-100">
-                      {p.title}
-                    </h3>
-                    <div className="mt-1.5 text-xs font-semibold tracking-[.12em] text-[#1b2d4e] uppercase dark:text-[#8fa7cc]">
+                    <h3 className="font-display text-xl text-gray-900 sm:text-2xl">{p.title}</h3>
+                    <div className="mt-1.5 text-xs font-semibold tracking-[.12em] text-[#1b2d4e] uppercase">
                       {p.role}
                     </div>
-                    <p className="mt-4 text-sm leading-relaxed font-light text-gray-500 dark:text-gray-400">
+                    <p className="mt-4 text-sm leading-relaxed font-light text-gray-500">
                       {p.desc}
                     </p>
                     <div className="mt-auto flex flex-wrap gap-2 pt-6">
                       {p.tags.map((tag, ti) => (
                         <span
                           key={`${p.num}-${ti}`}
-                          className="border border-gray-300 px-3 py-1 text-[11px] font-medium tracking-wider text-gray-500 uppercase transition-all duration-300 group-hover:border-[#1b2d4e]/50 group-hover:text-[#1b2d4e] group-[.in-view]:border-[#1b2d4e]/50 group-[.in-view]:text-[#1b2d4e] dark:border-gray-700 dark:text-gray-400 dark:group-hover:border-[#8fa7cc]/50 dark:group-hover:text-[#8fa7cc] dark:group-[.in-view]:border-[#8fa7cc]/50 dark:group-[.in-view]:text-[#8fa7cc]"
+                          className="border border-gray-300 px-3 py-1 text-[11px] font-medium tracking-wider text-gray-500 uppercase transition-all duration-300 group-hover:border-[#1b2d4e]/50 group-hover:text-[#1b2d4e] group-[.in-view]:border-[#1b2d4e]/50 group-[.in-view]:text-[#1b2d4e]"
                         >
                           {tag}
                         </span>
@@ -823,7 +793,7 @@ export default function Home() {
           <div className="mt-8 text-center">
             <Link
               href="/projects"
-              className="text-sm font-medium text-gray-400 transition-colors hover:text-gray-900 dark:text-gray-500 dark:hover:text-gray-100"
+              className="text-sm font-medium text-gray-400 transition-colors hover:text-gray-900"
             >
               Все проекты →
             </Link>
@@ -834,30 +804,30 @@ export default function Home() {
       {/* ═══ COMPETENCIES (4-column lists) ═══ */}
       <section className="py-10 sm:py-16">
         <Reveal>
-          <div className="mb-12 flex items-baseline justify-between border-b-[3px] border-gray-900 pb-3 dark:border-gray-100">
-            <h2 className="font-display text-3xl tracking-tight text-gray-900 sm:text-4xl dark:text-gray-100">
+          <div className="mb-12 flex items-baseline justify-between border-b-[3px] border-gray-900 pb-3">
+            <h2 className="font-display text-3xl tracking-tight text-gray-900 sm:text-4xl">
               Компетенции
             </h2>
-            <span className="text-xs font-medium tracking-widest text-gray-400 uppercase dark:text-gray-500">
+            <span className="text-xs font-medium tracking-widest text-gray-400 uppercase">
               Области экспертизы
             </span>
           </div>
         </Reveal>
 
-        <div className="border-t border-gray-200 pt-10 dark:border-gray-800">
+        <div className="border-t border-gray-200 pt-10">
           <StaggerContainer className="grid grid-cols-2 xl:grid-cols-4" stagger={0.1}>
             {competencies.map((col, i) => (
               <StaggerItem
                 key={col.title}
-                className={`border-gray-200 px-5 py-8 sm:px-6 xl:px-8 dark:border-gray-800 ${
+                className={`border-gray-200 px-5 py-8 sm:px-6 xl:px-8 ${
                   i % 2 === 0 ? 'border-r' : ''
                 } ${i < 2 ? 'border-b xl:border-b-0' : ''} ${
                   i < 3 ? 'xl:border-r' : 'xl:border-r-0'
                 }`}
               >
-                <h3 className="group/title font-display relative inline-block text-lg text-gray-900 dark:text-gray-100">
+                <h3 className="group/title font-display relative inline-block text-lg text-gray-900">
                   {col.title}
-                  <span className="absolute bottom-0 left-0 h-[1.5px] w-0 bg-[#1b2d4e] transition-all duration-300 group-hover/title:w-full dark:bg-[#8fa7cc]" />
+                  <span className="absolute bottom-0 left-0 h-[1.5px] w-0 bg-[#1b2d4e] transition-all duration-300 group-hover/title:w-full" />
                 </h3>
                 <ul className="mt-5 flex flex-col gap-0">
                   {col.items.map((item, ii) => (
@@ -865,8 +835,8 @@ export default function Home() {
                       key={`${col.title}-${ii}`}
                       className="group/item flex items-start gap-2.5 py-2 transition-all duration-200 hover:pl-1"
                     >
-                      <span className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-gray-300 transition-colors duration-200 group-hover/item:bg-[#1b2d4e] dark:bg-gray-700 dark:group-hover/item:bg-[#8fa7cc]" />
-                      <span className="text-sm leading-relaxed text-gray-600 transition-colors duration-200 group-hover/item:text-gray-900 dark:text-gray-400 dark:group-hover/item:text-gray-100">
+                      <span className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-gray-300 transition-colors duration-200 group-hover/item:bg-[#1b2d4e]" />
+                      <span className="text-sm leading-relaxed text-gray-600 transition-colors duration-200 group-hover/item:text-gray-900">
                         {item}
                       </span>
                     </li>
@@ -881,11 +851,11 @@ export default function Home() {
       {/* ═══ SPEAKING ═══ */}
       <section className="py-10 sm:py-16">
         <Reveal>
-          <div className="mb-12 flex flex-col gap-2 border-b-[3px] border-gray-900 pb-3 sm:flex-row sm:items-baseline sm:justify-between dark:border-gray-100">
-            <h2 className="font-display text-3xl tracking-tight text-gray-900 sm:text-4xl dark:text-gray-100">
+          <div className="mb-12 flex flex-col gap-2 border-b-[3px] border-gray-900 pb-3 sm:flex-row sm:items-baseline sm:justify-between">
+            <h2 className="font-display text-3xl tracking-tight text-gray-900 sm:text-4xl">
               Выступления
             </h2>
-            <span className="text-xs font-medium tracking-widest text-gray-400 uppercase dark:text-gray-500">
+            <span className="text-xs font-medium tracking-widest text-gray-400 uppercase">
               Готов выступить спикером
             </span>
           </div>
@@ -899,15 +869,15 @@ export default function Home() {
                   prefersReducedMotion ? {} : { y: -2, boxShadow: '0 8px 32px rgba(0,0,0,0.06)' }
                 }
                 transition={{ type: 'spring', stiffness: 400, damping: 25 }}
-                className="h-full rounded border border-gray-200 bg-white/80 p-4 sm:p-7 dark:border-gray-800 dark:bg-[#1a1916]"
+                className="h-full rounded border border-gray-200 bg-white/80 p-4 sm:p-7"
               >
-                <div className="font-display text-xl text-[#1b2d4e] opacity-40 sm:text-2xl dark:text-[#8fa7cc]">
+                <div className="font-display text-xl text-[#1b2d4e] opacity-40 sm:text-2xl">
                   {topic.num}
                 </div>
-                <h3 className="font-display mt-2 text-[15px] leading-snug text-gray-900 sm:mt-3 sm:text-lg dark:text-gray-100">
+                <h3 className="font-display mt-2 text-[15px] leading-snug text-gray-900 sm:mt-3 sm:text-lg">
                   {topic.title}
                 </h3>
-                <p className="mt-1.5 text-xs leading-relaxed text-gray-600 sm:mt-2.5 sm:text-sm dark:text-gray-300">
+                <p className="mt-1.5 text-xs leading-relaxed text-gray-600 sm:mt-2.5 sm:text-sm">
                   {topic.desc}
                 </p>
               </motion.div>

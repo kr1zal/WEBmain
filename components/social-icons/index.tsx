@@ -55,7 +55,7 @@ const SocialIcon = ({ kind, href, size = 8 }: SocialIconProps) => {
 
   return (
     <a
-      className="inline-flex items-center justify-center p-2 text-gray-500 transition-colors hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+      className="inline-flex items-center justify-center p-2 text-gray-500 transition-colors hover:text-gray-700"
       target="_blank"
       rel="noopener noreferrer"
       href={href}

@@ -41,13 +41,10 @@ const metrics: Metric[] = [
 
 export default function MetricsStrip() {
   return (
-    <section className="bg-[#1a1a1a] text-[#f5f2ed] transition-colors duration-400 dark:bg-[#1a1916]">
+    <section className="bg-[#1a1a1a] text-[#f5f2ed] transition-colors duration-400">
       <div className="mx-auto grid max-w-[1380px] grid-cols-1 gap-px bg-[#2e2a24] px-0 sm:grid-cols-2 lg:grid-cols-4">
         {metrics.map((m) => (
-          <div
-            key={m.label}
-            className="relative bg-[#1a1a1a] px-7 py-10 text-center dark:bg-[#1a1916]"
-          >
+          <div key={m.label} className="relative bg-[#1a1a1a] px-7 py-10 text-center">
             <div className="font-display text-4xl text-[#8fa7cc] lg:text-5xl">
               {m.isStatic ? (
                 <span>{m.staticText}</span>

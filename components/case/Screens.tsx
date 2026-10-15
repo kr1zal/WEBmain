@@ -29,7 +29,7 @@ function Frame({ shot, delay = 0, className }: { shot: Shot; delay?: number; cla
           href={shot.src}
           target="_blank"
           rel="noopener noreferrer"
-          className="block border border-gray-200 transition-colors duration-150 ease-out hover:border-gray-400 dark:border-gray-800 dark:hover:border-gray-600"
+          className="block border border-gray-200 transition-colors duration-150 ease-out hover:border-gray-400"
         >
           <Image
             src={shot.src}
@@ -40,7 +40,7 @@ function Frame({ shot, delay = 0, className }: { shot: Shot; delay?: number; cla
             className="block h-auto w-full"
           />
         </a>
-        <figcaption className="mt-2.5 text-[13px] leading-5 text-gray-500 dark:text-gray-400">
+        <figcaption className="mt-2.5 text-[13px] leading-5 text-gray-500">
           {shot.caption}
         </figcaption>
       </figure>

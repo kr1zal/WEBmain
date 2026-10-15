@@ -116,14 +116,14 @@ function ChapterHeading({
     <Reveal>
       <div
         id={id}
-        className={`scroll-mt-28 ${first ? '' : 'mt-14 border-t border-[#e0dcd6] pt-8 sm:mt-12 sm:pt-6 dark:border-gray-700/50'}`}
+        className={`scroll-mt-28 ${first ? '' : 'mt-14 border-t border-[#e0dcd6] pt-8 sm:mt-12 sm:pt-6'}`}
       >
         {label && (
-          <div className="text-[11px] font-semibold tracking-[0.14em] text-[#1b2d4e] uppercase dark:text-[#8fa7cc]">
+          <div className="text-[11px] font-semibold tracking-[0.14em] text-[#1b2d4e] uppercase">
             {label}
           </div>
         )}
-        <h2 className="font-display mt-1 text-[22px] font-semibold tracking-tight text-[#1a1a1a] sm:text-2xl dark:text-gray-100">
+        <h2 className="font-display mt-1 text-[22px] font-semibold tracking-tight text-[#1a1a1a] sm:text-2xl">
           {title}
         </h2>
       </div>
@@ -134,8 +134,8 @@ function ChapterHeading({
 function PullQuote({ children }: { children: string }) {
   return (
     <Reveal>
-      <blockquote className="my-8 border-l-[3px] border-[#1b2d4e] py-1 pl-5 dark:border-[#8fa7cc]">
-        <p className="text-[17px] leading-relaxed font-normal text-[#1a1a1a] sm:text-lg dark:text-gray-200">
+      <blockquote className="my-8 border-l-[3px] border-[#1b2d4e] py-1 pl-5">
+        <p className="text-[17px] leading-relaxed font-normal text-[#1a1a1a] sm:text-lg">
           {children}
         </p>
       </blockquote>
@@ -146,13 +146,11 @@ function PullQuote({ children }: { children: string }) {
 function FactStrip() {
   return (
     <Reveal>
-      <div className="-mx-5 my-8 grid grid-cols-2 gap-px bg-[#e0dcd6] sm:mx-0 sm:grid-cols-4 dark:bg-gray-700/50">
+      <div className="-mx-5 my-8 grid grid-cols-2 gap-px bg-[#e0dcd6] sm:mx-0 sm:grid-cols-4">
         {facts.map((f) => (
-          <div key={f.label} className="bg-[#f5f2ed] py-5 text-center sm:p-4 dark:bg-[#111110]">
-            <div className="text-[22px] font-semibold text-[#1b2d4e] sm:text-[22px] dark:text-[#8fa7cc]">
-              {f.val}
-            </div>
-            <div className="mt-0.5 text-[10px] tracking-[0.08em] text-[#999] uppercase dark:text-gray-500">
+          <div key={f.label} className="bg-[#f5f2ed] py-5 text-center sm:p-4">
+            <div className="text-[22px] font-semibold text-[#1b2d4e] sm:text-[22px]">{f.val}</div>
+            <div className="mt-0.5 text-[10px] tracking-[0.08em] text-[#999] uppercase">
               {f.label}
             </div>
           </div>
@@ -164,18 +162,18 @@ function FactStrip() {
 
 function P({ children }: { children: React.ReactNode }) {
   return (
-    <p className="mb-5 text-[17px] leading-[1.85] text-[#444] sm:mb-[18px] sm:text-base dark:text-gray-400">
+    <p className="mb-5 text-[17px] leading-[1.85] text-[#444] sm:mb-[18px] sm:text-base">
       {children}
     </p>
   )
 }
 
 function Strong({ children }: { children: React.ReactNode }) {
-  return <strong className="font-semibold text-[#1a1a1a] dark:text-gray-200">{children}</strong>
+  return <strong className="font-semibold text-[#1a1a1a]">{children}</strong>
 }
 
 function Hn({ children }: { children: React.ReactNode }) {
-  return <span className="font-semibold text-[#1b2d4e] dark:text-[#8fa7cc]">{children}</span>
+  return <span className="font-semibold text-[#1b2d4e]">{children}</span>
 }
 
 /* ═══════════════════════════════════════════
@@ -367,12 +365,9 @@ function StoryContent() {
       </div>
 
       {/* ── Approach ── */}
-      <div
-        id="ch8"
-        className="mt-14 scroll-mt-28 border-t-2 border-[#e0dcd6] pt-8 sm:mt-12 dark:border-gray-700/50"
-      >
+      <div id="ch8" className="mt-14 scroll-mt-28 border-t-2 border-[#e0dcd6] pt-8 sm:mt-12">
         <Reveal>
-          <h2 className="font-display mb-7 text-[22px] font-semibold tracking-tight text-[#1a1a1a] sm:text-2xl dark:text-gray-100">
+          <h2 className="font-display mb-7 text-[22px] font-semibold tracking-tight text-[#1a1a1a] sm:text-2xl">
             Как я думаю
           </h2>
         </Reveal>
@@ -382,21 +377,17 @@ function StoryContent() {
             <StaggerItem key={p.title}>
               <div
                 className={`grid grid-cols-[44px_1fr] py-[18px] sm:grid-cols-[48px_1fr] ${
-                  i < principles.length - 1
-                    ? 'border-b border-[#eae7e2] dark:border-gray-700/30'
-                    : ''
+                  i < principles.length - 1 ? 'border-b border-[#eae7e2]' : ''
                 }`}
               >
-                <div className="text-[24px] font-light text-[#d0ccc6] sm:text-[26px] dark:text-gray-700">
+                <div className="text-[24px] font-light text-[#d0ccc6] sm:text-[26px]">
                   {String(i + 1).padStart(2, '0')}
                 </div>
                 <div>
-                  <h3 className="text-[15px] font-semibold text-[#1a1a1a] sm:text-base dark:text-gray-200">
+                  <h3 className="text-[15px] font-semibold text-[#1a1a1a] sm:text-base">
                     {p.title}
                   </h3>
-                  <p className="mt-1 text-[13px] leading-[1.7] text-[#777] sm:text-sm dark:text-gray-500">
-                    {p.desc}
-                  </p>
+                  <p className="mt-1 text-[13px] leading-[1.7] text-[#777] sm:text-sm">{p.desc}</p>
                 </div>
               </div>
             </StaggerItem>
@@ -428,7 +419,7 @@ function BackToTop() {
     <button
       type="button"
       onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-      className="fixed right-5 bottom-6 z-40 flex h-10 w-10 items-center justify-center border border-[#e0dcd6] bg-[#f5f2ed]/90 backdrop-blur-sm transition-opacity hover:border-[#1b2d4e] lg:hidden dark:border-gray-700 dark:bg-[#111110]/90 dark:hover:border-[#8fa7cc]"
+      className="fixed right-5 bottom-6 z-40 flex h-10 w-10 items-center justify-center border border-[#e0dcd6] bg-[#f5f2ed]/90 backdrop-blur-sm transition-opacity hover:border-[#1b2d4e] lg:hidden"
       aria-label="Наверх"
     >
       <svg
@@ -438,7 +429,7 @@ function BackToTop() {
         fill="none"
         stroke="currentColor"
         strokeWidth="1.5"
-        className="text-[#1b2d4e] dark:text-[#8fa7cc]"
+        className="text-[#1b2d4e]"
       >
         <path d="M8 14V2M8 2L3 7M8 2l5 5" />
       </svg>
@@ -486,7 +477,7 @@ export default function AboutLayout() {
             onEnded={() => setIsVideoPlaying(false)}
           />
         )}
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[#f5f2ed] to-transparent dark:from-[#111110]" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[#f5f2ed] to-transparent" />
       </div>
     </button>
   )
@@ -497,11 +488,11 @@ export default function AboutLayout() {
       <section className="pt-24 pb-16 sm:pt-28">
         {/* Page header */}
         <Reveal>
-          <div className="flex items-baseline justify-between border-b-[3px] border-[#1b2d4e] pb-3 dark:border-[#8fa7cc]">
-            <h1 className="font-display text-3xl font-bold tracking-tight text-[#1b2d4e] sm:text-4xl md:text-5xl dark:text-gray-100">
+          <div className="flex items-baseline justify-between border-b-[3px] border-[#1b2d4e] pb-3">
+            <h1 className="font-display text-3xl font-bold tracking-tight text-[#1b2d4e] sm:text-4xl md:text-5xl">
               Обо мне
             </h1>
-            <span className="text-xs font-medium tracking-widest text-gray-400 uppercase dark:text-gray-500">
+            <span className="text-xs font-medium tracking-widest text-gray-400 uppercase">
               История
             </span>
           </div>
@@ -513,10 +504,8 @@ export default function AboutLayout() {
             <div className="mb-10 flex flex-col items-center">
               <div className="w-[180px] sm:w-[220px]">{avatarButton(220, 293, '')}</div>
               <div className="mt-4 text-center">
-                <div className="text-xl font-semibold text-[#1a1a1a] dark:text-gray-100">
-                  Александр Виноградов
-                </div>
-                <div className="mt-1 text-[11px] font-semibold tracking-[0.1em] text-[#1b2d4e] uppercase dark:text-[#8fa7cc]">
+                <div className="text-xl font-semibold text-[#1a1a1a]">Александр Виноградов</div>
+                <div className="mt-1 text-[11px] font-semibold tracking-[0.1em] text-[#1b2d4e] uppercase">
                   Head of E-commerce · IT Director · CAIO
                 </div>
               </div>
@@ -531,18 +520,18 @@ export default function AboutLayout() {
             <aside className="hidden lg:sticky lg:top-32 lg:block lg:self-start">
               <div className="max-w-[260px]">{avatarButton(260, 347, '')}</div>
 
-              <div className="mt-3.5 text-lg font-semibold text-[#1a1a1a] dark:text-gray-100">
+              <div className="mt-3.5 text-lg font-semibold text-[#1a1a1a]">
                 Александр Виноградов
               </div>
-              <div className="mt-0.5 text-[11px] leading-relaxed font-semibold tracking-[0.1em] text-[#1b2d4e] uppercase dark:text-[#8fa7cc]">
+              <div className="mt-0.5 text-[11px] leading-relaxed font-semibold tracking-[0.1em] text-[#1b2d4e] uppercase">
                 Head of E-commerce
                 <br />
                 IT Director · CAIO
               </div>
 
               {/* TOC */}
-              <nav className="mt-6 border-t border-[#e0dcd6] pt-4 dark:border-gray-700/50">
-                <div className="mb-2.5 text-[11px] font-semibold tracking-[0.12em] text-[#999] uppercase dark:text-gray-500">
+              <nav className="mt-6 border-t border-[#e0dcd6] pt-4">
+                <div className="mb-2.5 text-[11px] font-semibold tracking-[0.12em] text-[#999] uppercase">
                   Содержание
                 </div>
                 {chapters.map((ch) => (
@@ -559,8 +548,8 @@ export default function AboutLayout() {
                     }}
                     className={`block py-1 text-[13px] no-underline transition-colors ${
                       activeId === ch.id
-                        ? 'font-semibold text-[#1b2d4e] dark:text-[#8fa7cc]'
-                        : 'text-[#666] hover:text-[#1b2d4e] dark:text-gray-500 dark:hover:text-[#8fa7cc]'
+                        ? 'font-semibold text-[#1b2d4e]'
+                        : 'text-[#666] hover:text-[#1b2d4e]'
                     }`}
                   >
                     {ch.toc}

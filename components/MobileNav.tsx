@@ -26,7 +26,7 @@ const MobileNav = () => {
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"
           fill="currentColor"
-          className="h-7 w-7 text-gray-700 transition-colors hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100"
+          className="h-7 w-7 text-gray-700 transition-colors hover:text-gray-900"
         >
           <path
             fillRule="evenodd"
@@ -60,9 +60,9 @@ const MobileNav = () => {
             leaveTo="translate-x-full opacity-0"
             unmount={false}
           >
-            <DialogPanel className="fixed top-0 right-0 z-70 h-full w-72 bg-white/98 shadow-2xl backdrop-blur-xl dark:bg-gray-950/98">
+            <DialogPanel className="fixed top-0 right-0 z-70 h-full w-72 bg-white/98 shadow-2xl backdrop-blur-xl">
               <button
-                className="absolute top-5 right-5 z-80 p-3 text-gray-400 transition-colors hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300"
+                className="absolute top-5 right-5 z-80 p-3 text-gray-400 transition-colors hover:text-gray-600"
                 aria-label="Закрыть меню"
                 onClick={onToggleNav}
               >
@@ -85,7 +85,7 @@ const MobileNav = () => {
                   <Link
                     key={link.title}
                     href={link.href}
-                    className="rounded-lg px-4 py-3 text-base font-medium text-gray-700 transition-colors hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-gray-100"
+                    className="rounded-lg px-4 py-3 text-base font-medium text-gray-700 transition-colors hover:bg-gray-100 hover:text-gray-900"
                     onClick={onToggleNav}
                   >
                     {link.title}

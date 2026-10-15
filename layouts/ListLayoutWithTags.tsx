@@ -84,19 +84,19 @@ export default function ListLayoutWithTags({
     <>
       <div>
         <div className="pt-6 pb-6">
-          <h1 className="text-3xl leading-9 font-extrabold tracking-tight text-gray-900 sm:hidden sm:text-4xl sm:leading-10 md:text-6xl md:leading-14 dark:text-gray-100">
+          <h1 className="text-3xl leading-9 font-extrabold tracking-tight text-gray-900 sm:hidden sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
             {title}
           </h1>
         </div>
         <div className="flex sm:space-x-24">
-          <div className="hidden h-full max-h-screen max-w-[280px] min-w-[280px] flex-wrap overflow-auto rounded-sm bg-gray-50 pt-5 shadow-md sm:flex dark:bg-gray-900/70 dark:shadow-gray-800/40">
+          <div className="hidden h-full max-h-screen max-w-[280px] min-w-[280px] flex-wrap overflow-auto rounded-sm bg-gray-50 pt-5 shadow-md sm:flex">
             <div className="px-6 py-4">
               {pathname.startsWith('/blog') ? (
                 <h3 className="text-primary-500 font-bold uppercase">Все статьи</h3>
               ) : (
                 <Link
                   href={`/blog`}
-                  className="hover:text-primary-500 dark:hover:text-primary-500 font-bold text-gray-700 uppercase dark:text-gray-300"
+                  className="hover:text-primary-500 font-bold text-gray-700 uppercase"
                 >
                   Все статьи
                 </Link>
@@ -112,7 +112,7 @@ export default function ListLayoutWithTags({
                       ) : (
                         <Link
                           href={`/tags/${slug(t)}`}
-                          className="hover:text-primary-500 dark:hover:text-primary-500 px-3 py-2 text-sm font-medium text-gray-500 uppercase dark:text-gray-300"
+                          className="hover:text-primary-500 px-3 py-2 text-sm font-medium text-gray-500 uppercase"
                           aria-label={`Посмотреть статьи с тегом ${t}`}
                         >
                           {`${t} (${tagCounts[t]})`}
@@ -135,7 +135,7 @@ export default function ListLayoutWithTags({
                     <article className="flex flex-col space-y-2 xl:space-y-0">
                       <dl>
                         <dt className="sr-only">Published on</dt>
-                        <dd className="text-base leading-6 font-medium text-gray-500 dark:text-gray-400">
+                        <dd className="text-base leading-6 font-medium text-gray-500">
                           <time dateTime={date} suppressHydrationWarning>
                             {formatDate(date, siteMetadata.locale)}
                           </time>
@@ -145,7 +145,7 @@ export default function ListLayoutWithTags({
                         <div className="flex flex-col gap-6 md:flex-row">
                           {displayImage && (
                             <div className="shrink-0">
-                              <div className="relative aspect-square h-24 w-24 overflow-hidden rounded-lg border border-gray-200 dark:border-gray-800">
+                              <div className="relative aspect-square h-24 w-24 overflow-hidden rounded-lg border border-gray-200">
                                 <Image
                                   src={displayImage}
                                   alt={title}
@@ -159,10 +159,7 @@ export default function ListLayoutWithTags({
                           <div className="flex-1 space-y-3">
                             <div>
                               <h2 className="text-2xl leading-8 font-bold tracking-tight">
-                                <Link
-                                  href={`/${path}`}
-                                  className="text-gray-900 dark:text-gray-100"
-                                >
+                                <Link href={`/${path}`} className="text-gray-900">
                                   {title}
                                 </Link>
                               </h2>
@@ -172,9 +169,7 @@ export default function ListLayoutWithTags({
                                 ))}
                               </div>
                             </div>
-                            <div className="prose max-w-none text-gray-500 dark:text-gray-400">
-                              {summary}
-                            </div>
+                            <div className="prose max-w-none text-gray-500">{summary}</div>
                           </div>
                         </div>
                       </div>

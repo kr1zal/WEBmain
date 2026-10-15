@@ -11,7 +11,6 @@ import SectionContainer from '@/components/SectionContainer'
 import Footer from '@/components/Footer'
 import SchemaPersonLd from '@/components/SchemaPersonLd'
 import siteMetadata from '@/data/siteMetadata'
-import { ThemeProviders } from './theme-providers'
 import { Metadata } from 'next'
 
 const golosText = Golos_Text({
@@ -91,7 +90,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang={siteMetadata.language}
       className={`${golosText.variable} ${prata.variable} scroll-smooth`}
-      suppressHydrationWarning
     >
       <head>
         <link
@@ -129,11 +127,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           content="aFfvWj7aKx0gD2m9kejO4lDY32ijnVOgl6J2eC-EZz0"
         />
         <meta name="msapplication-TileColor" content="#000000" />
-        <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fff" />
-        <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000" />
+        <meta name="theme-color" content="#f5f2ed" />
         <link rel="alternate" type="application/rss+xml" href={`${basePath}/feed.xml`} />
       </head>
-      <body className="overflow-x-hidden bg-[#f5f2ed] pl-[calc(100vw-100%)] text-black antialiased dark:bg-[#111110] dark:text-white">
+      <body className="overflow-x-hidden bg-[#f5f2ed] pl-[calc(100vw-100%)] text-black antialiased">
         <SchemaPersonLd />
         <Script id="yandex-metrika" src="/yandex-metrika.js" strategy="afterInteractive" />
         <noscript>
@@ -146,16 +143,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             />
           </div>
         </noscript>
-        <ThemeProviders>
-          <Analytics analyticsConfig={siteMetadata.analytics as AnalyticsConfig} />
-          <SectionContainer>
-            <SearchProvider searchConfig={siteMetadata.search as SearchConfig}>
-              <Header />
-              <main className="mb-auto">{children}</main>
-            </SearchProvider>
-            <Footer />
-          </SectionContainer>
-        </ThemeProviders>
+        <Analytics analyticsConfig={siteMetadata.analytics as AnalyticsConfig} />
+        <SectionContainer>
+          <SearchProvider searchConfig={siteMetadata.search as SearchConfig}>
+            <Header />
+            <main className="mb-auto">{children}</main>
+          </SearchProvider>
+          <Footer />
+        </SectionContainer>
       </body>
     </html>
   )

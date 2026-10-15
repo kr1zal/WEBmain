@@ -28,7 +28,7 @@ const Card = ({ title, description, imgSrc, imgPosition, href }: CardProps) => {
       }
       className={`${
         imgSrc && 'h-full'
-      } group overflow-hidden rounded-xl border border-gray-200 bg-white will-change-transform dark:border-gray-800 dark:bg-gray-900/60`}
+      } group overflow-hidden rounded-xl border border-gray-200 bg-white will-change-transform`}
     >
       {imgSrc &&
         (href ? (
@@ -57,7 +57,7 @@ const Card = ({ title, description, imgSrc, imgPosition, href }: CardProps) => {
           </div>
         ))}
       <div className="p-3 sm:p-5">
-        <h2 className="font-display mb-1.5 text-sm leading-snug font-semibold tracking-tight text-gray-900 sm:mb-2 sm:text-lg sm:leading-7 dark:text-gray-100">
+        <h2 className="font-display mb-1.5 text-sm leading-snug font-semibold tracking-tight text-gray-900 sm:mb-2 sm:text-lg sm:leading-7">
           {href ? (
             <Link href={href} aria-label={`Ссылка на ${title}`}>
               {title}
@@ -66,13 +66,13 @@ const Card = ({ title, description, imgSrc, imgPosition, href }: CardProps) => {
             title
           )}
         </h2>
-        <p className="mb-2 line-clamp-2 text-xs leading-relaxed text-gray-500 sm:mb-3 sm:text-sm dark:text-gray-400">
+        <p className="mb-2 line-clamp-2 text-xs leading-relaxed text-gray-500 sm:mb-3 sm:text-sm">
           {description}
         </p>
         {href && (
           <Link
             href={href}
-            className="text-primary-600 dark:text-primary-400 inline-flex items-center gap-1 text-xs font-medium sm:text-sm"
+            className="text-primary-600 inline-flex items-center gap-1 text-xs font-medium sm:text-sm"
             aria-label={`Ссылка на ${title}`}
           >
             Подробнее

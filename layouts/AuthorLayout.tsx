@@ -18,11 +18,11 @@ export default function AuthorLayout({ children, content }: Props) {
     <section className="pt-24 pb-16 sm:pt-28">
       {/* Editorial section header */}
       <Reveal>
-        <div className="flex items-baseline justify-between border-b-[3px] border-[#1b2d4e] pb-3 dark:border-[#8fa7cc]">
-          <h1 className="font-display text-3xl font-bold tracking-tight text-[#1b2d4e] sm:text-4xl md:text-5xl dark:text-gray-100">
+        <div className="flex items-baseline justify-between border-b-[3px] border-[#1b2d4e] pb-3">
+          <h1 className="font-display text-3xl font-bold tracking-tight text-[#1b2d4e] sm:text-4xl md:text-5xl">
             Обо мне
           </h1>
-          <span className="hidden text-sm font-medium tracking-widest text-[#1b2d4e]/50 uppercase sm:block dark:text-[#8fa7cc]/60">
+          <span className="hidden text-sm font-medium tracking-widest text-[#1b2d4e]/50 uppercase sm:block">
             Биография
           </span>
         </div>
@@ -72,18 +72,16 @@ export default function AuthorLayout({ children, content }: Props) {
                     />
                   )}
                   {/* Gradient fade at bottom */}
-                  <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-[#f5f2ed] to-transparent dark:from-[#111110]" />
+                  <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-[#f5f2ed] to-transparent" />
                 </div>
               </button>
             )}
 
-            <h3 className="font-display mt-5 text-xl font-bold tracking-tight text-[#1b2d4e] dark:text-gray-100">
+            <h3 className="font-display mt-5 text-xl font-bold tracking-tight text-[#1b2d4e]">
               {name}
             </h3>
-            <p className="mt-1 text-sm leading-relaxed text-[#1b2d4e]/60 dark:text-[#8fa7cc]/80">
-              {occupation}
-            </p>
-            <p className="text-sm text-[#1b2d4e]/60 dark:text-[#8fa7cc]/80">{company}</p>
+            <p className="mt-1 text-sm leading-relaxed text-[#1b2d4e]/60">{occupation}</p>
+            <p className="text-sm text-[#1b2d4e]/60">{company}</p>
 
             <div className="mt-5 flex space-x-3">
               {email && <SocialIcon kind="mail" href={`mailto:${email}`} size={5} />}
@@ -96,7 +94,7 @@ export default function AuthorLayout({ children, content }: Props) {
 
         {/* Right column — MDX content */}
         <Reveal delay={0.2}>
-          <div className="prose prose-neutral dark:prose-invert prose-headings:font-display prose-headings:tracking-tight prose-headings:text-[#1b2d4e] dark:prose-headings:text-gray-100 prose-a:text-[#1b2d4e] prose-a:underline-offset-2 dark:prose-a:text-[#8fa7cc] max-w-none">
+          <div className="prose prose-neutral prose-headings:font-display prose-headings:tracking-tight prose-headings:text-[#1b2d4e] prose-a:text-[#1b2d4e] prose-a:underline-offset-2 max-w-none">
             {children}
           </div>
         </Reveal>

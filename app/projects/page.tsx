@@ -13,11 +13,11 @@ export default function Projects() {
   return (
     <div className="pt-24 sm:pt-28">
       <Reveal>
-        <div className="mb-12 flex items-baseline justify-between border-b-[3px] border-gray-900 pb-3 dark:border-gray-100">
-          <h1 className="font-display text-3xl tracking-tight text-gray-900 sm:text-4xl dark:text-gray-100">
+        <div className="mb-12 flex items-baseline justify-between border-b-[3px] border-gray-900 pb-3">
+          <h1 className="font-display text-3xl tracking-tight text-gray-900 sm:text-4xl">
             Проекты
           </h1>
-          <span className="text-xs font-medium tracking-widest text-gray-400 uppercase dark:text-gray-500">
+          <span className="text-xs font-medium tracking-widest text-gray-400 uppercase">
             Избранные реализации
           </span>
         </div>

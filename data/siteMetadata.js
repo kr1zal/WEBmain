@@ -6,7 +6,6 @@ const siteMetadata = {
   description:
     'Александр Виноградов — Head of E-commerce и IT Director с 13+ летним опытом. Цифровая трансформация, рост выручки в 87 раз, команды до 60 человек, AI-автоматизация.',
   language: 'ru-RU',
-  theme: 'light', // system, dark or light
   siteUrl: 'https://avinogradov.pro',
   siteRepo: 'https://github.com/kr1zal/WEBmain',
   siteLogo: `${process.env.BASE_PATH || ''}/static/images/logo.png`,

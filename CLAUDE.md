@@ -15,7 +15,7 @@
 - **Content:** Contentlayer2 0.5.5 (MDX → типизированные данные)
 - **Animations:** Framer Motion 12.23.24
 - **UI:** Headless UI 2.2.0
-- **Theme:** next-themes 0.4.6
+- **Theme:** только светлая. Тёмная тема, переключатель и все `dark:`-стили убраны 15.10.2026; пакет `next-themes` остаётся в зависимостях, его требует pliny
 - **Font:** Prata (заголовки, `font-display`) + Golos Text (текст), Google Fonts через `next/font`, subsets `latin` + `cyrillic`
 - **Analytics:** Яндекс.Метрика (счётчик `108207327`, с Webvisor)
 - **Search:** KBar (client-side)

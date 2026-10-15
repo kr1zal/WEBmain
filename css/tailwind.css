@@ -2,14 +2,17 @@
 @plugin "@tailwindcss/forms";
 @plugin '@tailwindcss/typography';
 @source '../node_modules/pliny';
+/* Тёмной темы на сайте нет (убрана 15.10.2026). Вариант dark оставлен привязанным к классу .dark,
+   который никто не ставит: иначе Tailwind 4 по умолчанию вешает dark:-классы из pliny (KBar)
+   на prefers-color-scheme, и окно поиска темнело бы у пользователей с тёмной ОС. */
 @custom-variant dark (&:where(.dark, .dark *));
 
 /* Core theme configuration */
 @theme {
   /* Font families */
   --font-sans:
-    var(--font-golos), ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
-    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    var(--font-golos), ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    'Segoe UI Symbol', 'Noto Color Emoji';
   --font-display: var(--font-prata), Georgia, serif;
 
   /* Colors — Neutral enterprise palette */
@@ -141,7 +144,7 @@
 }
 
 .footnotes {
-  @apply mt-12 border-t border-gray-200 pt-8 dark:border-gray-700;
+  @apply mt-12 border-t border-gray-200 pt-8;
 }
 
 .data-footnote-backref {
