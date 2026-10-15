@@ -193,7 +193,8 @@ Contentlayer генерирует типизированные данные в `
 
 ```
 NEXT_UMAMI_ID=          # Umami analytics (сейчас не активен)
-NEXT_PUBLIC_GISCUS_*=   # Giscus comments (4 переменные, блог пока не используется)
+NEXT_PUBLIC_GISCUS_*=   # Giscus comments (4 переменные). Не используются: блок comments убран из
+                        # siteMetadata 15.10.2026, с ним ушла плавающая кнопка «к комментариям»
 BUTTONDOWN_API_KEY=     # Newsletter (не используется)
 BASE_PATH=              # Опциональный subpath деплой
 EXPORT=1                # Включает static export в next.config.js
