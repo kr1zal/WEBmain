@@ -149,10 +149,10 @@ const competencies = [
 const featuredProjects = [
   {
     badge: 'Featured',
-    title: 'RevioMP — SaaS-аналитика для маркетплейсов',
+    title: 'RevioMP — SaaS-аналитика прибыли для Wildberries и Ozon',
     role: 'Founder & Developer',
-    desc: 'Полный цикл создания SaaS-платформы: аналитика продаж, юнит-экономика, прогнозирование остатков для продавцов Wildberries и Ozon. React 19 + FastAPI + Supabase.',
-    tags: ['React', 'TypeScript', 'FastAPI', 'Supabase', 'Tailwind'],
+    desc: 'SaaS-платформа для продавцов маркетплейсов: прибыль по каждому товару и заказу, удержания до операции, остатки и реклама в одном кабинете. Веб и приложение для iPhone.',
+    tags: ['React 19', 'TypeScript', 'FastAPI', 'PostgreSQL', 'Supabase', 'Capacitor'],
     link: 'https://reviomp.ru',
     linkText: 'reviomp.ru',
   },

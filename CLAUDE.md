@@ -86,8 +86,11 @@ app/
   page.tsx                # Root route — рендерит <Main />
   about/                  # Страница /about (server, MDX-контент)
   projects/               # /projects + /projects/[slug] (детали кейсов)
-  blog/                   # /blog + /blog/[slug]
-  tags/                   # /tags + /tags/[tag]
+  blog/                   # /blog + /blog/[slug]. Опубликованных постов нет, hello-world.mdx
+                          # оставлен как draft: совсем без файлов в data/blog пустой
+                          # generateStaticParams в /blog/[...slug] ломает static export.
+                          # app/tags удалён 15.10.2026 по той же причине (/tags/[tag] при
+                          # нуле тегов); при запуске блога: git checkout 3c675d1 -- app/tags
   contact/
     page.tsx              # 'use client' с формой
     layout.tsx            # server-layout c metadata (title/description для /contact)
@@ -117,7 +120,7 @@ data/
   headerNavLinks.ts       # Навигация в шапке.
   projects/*.mdx          # 5 кейсов: imperial-furniture, reviomp-analytics,
                           # bixirun-app, medtech-clinic, political-campaigns.
-  blog/hello-world.mdx    # Placeholder-пост.
+  blog/hello-world.mdx    # Placeholder-пост из boilerplate, draft: true (вне /blog, sitemap, feed).
   authors/default.mdx     # Био автора.
 
 css/                      # tailwind.css, prism.css
@@ -162,7 +165,7 @@ next.config.js            # CSP, trailingSlash, images config, webpack svgr
 
 ## Контент (MDX + Contentlayer2)
 
-- **Проекты:** `data/projects/*.mdx` — frontmatter: `title, description, imgSrc, role, period, techStack, repo, gallery`, необязательное `hero` (`'reviomp'` = вместо картинки `imgSrc` над текстом рендерится `<RevioHero />`; `imgSrc` остаётся для карточек и OG).
+- **Проекты:** `data/projects/*.mdx` — frontmatter: `title, description, imgSrc, role, period, techStack, repo, gallery`, `lastmod` (дата последней правки, идёт в `lastModified` sitemap), необязательное `hero` (`'reviomp'` = вместо картинки `imgSrc` над текстом рендерится `<RevioHero />`; `imgSrc` остаётся для карточек и OG).
 - **Блог:** `data/blog/*.mdx` — `title, date, tags, draft, summary, authors`.
 - **Авторы:** `data/authors/*.mdx` — `name, avatar, occupation, company, social links`.
 

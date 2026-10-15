@@ -1,10 +1,10 @@
 /** @type {import("pliny/config").PlinyConfig } */
 const siteMetadata = {
-  title: 'Александр Виноградов — IT Director, Chief AI Officer, E-commerce Expert',
+  title: 'Александр Виноградов — Head of E-commerce, IT Director, Chief AI Officer',
   author: 'Александр Виноградов',
   headerTitle: 'Vinogradov',
   description:
-    'Александр Виноградов — IT Director, Chief AI Officer и эксперт в e-commerce с 11+ летним опытом. Цифровая трансформация, AI-автоматизация, рост выручки в 87 раз, управление командами до 60 человек.',
+    'Александр Виноградов — Head of E-commerce и IT Director с 13+ летним опытом. Цифровая трансформация, рост выручки в 87 раз, команды до 60 человек, AI-автоматизация.',
   language: 'ru-RU',
   theme: 'light', // system, dark or light
   siteUrl: 'https://avinogradov.pro',
@@ -14,7 +14,7 @@ const siteMetadata = {
   stickyNav: true,
   email: 'kr1zal@yandex.ru',
   github: 'https://github.com/kr1zal',
-  telegram: 'https://t.me/kr1zal',
+  telegram: 'https://t.me/alv1nogradov',
   linkedin: 'https://www.linkedin.com/in/александр-виноградов-02a2441a0',
   locale: 'ru-RU',
   analytics: {

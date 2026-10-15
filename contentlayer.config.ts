@@ -161,6 +161,8 @@ export const Project = defineDocumentType(() => ({
     techStack: { type: 'list', of: { type: 'string' } },
     period: { type: 'string' },
     role: { type: 'string' },
+    // дата последней правки кейса, идёт в lastModified sitemap (формат YYYY-MM-DD)
+    lastmod: { type: 'date' },
     repo: { type: 'string' },
     gallery: { type: 'list', of: { type: 'string' } },
   },

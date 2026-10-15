@@ -31,14 +31,14 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteMetadata.siteUrl),
   title: {
     default: siteMetadata.title,
-    template: `%s | ${siteMetadata.title}`,
+    template: `%s | ${siteMetadata.author}`,
   },
   description: siteMetadata.description,
   openGraph: {
     title: siteMetadata.title,
     description: siteMetadata.description,
     url: './',
-    siteName: siteMetadata.title,
+    siteName: siteMetadata.author,
     images: [siteMetadata.socialBanner],
     locale: 'ru_RU',
     type: 'website',

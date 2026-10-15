@@ -28,7 +28,7 @@ export async function generateMetadata(props: {
     openGraph: {
       title: project.title,
       description: project.description,
-      siteName: siteMetadata.title,
+      siteName: siteMetadata.author,
       locale: 'ru_RU',
       type: 'article',
       url: './',
