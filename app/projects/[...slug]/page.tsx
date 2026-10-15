@@ -7,6 +7,7 @@ import { coreContent } from 'pliny/utils/contentlayer'
 import { allProjects } from 'contentlayer/generated'
 import type { Project } from 'contentlayer/generated'
 import ProjectLayout from '@/layouts/ProjectLayout'
+import SchemaBreadcrumbLd from '@/components/SchemaBreadcrumbLd'
 import { Metadata } from 'next'
 import siteMetadata from '@/data/siteMetadata'
 import { notFound } from 'next/navigation'
@@ -65,6 +66,13 @@ export default async function Page(props: { params: Promise<{ slug: string[] }> 
 
   return (
     <>
+      <SchemaBreadcrumbLd
+        items={[
+          { name: 'Главная', path: '' },
+          { name: 'Проекты', path: 'projects/' },
+          { name: project.title, path: `projects/${project.slug}/` },
+        ]}
+      />
       <ProjectLayout content={mainContent} next={next} prev={prev}>
         <MDXLayoutRenderer code={project.body.code} components={components} toc={project.toc} />
       </ProjectLayout>

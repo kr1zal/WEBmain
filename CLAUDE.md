@@ -34,7 +34,8 @@
    EXPORT=1 UNOPTIMIZED=1 yarn build
    ```
 
-   Результат в `out/` (~38-42 MB).
+   Результат в `out/` (~18 MB, 18 страниц; замер 15.10.2026). Если запускать сборку через
+   `| tail`, код выхода теряется: смотреть в логе `✓ Exporting`, а не exit code.
 
 2. **`trailingSlash: true`** в `next.config.js` — обязательно. При `false` Next.js генерирует `about.html`/`projects.html`, а nginx на Beget не добавляет `.html` к URL без расширения → все подстраницы дают 404. При `true` структура `about/index.html` — nginx подаёт `index.html` из директории из коробки.
 
@@ -47,12 +48,14 @@
 ```bash
 rm -rf out .next
 EXPORT=1 UNOPTIMIZED=1 yarn build
-sshpass -e rsync -avz --delete -e "ssh -o StrictHostKeyChecking=accept-new" \
+rsync -avz --delete -e "ssh -o BatchMode=yes -o StrictHostKeyChecking=accept-new" \
   out/ kr1zalf2@kr1zalf2.beget.tech:~/avinogradov.pro/public_html/
 git add . && git commit -m "..." && git push origin main
 ```
 
-SSH-доступ: пароль и ключ `~/.ssh/id_ed25519` (ключ принят, `ssh -o BatchMode=yes` проходит — проверено 15.10.2026). Сервер: `kr1zalf2.beget.tech`. Логин: `kr1zalf2`. Корень сайта: `~/avinogradov.pro/public_html/`.
+SSH-доступ по ключу `~/.ssh/id_ed25519`, пароль и `sshpass` не нужны (`ssh -o BatchMode=yes` проходит, проверено при деплое 15.10.2026). Сервер: `kr1zalf2.beget.tech`. Логин: `kr1zalf2`. Корень сайта: `~/avinogradov.pro/public_html/`.
+
+Полную сборку с `--delete` деплоить только из чистого рабочего дерева (`git status` пуст): чужие незакоммиченные правки иначе уедут на прод. Точечная правка одного файла — `rsync` без `--delete`.
 
 ### DNS / SSL / Домен
 
@@ -98,6 +101,8 @@ app/
 components/
   SchemaPersonLd.tsx      # Server component с JSON-LD Schema.org Person разметкой.
                           # Используется в layout.tsx для Google Knowledge Panel.
+  SchemaBreadcrumbLd.tsx  # Server component с JSON-LD BreadcrumbList (Главная → Проекты → кейс),
+                          # подключён в app/projects/[...slug]/page.tsx. Адреса со слешем, как canonical.
   RevioDiagram.tsx        # Схема RevioMP (источники → ядро → кабинет) по образцу BixirunDiagram.
   case/                   # Страница проекта RevioMP: RevioHero.tsx (hero-сцены продукта),
                           # Screens.tsx (сетка кадров, пара «десктоп / телефон», кадр на всю
@@ -221,7 +226,7 @@ echo | openssl s_client -connect avinogradov.pro:443 -servername avinogradov.pro
   | openssl x509 -noout -subject -issuer -dates -ext subjectAltName
 
 # SSH на Beget
-SSHPASS='<пароль>' sshpass -e ssh kr1zalf2@kr1zalf2.beget.tech
+ssh -o BatchMode=yes kr1zalf2@kr1zalf2.beget.tech
 ```
 
 ## Не трогать (legacy/unused)
